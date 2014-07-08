@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Departments:war exploded">
+    <output-path>$PROJECT_DIR$/target/Departments</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Departments/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Departments" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: aspectj:aspectjtools:1.5.2a" />
+          <element id="library" level="project" name="Maven: aspectj:aspectjrt:1.5.2a" />
+          <element id="library" level="project" name="Maven: net.sf.oval:oval:1.31" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
