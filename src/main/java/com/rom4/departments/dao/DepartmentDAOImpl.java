@@ -37,8 +37,8 @@ public class DepartmentDAOImpl implements DepartmentDAO {
             ps.setString(1, dep.getName());
             ps.setString(2, dep.getCity());
 
-           ps.executeUpdate();
-           rs = ps.getGeneratedKeys();
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
                 dep.setDepartmentID(rs.getInt(1));
@@ -47,10 +47,8 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         } catch (SQLException e) {
             dep = null;
             e.printStackTrace();
-            AppExcepption exception = new AppExcepption("Can't create new department /n" + e.getMessage(), e);
-            throw exception;
-        }
-        finally {
+            throw new AppExcepption("Can't create new department /n" + e.getMessage(), e);
+        } finally {
             closeConnection(rs, ps, conn);
         }
 
@@ -59,9 +57,9 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public Department readDepartment(int departmentID)  throws AppExcepption {
+    public Department readDepartment(Integer departmentID) throws AppExcepption {
         Department dep = null;
-        Connection conn = null;
+        Connection conn;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -86,8 +84,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            AppExcepption exception = new AppExcepption("Can't read department from DB /n" + e.getMessage(), e);
-            throw exception;
+            throw  new AppExcepption("Can't read department from DB /n" + e.getMessage(), e);
         } finally {
             closeConnection(rs, ps, conn);
         }
@@ -96,11 +93,10 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public boolean udpateDepartment(Department dep)  throws AppExcepption {
+    public boolean udpateDepartment(Department dep) throws AppExcepption {
 
         Connection conn;
         PreparedStatement ps = null;
-        ResultSet rs = null;
 
         conn = ConnectionInstance.getConnection();
 
@@ -118,11 +114,9 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            AppExcepption exception = new AppExcepption("Can't update department /n" + e.getMessage(), e);
-            throw exception;
-        }
-        finally {
-            closeConnection(rs, ps, conn);
+            throw  new AppExcepption("Can't update department /n" + e.getMessage(), e);
+        } finally {
+            closeConnection( ps, conn);
 
         }
 
@@ -131,11 +125,10 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public boolean deleteDepartment(int departmentID)  throws AppExcepption {
+    public boolean deleteDepartment(Integer departmentID) throws AppExcepption {
 
         Connection conn;
         PreparedStatement ps = null;
-        ResultSet rs = null;
 
         conn = ConnectionInstance.getConnection();
 
@@ -151,26 +144,23 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            AppExcepption exception = new AppExcepption("Can't delete department /n" + e.getMessage(), e);
-            throw exception;
-        }
-        finally {
-            closeConnection(rs, ps, conn);
+            throw new AppExcepption("Can't delete department /n" + e.getMessage(), e);
+        } finally {
+            closeConnection(ps, conn);
         }
 
         return true;
     }
 
     @Override
-    public List<Department> getDepartments()  throws AppExcepption {
+    public List<Department> getDepartments() throws AppExcepption {
 
-        Connection conn = null;
+        Connection conn ;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        List<Department> departments = null;
-        departments = new ArrayList<Department>();
-        Department dep = null;
+        List<Department> departments = new ArrayList<Department>();;
+        Department dep;
 
         conn = ConnectionInstance.getConnection();
 
@@ -192,29 +182,33 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            AppExcepption exception = new AppExcepption("Can't read departments /n" + e.getMessage(), e);
-            throw exception;
+            throw new AppExcepption("Can't read departments /n" + e.getMessage(), e);
 
-        }
-        finally {
+        } finally {
             closeConnection(rs, ps, conn);
         }
         return departments;
     }
 
-    private void closeConnection (ResultSet rs, PreparedStatement ps, Connection conn)  throws AppExcepption {
-        if (rs != null) {
+    private void closeConnection(ResultSet rs, PreparedStatement ps, Connection conn) throws AppExcepption {
             try {
-                rs.close();
-                if (rs != null) ps.close();
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-                AppExcepption exception = new AppExcepption("Can't close connection /n" + e.getMessage(), e);
-                throw exception;
-
+                throw new AppExcepption("Can't close connection /n" + e.getMessage(), e);
             }
+    }
 
+    private void closeConnection(PreparedStatement ps, Connection conn) throws AppExcepption {
+        try {
+            if (ps != null) ps.close();
+            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new AppExcepption("Can't close connection /n" + e.getMessage(), e);
         }
     }
+
 }

@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface DepartmentDAO {
     Department createDepartment(Department dep) throws AppExcepption;
-    Department readDepartment(int departmentID) throws AppExcepption;
+    Department readDepartment(Integer departmentID) throws AppExcepption;
     boolean udpateDepartment(Department dep) throws AppExcepption;
-    boolean deleteDepartment(int departmentID)throws AppExcepption;
+    boolean deleteDepartment(Integer departmentID)throws AppExcepption;
     List<Department> getDepartments() throws AppExcepption;
 
 }

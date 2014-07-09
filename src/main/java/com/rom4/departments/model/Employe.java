@@ -7,7 +7,6 @@ import net.sf.oval.Validator;
 import net.sf.oval.constraint.*;
 import net.sf.oval.guard.Guarded;
 
-import java.awt.*;
 import java.util.*;
 
 /**
@@ -20,7 +19,6 @@ public class Employe {
 
     @NotNull
     @NotEmpty
-    @Length(max=10)
     private Integer employeID;
 
     private String firstName = null;
@@ -28,13 +26,13 @@ public class Employe {
     private String email = null;
     private float salary = 0.0F;
     private Date birthday = null;
-    private int departmentID = 0;
+    private Integer departmentID = 0;
 
     public Employe() {
     }
 
 
-    public int getEmployeID() {
+    public Integer getEmployeID() {
         return employeID;
     }
 
@@ -82,11 +80,11 @@ public class Employe {
         this.birthday = birthday;
     }
 
-    public int getDepartmentID() {
+    public Integer getDepartmentID() {
         return departmentID;
     }
 
-    public void setDepartmentID(int departmentID) {
+    public void setDepartmentID(Integer departmentID) {
         this.departmentID = departmentID;
     }
 
