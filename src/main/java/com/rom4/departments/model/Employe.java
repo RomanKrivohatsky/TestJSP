@@ -3,8 +3,13 @@ package com.rom4.departments.model;
 
 
 
+import com.rom4.departments.connection.ConnectionInstance;
+import com.rom4.departments.dao.DAOFactory;
+import com.rom4.departments.dao.EmployeDAO;
+import com.rom4.departments.exception.AppExcepption;
 import net.sf.oval.Validator;
 import net.sf.oval.constraint.*;
+import net.sf.oval.exception.ConstraintsViolatedException;
 import net.sf.oval.guard.Guarded;
 
 import java.util.*;
@@ -17,10 +22,9 @@ import java.util.*;
 @Guarded
 public class Employe {
 
-    @NotNull
-    @NotEmpty
     private Integer employeID;
-
+    @NotEmpty
+    @ValidateWithMethod(methodName = "checkFirstNameUnique" , parameterType = String.class, errorCode = "10")
     private String firstName = null;
     private String lastName = null;
     private String email = null;
@@ -31,6 +35,23 @@ public class Employe {
     public Employe() {
     }
 
+    private boolean checkFirstNameUnique (String firstName) {
+        EmployeDAO dao = DAOFactory.getEmployeDAO();
+
+        try {
+            List<Employe> employes = dao.getEmployes();
+            for (Employe e:employes) {
+                if (e.getFirstName().equals(firstName)) {
+                    return false;
+                }
+            }
+        } catch (AppExcepption appExcepption) {
+            appExcepption.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
 
     public Integer getEmployeID() {
         return employeID;
@@ -124,12 +145,15 @@ public class Employe {
         e.setEmployeID(null);
         e.setFirstName(null);
 
-        Validator validator = new net.sf.oval.Validator();
-        java.util.List violations = validator.validate(e);
+        //throw new ConstraintsViolatedException();
 
-        if (!violations.isEmpty()) {
+       /* Validator validator = new net.sf.oval.Validator();
+        java.util.List violations = validator.validate(e);
+*/
+      /*  if (!violations.isEmpty()) {
             System.out.println(violations.get(0));
-        }
+            System.out.println(violations.get(0));
+        }*/
 
     }
 }

@@ -23,7 +23,7 @@
     <input type="submit" name="submit" value="Сохранить">
 </form>
 
-<form method="post" action="controller">
+<form method="post" action="home">
     <input type="hidden" name="page" value="home">
     <input type="submit" name="submit" value="На главную">
 </form>

@@ -5,7 +5,7 @@
   Time: 16:31
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=windows-1251" language="java" %>
 <%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
@@ -15,14 +15,14 @@
 <body>
 
 <table border="1">
-    <caption>РўР°Р±Р»РёС†Р° СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ</caption>
+    <caption>Таблица сотрудников</caption>
     <tr>
-        <th>РРјСЏ</th>
-        <th>Р¤Р°РјРёР»РёСЏ</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
         <th>E-mail</th>
-        <th>РћРєР»Р°Рґ</th>
-        <th>Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ</th>
-        <th>СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ</th>
+        <th>Оклад</th>
+        <th>Дата рождения</th>
+        <th>редактировать</th>
 
 
     </tr>
@@ -41,14 +41,14 @@
                     <input type="hidden" name="EmployeID" value=${Employe.employeID}>
                     <input type="hidden" name="departmentID" value=${departmentID}>
 
-                    <p><input type="submit" name="submit" value="СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"></p>
+                    <p><input type="submit" name="submit" value="редактировать"></p>
                 </form>
             </td>
             <td>
                 <form method="post" action="controller">
                     <input type="hidden" name="page" value="DeleteEmploye">
                         <input type="hidden" name="EmployeID" value=${Employe.employeID}>
-                    <p><input type="submit" name="submit" value="РЈРґР°Р»РёС‚СЊ"></p>
+                    <p><input type="submit" name="submit" value="Удалить"></p>
                 </form>
             </td>
 
@@ -64,13 +64,13 @@
                 <input type="hidden" name="page" value="AddEmploye">
                 <input type="hidden" name="pageType" value="AddEmployeWithDep">
                 <input type="hidden" name="departmentID" value=${departmentID}>
-                <p><input type="submit" name="submit" value="РґРѕР±Р°РІРёС‚СЊ СЃРѕС‚СЂСѓРґРЅРёРєР°"></p>
+                <p><input type="submit" name="submit" value="добавить сотрудника"></p>
             </form>
         </td>
         <td>
             <form method="post" action="controller">
                 <input type="hidden" name="page" value="home">
-                <input type="submit" name="submit" value="РќР° РіР»Р°РІРЅСѓСЋ">
+                <input type="submit" name="submit" value="На главную">
             </form>
         </td>
 

@@ -4,6 +4,8 @@ import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
 import com.rom4.departments.exception.AppExcepption;
 import com.rom4.departments.model.Employe;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +26,7 @@ public class SaveEmploye implements  Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
 
         String saveStatus = "Error saving";
+        String validateError;
 
         Employe emp = new Employe();
 
@@ -37,6 +40,14 @@ public class SaveEmploye implements  Handler {
             emp.setBirthday(sdf.parse(request.getParameter("birthday")));
             emp.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
 
+            Validator validator = new net.sf.oval.Validator();
+            java.util.List violations = validator.validate(emp);
+
+            if (!violations.isEmpty()) {
+                validateError = ((ConstraintViolation)violations.get(0)).getMessage();
+                System.err.println(validateError);
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -44,6 +55,7 @@ public class SaveEmploye implements  Handler {
         if (request.getParameter("pageType").equals("add")) {
             try {
                 saveStatus = "Employe created";
+
                 emp = empDAO.createEmploye(emp);
             }
             catch (AppExcepption a) {

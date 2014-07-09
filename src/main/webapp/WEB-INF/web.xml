@@ -27,14 +27,14 @@
         <url-pattern>/DepartmentsList</url-pattern>
     </servlet-mapping>
 
-    <servlet>
+     <servlet>
         <servlet-name>Employers</servlet-name>
-        <jsp-file>/Employers.jsp</jsp-file>
+        <jsp-file>/Employers2.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>Employers</servlet-name>
-        <url-pattern>/Employers</url-pattern>
+        <url-pattern>/xxx11</url-pattern>
     </servlet-mapping>
 
     <servlet>
