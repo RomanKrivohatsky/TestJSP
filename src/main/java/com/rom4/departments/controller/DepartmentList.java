@@ -2,7 +2,7 @@ package com.rom4.departments.controller;
 
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
-import com.rom4.departments.exception.AppExcepption;
+import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Department;
 
 import javax.servlet.RequestDispatcher;
@@ -25,7 +25,7 @@ public class DepartmentList implements Handler {
         System.err.println("list");
         try {
             departments = depDAO.getDepartments();
-        } catch (AppExcepption a) {
+        } catch (AppException a) {
             a.printStackTrace();
             request.setAttribute("errorStatus", a.getMessage());
             response.sendRedirect("ErrorPage.jsp");
@@ -34,7 +34,7 @@ public class DepartmentList implements Handler {
         request.setAttribute("Departments", departments);
 
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher("DepartmentsList");
+        rd = request.getRequestDispatcher("Departments.jsp");
         rd.forward(request, response);
 
     }

@@ -1,6 +1,6 @@
 package com.rom4.departments.dao;
 
-import com.rom4.departments.exception.AppExcepption;
+import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Employe;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.List;
  * Project name Employes
  */
 public interface EmployeDAO {
-    Employe createEmploye(Employe emp) throws AppExcepption;
-    Employe readEmploye(int EmployeID) throws AppExcepption;
-    boolean udpateEmploye(Employe emp) throws AppExcepption;
-    boolean deleteEmploye(int EmployeID)throws AppExcepption;
-    List<Employe> getEmployes() throws AppExcepption;
-    List<Employe> getEmployes(int departmentID) throws AppExcepption;
+    Employe createEmploye(Employe emp) throws AppException;
+    Employe readEmploye(int EmployeID) throws AppException;
+    boolean udpateEmploye(Employe emp) throws AppException;
+    boolean deleteEmploye(int EmployeID)throws AppException;
+    List<Employe> getEmployes() throws AppException;
+    List<Employe> getEmployes(int departmentID) throws AppException;
 }

@@ -14,19 +14,13 @@
 </head>
 <body>
 
-<form method="post" action="controller">
+<form method="post" action="AddDepartment.html">
     <p>Введите имя</p><input type="text" name="firstName" value="имя">
-
     <p>Введите фамилию</p><input type="text" name="lastName" value="фамилия">
-
     <p>Введите e-mail</p><input type="email" name="email" value="e-mail">
-
     <p>Введите оклад</p><input type="number" name="salary" value="0.0">
-
     <p>Введите дату рождения</p><input type="date" name="birthday" value="01.01.1900">
-
     <p>Выберите отдел</p>
-
     <p><select name="departmentID">
 
         <c:forEach var="Department" items="${requestScope.Departments}">
@@ -46,7 +40,7 @@
     <input type="submit" name="submit" value="Сохранить">
 </form>
 
-<form method="post" action="controller">
+<form method="get" action="home.html">
     <input type="hidden" name="page" value="home">
     <input type="submit" name="submit" value="На главную">
 </form>

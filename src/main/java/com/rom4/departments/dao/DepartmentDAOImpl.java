@@ -1,7 +1,7 @@
 package com.rom4.departments.dao;
 
 import com.rom4.departments.connection.ConnectionInstance;
-import com.rom4.departments.exception.AppExcepption;
+import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Department;
 
 import java.sql.Connection;
@@ -17,7 +17,7 @@ import java.util.List;
 public class DepartmentDAOImpl implements DepartmentDAO {
 
     @Override
-    public Department createDepartment(Department dep) throws AppExcepption {
+    public Department createDepartment(Department dep) throws AppException {
 
         Connection conn;
         PreparedStatement ps = null;
@@ -47,7 +47,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         } catch (SQLException e) {
             dep = null;
             e.printStackTrace();
-            throw new AppExcepption("Can't create new department /n" + e.getMessage(), e);
+            throw new AppException("Can't create new department /n" + e.getMessage(), e);
         } finally {
             closeConnection(rs, ps, conn);
         }
@@ -57,7 +57,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public Department readDepartment(Integer departmentID) throws AppExcepption {
+    public Department readDepartment(Integer departmentID) throws AppException {
         Department dep = null;
         Connection conn;
         PreparedStatement ps = null;
@@ -84,7 +84,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw  new AppExcepption("Can't read department from DB /n" + e.getMessage(), e);
+            throw  new AppException("Can't read department from DB /n" + e.getMessage(), e);
         } finally {
             closeConnection(rs, ps, conn);
         }
@@ -93,7 +93,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public boolean udpateDepartment(Department dep) throws AppExcepption {
+    public boolean udpateDepartment(Department dep) throws AppException {
 
         Connection conn;
         PreparedStatement ps = null;
@@ -114,7 +114,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw  new AppExcepption("Can't update department /n" + e.getMessage(), e);
+            throw  new AppException("Can't update department /n" + e.getMessage(), e);
         } finally {
             closeConnection( ps, conn);
 
@@ -125,7 +125,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public boolean deleteDepartment(Integer departmentID) throws AppExcepption {
+    public boolean deleteDepartment(Integer departmentID) throws AppException {
 
         Connection conn;
         PreparedStatement ps = null;
@@ -144,7 +144,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new AppExcepption("Can't delete department /n" + e.getMessage(), e);
+            throw new AppException("Can't delete department /n" + e.getMessage(), e);
         } finally {
             closeConnection(ps, conn);
         }
@@ -153,7 +153,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public List<Department> getDepartments() throws AppExcepption {
+    public List<Department> getDepartments() throws AppException {
 
         Connection conn ;
         PreparedStatement ps = null;
@@ -182,7 +182,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new AppExcepption("Can't read departments /n" + e.getMessage(), e);
+            throw new AppException("Can't read departments /n" + e.getMessage(), e);
 
         } finally {
             closeConnection(rs, ps, conn);
@@ -190,24 +190,24 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         return departments;
     }
 
-    private void closeConnection(ResultSet rs, PreparedStatement ps, Connection conn) throws AppExcepption {
+    private void closeConnection(ResultSet rs, PreparedStatement ps, Connection conn) throws AppException {
             try {
                 if (rs != null) rs.close();
                 if (ps != null) ps.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-                throw new AppExcepption("Can't close connection /n" + e.getMessage(), e);
+                throw new AppException("Can't close connection /n" + e.getMessage(), e);
             }
     }
 
-    private void closeConnection(PreparedStatement ps, Connection conn) throws AppExcepption {
+    private void closeConnection(PreparedStatement ps, Connection conn) throws AppException {
         try {
             if (ps != null) ps.close();
             if (conn != null) conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new AppExcepption("Can't close connection /n" + e.getMessage(), e);
+            throw new AppException("Can't close connection /n" + e.getMessage(), e);
         }
     }
 

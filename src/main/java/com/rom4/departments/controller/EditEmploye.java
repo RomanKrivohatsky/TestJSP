@@ -24,7 +24,7 @@ public class EditEmploye implements Handler {
             request.setAttribute("departmentID", request.getParameter("departmentID"));
         }
 
-        rd = request.getRequestDispatcher("EditEmploye");
+        rd = request.getRequestDispatcher("EditEmploye.jsp");
         rd.forward(request, response);
     }
 }

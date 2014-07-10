@@ -20,27 +20,8 @@ public class MainPage implements Handler  {
 
         System.err.println("main ");
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher("home");
+        rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
-/*
-        String page;
-        page =request.getParameter("page");
-        if (page.equals("DepartmentList")) {
 
-            response.sendRedirect("DepartmentsList");
-
-            try {
-                request.getServletContext().getRequestDispatcher("Departments.jsp").forward(request, response);
-            }
-            catch (ServletException e) {
-                e.printStackTrace();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-*/
     }
 }

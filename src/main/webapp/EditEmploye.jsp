@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form method="post" action="controller">
+<form method="post" action="EditEmploye.html">
     <p>Введите имя</p><input type="text" name="firstName" value="имя" >
     <p>Введите фамилию</p><input type="text" name="lastName" value="фамилия">
     <p>Введите e-mail</p><input type="email" name="email" value="e-mail">
@@ -23,7 +23,7 @@
     <input type="submit" name="submit" value="Сохранить">
 </form>
 
-<form method="post" action="controller">
+<form method="get" action="home.html">
     <input type="hidden" name="page" value="home">
     <input type="submit" name="submit" value="На главную">
 </form>

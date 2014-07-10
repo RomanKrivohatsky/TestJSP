@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form method="post" action="controller">
+<form method="post" action="SaveDepartment.html">
     <p>Введите название</p><input type="text" name="name" value=${name} >
     <p>Введите город</p><input type="text" name="city" value=${city}>
     </p><input type="hidden" name="departmentID" value=${departmentID}>
@@ -21,7 +21,7 @@
     <input type="submit" name="submit" value="Сохранить">
 </form>
 
-<form method="post" action="controller">
+<form method="get" action="home.html">
     <input type="hidden" name="page" value="home">
     <input type="submit" name="submit" value="На главную">
 </form>

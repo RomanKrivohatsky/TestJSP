@@ -14,8 +14,26 @@
 </head>
 <body>
 
-<table border="1">
-    <caption>Таблица сотрудников</caption>
+<table border="0" align = "center">
+    <tr>
+        <td align="center" valign="top">
+            <form method="get" action="AddEmploye.html">
+                <input type="hidden" name="page" value="AddEmploye">
+                <input type="hidden" name="pageType" value="AddEmployeWithDep">
+                <input type="hidden" name="departmentID" value=${departmentID}>
+                <p><input type="submit" name="submit" value="добавить сотрудника"></p>
+            </form>
+        </td>
+        <td  align="center" valign="top">
+            <form method="get" action="home.html">
+                <input type="hidden" name="page" value="home">
+                <input type="submit" name="submit" value="На главную">
+            </form>
+        </td>
+    </tr>
+</table>
+
+<table border="1" align = "center">
     <tr>
         <th>Имя</th>
         <th>Фамилия</th>
@@ -23,60 +41,32 @@
         <th>Оклад</th>
         <th>Дата рождения</th>
         <th>редактировать</th>
-
-
     </tr>
     <c:forEach var="Employe" items="${requestScope.Employers}">
         <tr>
-                ${count}
             <td> ${Employe.firstName} </td>
             <td> ${Employe.lastName} </td>
             <td> ${Employe.email} </td>
             <td> ${Employe.salary} </td>
             <td> ${Employe.birthday} </td>
-
             <td>
-                <form method="post" action="controller">
+                <form method="get" action="EditEmploye.html">
                     <input type="hidden" name="page" value="EditEmployeWithDep">
                     <input type="hidden" name="EmployeID" value=${Employe.employeID}>
                     <input type="hidden" name="departmentID" value=${departmentID}>
 
-                    <p><input type="submit" name="submit" value="редактировать"></p>
+                    <p><input type="submit" name="submit" value="Редактировать"></p>
                 </form>
             </td>
             <td>
-                <form method="post" action="controller">
+                <form method="get" action="DeleteEmploye.html">
                     <input type="hidden" name="page" value="DeleteEmploye">
                         <input type="hidden" name="EmployeID" value=${Employe.employeID}>
                     <p><input type="submit" name="submit" value="Удалить"></p>
                 </form>
             </td>
-
-
         </tr>
     </c:forEach>
 </table>
-
-<table border="0">
-    <tr>
-        <td valign="bottom">
-            <form method="post" action="controller">
-                <input type="hidden" name="page" value="AddEmploye">
-                <input type="hidden" name="pageType" value="AddEmployeWithDep">
-                <input type="hidden" name="departmentID" value=${departmentID}>
-                <p><input type="submit" name="submit" value="добавить сотрудника"></p>
-            </form>
-        </td>
-        <td>
-            <form method="post" action="controller">
-                <input type="hidden" name="page" value="home">
-                <input type="submit" name="submit" value="На главную">
-            </form>
-        </td>
-
-
-    </tr>
-</table>
-
 </body>
 </html>

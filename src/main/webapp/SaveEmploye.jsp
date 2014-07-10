@@ -14,12 +14,12 @@
 
 <p>${saveStatus}</p>
 
-<form method="post" action="controller">
+<form method="get" action="home.html">
     <input type="hidden" name="page" value="home">
     <input type="submit" name="submit" value="На главную">
 </form>
 
-<form method="post" action="controller">
+<form method="get" action="Employers.html">
     <input type="hidden" name="page" value="Employers">
     <input type="hidden" name="pageType" value="all">
     <p><input type="submit" name="submit" value = "Список сотрудников"></p>

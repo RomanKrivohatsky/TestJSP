@@ -3,13 +3,10 @@ package com.rom4.departments.model;
 
 
 
-import com.rom4.departments.connection.ConnectionInstance;
 import com.rom4.departments.dao.DAOFactory;
 import com.rom4.departments.dao.EmployeDAO;
-import com.rom4.departments.exception.AppExcepption;
-import net.sf.oval.Validator;
+import com.rom4.departments.exception.AppException;
 import net.sf.oval.constraint.*;
-import net.sf.oval.exception.ConstraintsViolatedException;
 import net.sf.oval.guard.Guarded;
 
 import java.util.*;
@@ -45,8 +42,8 @@ public class Employe {
                     return false;
                 }
             }
-        } catch (AppExcepption appExcepption) {
-            appExcepption.printStackTrace();
+        } catch (AppException appException) {
+            appException.printStackTrace();
             return false;
         }
 

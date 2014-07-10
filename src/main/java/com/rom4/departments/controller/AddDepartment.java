@@ -22,7 +22,8 @@ public class AddDepartment implements Handler {
         System.err.println("add dep");
 
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher("AddDepartment");
+        rd = request.getRequestDispatcher("AddDepartment.jsp");
         rd.forward(request, response);
+
     }
 }

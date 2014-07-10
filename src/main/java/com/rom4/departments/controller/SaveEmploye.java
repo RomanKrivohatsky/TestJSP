@@ -2,7 +2,7 @@ package com.rom4.departments.controller;
 
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
-import com.rom4.departments.exception.AppExcepption;
+import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Employe;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -58,7 +58,7 @@ public class SaveEmploye implements  Handler {
 
                 emp = empDAO.createEmploye(emp);
             }
-            catch (AppExcepption a) {
+            catch (AppException a) {
                 a.printStackTrace();
                 saveStatus = a.getMessage();
                 request.setAttribute("errorStatus",saveStatus);
@@ -72,7 +72,7 @@ public class SaveEmploye implements  Handler {
             try {
                 saveStatus = "Employe updated";
                 empDAO.udpateEmploye(emp);
-            } catch (AppExcepption a) {
+            } catch (AppException a) {
                  a.printStackTrace();
                 saveStatus = a.getMessage();
                 request.setAttribute("errorStatus",saveStatus);
@@ -82,10 +82,11 @@ public class SaveEmploye implements  Handler {
 
         }
 
-        RequestDispatcher rd;
+        /*RequestDispatcher rd;
         request.setAttribute("saveStatus", saveStatus);
         rd = request.getRequestDispatcher("SaveEmploye");
+        rd.forward(request, response);*/
 
-        rd.forward(request, response);
+        response.sendRedirect("SaveEmploye.jsp");
     }
 }

@@ -15,7 +15,7 @@
 <p> Kharkov </p>
 <p>  Tarasovskaya str.</p>
 
-<form method="post" action="controller">
+<form method="get" action="home.html">
     <input type="hidden" name="page" value="home">
     <input type="submit" name="submit" value="На главную">
 </form>

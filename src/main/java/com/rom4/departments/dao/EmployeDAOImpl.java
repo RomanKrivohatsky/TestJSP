@@ -1,14 +1,13 @@
 package com.rom4.departments.dao;
 
 import com.rom4.departments.connection.ConnectionInstance;
-import com.rom4.departments.exception.AppExcepption;
+import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Employe;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ import java.util.List;
  */
 public class EmployeDAOImpl implements EmployeDAO  {
     @Override
-    public Employe createEmploye(Employe emp) throws AppExcepption {
+    public Employe createEmploye(Employe emp) throws AppException {
 
         Connection conn;
         PreparedStatement ps = null;
@@ -58,7 +57,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
         } catch (SQLException e) {
             emp = null;
             e.printStackTrace();
-            throw new AppExcepption("Can't create new employe /n" + e.getMessage(), e);
+            throw new AppException("Can't create new employe /n" + e.getMessage(), e);
         } finally {
             closeConnection(rs, ps, conn);
         }
@@ -67,7 +66,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
     }
 
     @Override
-    public Employe readEmploye(int EmployeID) throws AppExcepption {
+    public Employe readEmploye(int EmployeID) throws AppException {
         Connection conn;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -100,7 +99,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new AppExcepption("Can't read employe /n" + e.getMessage(), e);
+            throw new AppException("Can't read employe /n" + e.getMessage(), e);
         } finally {
             closeConnection(rs, ps, conn);
         }
@@ -108,7 +107,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
     }
 
     @Override
-    public boolean udpateEmploye(Employe emp) throws AppExcepption {
+    public boolean udpateEmploye(Employe emp) throws AppException {
 
         Connection conn;
         PreparedStatement ps = null;
@@ -139,7 +138,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new AppExcepption("Can't update employe /n" + e.getMessage(), e);
+            throw new AppException("Can't update employe /n" + e.getMessage(), e);
         } finally {
             closeConnection(ps, conn);
         }
@@ -148,7 +147,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
     }
 
     @Override
-    public boolean deleteEmploye(int EmployeID) throws AppExcepption {
+    public boolean deleteEmploye(int EmployeID) throws AppException {
         Connection conn;
         PreparedStatement ps = null;
         conn = ConnectionInstance.getConnection();
@@ -164,7 +163,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new AppExcepption("Can't delete employe /n" + e.getMessage(), e);
+            throw new AppException("Can't delete employe /n" + e.getMessage(), e);
         }
         finally {
             closeConnection(ps, conn);
@@ -174,7 +173,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
     }
 
     @Override
-    public List<Employe> getEmployes() throws AppExcepption {
+    public List<Employe> getEmployes() throws AppException {
         Connection conn;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -210,7 +209,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new AppExcepption("Can't read an employes /n" + e.getMessage(), e);
+            throw new AppException("Can't read an employes /n" + e.getMessage(), e);
         } finally {
             closeConnection(rs, ps, conn);
         }
@@ -218,7 +217,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
     }
 
     @Override
-    public List<Employe> getEmployes(int departmentID) throws AppExcepption {
+    public List<Employe> getEmployes(int departmentID) throws AppException {
         Connection conn;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -256,31 +255,31 @@ public class EmployeDAOImpl implements EmployeDAO  {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new AppExcepption("Can't read an employes by id /n" + e.getMessage(), e);
+            throw new AppException("Can't read an employes by id /n" + e.getMessage(), e);
         } finally {
             closeConnection(rs, ps, conn);
         }
         return Employes;
     }
 
-    private void closeConnection(ResultSet rs, PreparedStatement ps, Connection conn) throws AppExcepption {
+    private void closeConnection(ResultSet rs, PreparedStatement ps, Connection conn) throws AppException {
             try {
                 if (rs != null) rs.close();
                 if (ps != null) ps.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-                throw new AppExcepption("Can't close connection /n" + e.getMessage(), e);
+                throw new AppException("Can't close connection /n" + e.getMessage(), e);
             }
     }
 
-    private void closeConnection(PreparedStatement ps, Connection conn) throws AppExcepption {
+    private void closeConnection(PreparedStatement ps, Connection conn) throws AppException {
             try {
                 if (ps != null) ps.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-                throw new AppExcepption("Can't close connection /n" + e.getMessage(), e);
+                throw new AppException("Can't close connection /n" + e.getMessage(), e);
             }
 
         }

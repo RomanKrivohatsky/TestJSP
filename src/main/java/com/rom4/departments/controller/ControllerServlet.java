@@ -5,6 +5,7 @@ import com.rom4.departments.dao.DAOFactory;
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,8 +41,8 @@ public class ControllerServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         System.err.println("uri " + req.getRequestURI());
-        System.err.println("url " + req.getRequestURL());
-        System.err.println("req.getParameter(page)" + req.getParameter("page"));
+       // System.err.println("url " + req.getRequestURL());
+        //System.err.println("req.getParameter(page)" + req.getParameter("page"));
 
         Handler handler = handlers.get(req.getParameter("page"));
 
@@ -49,6 +50,8 @@ public class ControllerServlet extends HttpServlet {
             handler.handle(req, resp, daoDep, daoEmp);
         }
 
+        ServletContext sc = this.getServletContext();
+        sc.log("go to "  + req.getRequestURI());
         //super.service(req, resp);
     }
 

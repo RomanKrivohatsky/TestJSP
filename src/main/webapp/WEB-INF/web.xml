@@ -8,113 +8,13 @@
     <display-name>Archetype Created Web Application</display-name>
 
     <servlet>
-        <servlet-name>Home</servlet-name>
-        <jsp-file>/index.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Home</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Departments</servlet-name>
-        <jsp-file>/Departments.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Departments</servlet-name>
-        <url-pattern>/DepartmentsList</url-pattern>
-    </servlet-mapping>
-
-     <servlet>
-        <servlet-name>Employers</servlet-name>
-        <jsp-file>/Employers2.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Employers</servlet-name>
-        <url-pattern>/xxx11</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AddDepartment</servlet-name>
-        <jsp-file>/AddDepartment.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AddDepartment</servlet-name>
-        <url-pattern>/AddDepartment</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AddEmploye</servlet-name>
-        <jsp-file>/AddEmploye.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AddEmploye</servlet-name>
-        <url-pattern>/AddEmploye</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>EditDepartment</servlet-name>
-        <jsp-file>/EditDepartment.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>EditDepartment</servlet-name>
-        <url-pattern>/EditDepartment</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>SaveDepartment</servlet-name>
-        <jsp-file>/SaveDepartment.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>SaveDepartment</servlet-name>
-        <url-pattern>/SaveDepartment</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>SaveEmploye</servlet-name>
-        <jsp-file>/SaveEmploye.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>SaveEmploye</servlet-name>
-        <url-pattern>/SaveEmploye</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Contacts</servlet-name>
-        <jsp-file>/Contacts.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Contacts</servlet-name>
-        <url-pattern>/Contacts</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ErrorPage</servlet-name>
-        <jsp-file>/ErrorPage.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ErrorPage</servlet-name>
-        <url-pattern>/ErrorPage</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>com.rom4.departments.controller.ControllerServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
 

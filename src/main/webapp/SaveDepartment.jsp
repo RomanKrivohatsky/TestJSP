@@ -12,15 +12,14 @@
 </head>
 <body>
 
-
     <p>${saveStatus}</p>
 
-    <form method="post" action="controller">
+    <form method="get" action="home.html">
         <input type="hidden" name="page" value="home">
         <input type="submit" name="submit" value="На главную">
     </form>
 
-    <form method="post" action="controller">
+    <form method="get" action="Departments.html">
         <p>Список отделов </p><br>
         <input type="hidden" name="page" value="DepartmentList">
         <p><input type="submit" name="submit" value = "показать"></p>

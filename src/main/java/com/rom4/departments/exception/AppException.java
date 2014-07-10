@@ -5,15 +5,15 @@ package com.rom4.departments.exception;
  * Creation time 13:13
  * Project name Departments
  */
-public class AppExcepption extends  Exception {
-    public AppExcepption() {
+public class AppException extends  Exception {
+    public AppException() {
     }
 
-    public AppExcepption(String message) {
+    public AppException(String message) {
         super(message);
     }
 
-    public AppExcepption(String message, Throwable cause) {
+    public AppException(String message, Throwable cause) {
         super(message, cause);
     }
 }

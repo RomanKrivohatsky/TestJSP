@@ -2,7 +2,7 @@ package com.rom4.departments.controller;
 
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
-import com.rom4.departments.exception.AppExcepption;
+import com.rom4.departments.exception.AppException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class DeleteEmploye implements  Handler {
             saveStatus = "Employe deleted";
             empDAO.deleteEmploye(Integer.parseInt(request.getParameter("EmployeID")));
             System.err.println(" Integer.parseInt(request.getParameter(\"EmployeID\")) = " + Integer.parseInt(request.getParameter("EmployeID")));
-        } catch (AppExcepption a) {
+        } catch (AppException a) {
             a.printStackTrace();
             saveStatus = a.getMessage();
             request.setAttribute("errorStatus", saveStatus);

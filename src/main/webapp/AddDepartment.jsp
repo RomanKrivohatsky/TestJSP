@@ -10,12 +10,13 @@
 
 
 <html>
+
 <head>
     <title>AddDepartment</title>
 </head>
 <body>
 
-<form method="post" action="controller">
+<form method="post" action="SaveDepartment.html">
     <p>Введите название</p><input type="text" name="name" value="название" >
     <p>Введите город</p><input type="text" name="city" value="город">
     <input type="hidden" name="page" value="SaveDepartment">
@@ -23,7 +24,7 @@
     <input type="submit" name="submit" value="Сохранить">
 </form>
 
-<form method="post" action="home">
+<form method="get" action="home.html">
     <input type="hidden" name="page" value="home">
     <input type="submit" name="submit" value="На главную">
 </form>

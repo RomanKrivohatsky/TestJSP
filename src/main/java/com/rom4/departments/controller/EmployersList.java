@@ -2,8 +2,7 @@ package com.rom4.departments.controller;
 
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
-import com.rom4.departments.exception.AppExcepption;
-import com.rom4.departments.model.Department;
+import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Employe;
 
 import javax.servlet.RequestDispatcher;
@@ -21,12 +20,12 @@ import java.util.List;
 public class EmployersList implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
-        List<Employe> employers = null;
+        List<Employe> employers ;
 
         if (request.getParameter("pageType").equals("all") ) {
             try {
                 employers = empDAO.getEmployes();
-            } catch (AppExcepption a) {
+            } catch (AppException a) {
                 a.printStackTrace();
                 request.setAttribute("errorStatus", a.getMessage());
                 response.sendRedirect("ErrorPage.jsp");
@@ -37,7 +36,7 @@ public class EmployersList implements Handler {
         else if  (request.getParameter("pageType").equals("byDepartment")) {
             try {
                 employers = empDAO.getEmployes(Integer.parseInt(request.getParameter("departmentID")));
-            } catch (AppExcepption a) {
+            } catch (AppException a) {
                 a.printStackTrace();
                 request.setAttribute("errorStatus", a.getMessage());
                 response.sendRedirect("ErrorPage.jsp");
@@ -48,7 +47,7 @@ public class EmployersList implements Handler {
         }
 
        RequestDispatcher rd;
-        rd = request.getRequestDispatcher("Employers");
+        rd = request.getRequestDispatcher("Employers.jsp");
         rd.forward(request, response);
 
     }
