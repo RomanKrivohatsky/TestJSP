@@ -38,11 +38,16 @@ public class SaveEmploye implements  Handler {
             validateError = validateEmploye(request, response, emp, pageType);
             //validate done
             if (validateError == null) {
-                 processEmploye(emp, request , response, pageType, empDAO);
-                response.sendRedirect("SaveEmploye.jsp");
+                saveStatus =  processEmploye(emp, request , response, pageType, empDAO);
+                if (saveStatus !=null) {
+                    request.setAttribute("saveStatus", saveStatus);
+                    PageUtil.forwardToPage(request, response, "SaveEmploye.jsp");
+                }
+
             }
         }
     }
+
 
     private Employe parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse responce, String pageType) throws IOException {
 
@@ -100,18 +105,18 @@ public class SaveEmploye implements  Handler {
         return validateError;
     }
 
-    private void processEmploye (Employe emp,  HttpServletRequest request, HttpServletResponse response, String pageType, EmployeDAO empDAO)  throws IOException {
-        String saveStatus;
+    private String  processEmploye (Employe emp,  HttpServletRequest request, HttpServletResponse response, String pageType, EmployeDAO empDAO) throws IOException, ServletException {
+        String saveStatus = "Employe created";
         if (pageType.equals("add")) {
             try {
-                saveStatus = "Employe created";
                 emp = empDAO.createEmploye(emp);
             }
             catch (AppException a) {
                 a.printStackTrace();
                 saveStatus = a.getMessage();
-                PageUtil.redirectToErrorPage(request, response, a.getMessage());
-                return;
+                request.setAttribute("errorStatus", a.getMessage());
+                PageUtil.forwardToPage(request, response, "ErrorPage");
+                return null;
             }
         }
         else if (pageType.equals("edit")) {
@@ -122,11 +127,12 @@ public class SaveEmploye implements  Handler {
                 empDAO.udpateEmploye(emp);
             } catch (AppException a) {
                 a.printStackTrace();
-                PageUtil.redirectToErrorPage(request, response, a.getMessage());
-                return;
+                request.setAttribute("errorStatus", a.getMessage());
+                PageUtil.forwardToPage(request, response, "ErrorPage");
+                return null;
             }
         }
-
+        return saveStatus;
     }
 
 

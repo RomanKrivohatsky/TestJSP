@@ -10,44 +10,23 @@
 
 <html>
 <head>
+    <title>DEPARTMENTS</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
-
-<style type="text/css">
-    TABLE {
-        background: maroon; /* Цвет фона таблицы */
-        color: white; /* Цвет текста */
-    }
-    TD {
-        background: navy; /* Цвет фона ячеек */
-    }
-</style>
-
-<table align="center" border="0">
-    <tr>
-        <td  align="center" valign="top">
-            <form method="get" action="AddDepartment.html">
-                <input type="hidden" name="page" value="AddDepartment">
-
-                <p><input type="submit" name="submit" value="Добавить отдел "></p>
-            </form>
-        </td>
-        <td align="center" valign="top">
-            <form method="get" action="home.html">
-                <input type="hidden" name="page" value="home">
-                <input type="submit" name="submit" value="На главную">
-            </form>
-        </td>
-      </tr>
-</table>
-<table align="center" border="1" >
-        <caption>Таблица отделов</caption>
+<div id="pagewidth">
+    <div id="header">
+        <h1 id="logo">DEPARTMENTS </h1>
+        <h2 id="slogan">Table with Departments...</h2>
+    </div>
+<table class="CSSTableGenerator" align="center" border="1" >
         <tr>
-            <th>Название</th>
-            <th>Город</th>
-            <th>Редактировать</th>
-            <th>Сотдрудники</th>
-            <th>Удалить</th>
+            <td>Название</td>
+            <td>Город</td>
+            <td>Редактировать</td>
+            <td>Сотдрудники</td>
+            <td>Удалить</td>
         </tr>
         <c:forEach var="Department" items="${requestScope.Departments}">
             <tr>
@@ -57,7 +36,7 @@
                     <form method="get" action="EditDepartment.html">
                         <input type="hidden" name="page" value="EditDepartment">
                         <input type="hidden" name="departmentID" value=${Department.departmentID}>
-                        <p><input type="submit" name="submit" value="Редактировать"></p>
+                        <p><input CLASS="button"  type="submit" name="submit" value="Редактировать"></p>
                     </form>
                 </td>
                 <td>
@@ -65,20 +44,24 @@
                         <input type="hidden" name="page" value="Employers">
                         <input type="hidden" name="pageType" value="byDepartment">
                         <input type="hidden" name="departmentID" value=${Department.departmentID}>
-                        <p><input type="submit" name="submit" value="Список"></p>
+                        <p><input CLASS="button"  type="submit" name="submit" value="Список"></p>
                     </form>
                 </td>
                 <td>
                     <form method="get" action="DeleteDepartment.html">
                         <input type="hidden" name="page" value="DeleteDepartment">
-                        <input type="hidden" name="departmentID" value=${Department.departmentID}>
+                        <input  type="hidden" name="departmentID" value=${Department.departmentID}>
 
-                        <p><input type="submit" name="submit" value="Удалить"></p>
+                        <p><input CLASS="button" type="submit" name="submit" value="Удалить"></p>
                     </form>
                 </td>
             </tr>
         </c:forEach>
         </td>
     </table>
+    <div id="footer">
+        <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a href="http://validator.w3.org/check?uri=referer">html</a> | <a href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a href="http://www.mitchinson.net"> www.mitchinson.net</a> | This work is licensed under a <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a></p>
+    </div>
+</div>
 </body>
 </html>

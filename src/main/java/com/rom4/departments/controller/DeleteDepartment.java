@@ -20,19 +20,20 @@ public class DeleteDepartment implements Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
         String saveStatus ;
 
-        try {
+          try {
             saveStatus = "Department deleted";
             depDAO.deleteDepartment(Integer.parseInt(request.getParameter("departmentID")));
         } catch (AppException a) {
             a.printStackTrace();
-            PageUtil.redirectToErrorPage(request, response, a.getMessage());
+            System.err.println(a.getMessage());
+            //PageUtil.redirectToErrorPage(request, response, a.getMessage());
+              request.setAttribute("errorStatus", a.getMessage());
+              PageUtil.forwardToPage(request, response, "ErrorPage.jsp");
             return ;
         }
 
-        RequestDispatcher rd;
         request.setAttribute("saveStatus", saveStatus);
-        rd = request.getRequestDispatcher("SaveDepartment");
-        rd.forward(request, response);
+        PageUtil.forwardToPage(request, response, "SaveDepartment.jsp");
 
     }
 }

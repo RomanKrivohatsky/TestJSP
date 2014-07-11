@@ -1,29 +1,56 @@
 <%--
   Created by IntelliJ IDEA.
   User: rom4
-  Date: 04.07.14
-  Time: 18:46
+  Date: 07.07.14
+  Time: 20:00
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page contentType="text/html;charset=windows-1251" language="java" %>
+<%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <html>
 <head>
-    <title></title>
+    <title>DEPARTMENTS</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
 </head>
+
 <body>
+
+<div id="pagewidth">
+    <div id="header">
+        <h1 id="logo">DEPARTMENTS </h1>
+
+        <h2 id="slogan">table with employers...</h2>
+    </div>
+
+    <p>${saveStatus}</p>
 
     <p>${saveStatus}</p>
 
     <form method="get" action="home.html">
         <input type="hidden" name="page" value="home">
-        <input type="submit" name="submit" value="–ù–∞ –≥–ª–∞–≤–Ω—É—é">
+        <input type="submit" name="submit" value="Õ‡ „Î‡‚ÌÛ˛">
     </form>
 
     <form method="get" action="Departments.html">
-        <p>–°–ø–∏—Å–æ–∫ –æ—Ç–¥–µ–ª–æ–≤ </p><br>
         <input type="hidden" name="page" value="DepartmentList">
-        <p><input type="submit" name="submit" value = "–ø–æ–∫–∞–∑–∞—Ç—å"></p>
+        <p><input type="submit" name="submit" value = "—ÔËÒÓÍ ÓÚ‰ÂÎÓ‚"></p>
     </form>
+
+    <div id="footer">
+        <p><a href="home.html/">Homepage</a> | <a href="contact.html">contact</a> | <a
+                href="http://validator.w3.org/check?uri=referer">html</a> | <a
+                href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a
+                href="http://www.mitchinson.net"> www.mitchinson.net</a> | tdis work is licensed under a <a
+                rel="license" target="_blank" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
+            Attribution 3.0 License</a></p>
+    </div>
+</div>
 
 </body>
 </html>
+
+

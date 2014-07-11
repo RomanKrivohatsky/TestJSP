@@ -37,18 +37,18 @@ public class ControllerServlet extends HttpServlet {
         handlers.put("Contacts",new Contacts());
         handlers.put("home",new MainPage());
 */
-        handlers.put("AddDepartment.html",new AddDepartment());
-        handlers.put("SaveDepartment",new SaveDepartment());
-        handlers.put("SaveEmploye",new SaveEmploye());
-        handlers.put("EditDepartment",new EditDepartment());
-        handlers.put("EditEmploye",new EditEmploye());
-        handlers.put("DeleteDepartment",new DeleteDepartment());
-        handlers.put("DeleteEmploye",new DeleteEmploye());
-        handlers.put("Departments.html",new DepartmentList());
-        handlers.put("Employers.html",new EmployersList());
-        handlers.put("AddEmploye.html",new AddEmploye());
-        handlers.put("contact.html",new Contacts());
-        handlers.put("home",new MainPage());
+        handlers.put("/AddDepartment.html",new AddDepartment());
+        handlers.put("/SaveDepartment.html",new SaveDepartment());
+        handlers.put("/SaveEmploye.html",new SaveEmploye());
+        handlers.put("/EditDepartment.html",new EditDepartment());
+        handlers.put("/EditEmploye.html",new EditEmploye());
+        handlers.put("/DeleteDepartment.html",new DeleteDepartment());
+        handlers.put("/DeleteEmploye.html",new DeleteEmploye());
+        handlers.put("/Departments.html",new DepartmentList());
+        handlers.put("/Employers.html",new EmployersList());
+        handlers.put("/AddEmploye.html",new AddEmploye());
+        handlers.put("/contact.html",new Contacts());
+        handlers.put("/home.html",new MainPage());
 
     }
 
@@ -59,7 +59,9 @@ public class ControllerServlet extends HttpServlet {
        // System.err.println("url " + req.getRequestURL());
         //System.err.println("req.getParameter(page)" + req.getParameter("page"));
 
-        Handler handler = handlers.get(req.getParameter("page"));
+        //Handler handler = handlers.get(req.getParameter("page"));
+
+        Handler handler = handlers.get(req.getRequestURI());
 
         if (handler != null) {
             handler.handle(req, resp, daoDep, daoEmp);

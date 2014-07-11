@@ -22,7 +22,7 @@ public class EmployersList implements Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
         List<Employe> employers ;
 
-        if (request.getParameter("pageType").equals("all") ) {
+        if (request.getParameter("pageType") == null)  {
             try {
                 employers = empDAO.getEmployes();
             } catch (AppException a) {

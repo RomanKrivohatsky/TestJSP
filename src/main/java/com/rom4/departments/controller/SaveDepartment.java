@@ -32,9 +32,8 @@ public class SaveDepartment implements Handler {
                 dep = depDAO.createDepartment(dep);
             } catch (AppException a) {
                 a.printStackTrace();
-                saveStatus = a.getMessage();
-                request.setAttribute("errorStatus",saveStatus);
-                response.sendRedirect("ErrorPage");
+                request.setAttribute("errorStatus",a.getMessage());
+                PageUtil.forwardToPage(request, response, "ErrorPage");
                 return;
             }
 
@@ -46,18 +45,14 @@ public class SaveDepartment implements Handler {
                 depDAO.udpateDepartment(dep);
             } catch (AppException a) {
                 a.printStackTrace();
-                saveStatus = a.getMessage();
-                request.setAttribute("errorStatus",saveStatus);
-                response.sendRedirect("ErrorPage");
+                request.setAttribute("errorStatus", a.getMessage());
+                PageUtil.forwardToPage(request, response, "ErrorPage");
                 return;
             }
 
         }
 
-       /* RequestDispatcher rd;
         request.setAttribute("saveStatus", saveStatus);
-        rd = request.getRequestDispatcher("SaveDepartment");
-        rd.forward(request, response);*/
         response.sendRedirect("SaveDepartment.jsp");
 
     }
