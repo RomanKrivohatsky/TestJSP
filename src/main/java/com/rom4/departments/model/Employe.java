@@ -2,10 +2,12 @@ package com.rom4.departments.model;
 
 
 
-
 import com.rom4.departments.dao.DAOFactory;
 import com.rom4.departments.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
+import com.rom4.departments.validation.Email;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
 import net.sf.oval.constraint.*;
 import net.sf.oval.guard.Guarded;
 
@@ -19,11 +21,17 @@ import java.util.*;
 @Guarded
 public class Employe {
 
-    private Integer employeID;
-    @NotEmpty
-    @ValidateWithMethod(methodName = "checkFirstNameUnique" , parameterType = String.class, errorCode = "10")
+
+    //@ValidateWithMethod(methodName = "checkID", parameterType = int.class)
+    private int employeID;
+
+    //@ValidateWithMethod(methodName = "checkFirstNameUnique" , parameterType = String.class, errorCode = "10")
+    //@CheckWith(checkFirstName.class)
     private String firstName = null;
+
     private String lastName = null;
+
+    @Email
     private String email = null;
     private float salary = 0.0F;
     private Date birthday = null;
@@ -31,10 +39,19 @@ public class Employe {
 
     public Employe() {
     }
+/*
+
+    private boolean checkID (int employeID) {
+        if (employeID == 0) {return false;}
+        return true;
+    }
 
     private boolean checkFirstNameUnique (String firstName) {
         EmployeDAO dao = DAOFactory.getEmployeDAO();
 
+        if (firstName == null) {
+            return false;
+        }
         try {
             List<Employe> employes = dao.getEmployes();
             for (Employe e:employes) {
@@ -49,12 +66,14 @@ public class Employe {
 
         return true;
     }
+*/
+
 
     public Integer getEmployeID() {
         return employeID;
     }
 
-    public void setEmployeID(@NotNull Integer employeID) {
+    public void setEmployeID( Integer employeID) {
         this.employeID = employeID;
     }
 
@@ -62,7 +81,7 @@ public class Employe {
         return firstName;
     }
 
-    public void setFirstName(@NotNull String firstName) {
+    public void setFirstName( String firstName) {
         this.firstName = firstName;
     }
 
@@ -137,20 +156,29 @@ public class Employe {
     }
 
     public static void main (String args[]) {
-        Employe e = new Employe();
+        /*Employe e = new Employe();
 
-        e.setEmployeID(null);
-        e.setFirstName(null);
+        e.setEmployeID(0);
+        //e.setEmail("email");
+        e.setFirstName("Ivan");
 
         //throw new ConstraintsViolatedException();
 
-       /* Validator validator = new net.sf.oval.Validator();
-        java.util.List violations = validator.validate(e);
-*/
-      /*  if (!violations.isEmpty()) {
-            System.out.println(violations.get(0));
-            System.out.println(violations.get(0));
+        Validator validator = new net.sf.oval.Validator();
+        java.util.List<ConstraintViolation> violations = validator.validate(e);
+        if (!violations.isEmpty()) {
+
+            System.out.println(violations.get(0).getMessage());
+            System.out.println("1123");
         }*/
 
+    }
+
+    private class checkFirstName implements CheckWithCheck.SimpleCheck {
+        @Override
+        public boolean isSatisfied(Object o, Object o2) {
+
+            return true;
+        }
     }
 }

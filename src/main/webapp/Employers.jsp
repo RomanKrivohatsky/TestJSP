@@ -14,6 +14,16 @@
 </head>
 <body>
 
+<style type="text/css">
+    TABLE {
+        background: maroon; /* ÷вет фона таблицы */
+        color: white; /* ÷вет текста */
+    }
+    TD {
+        background: navy; /* ÷вет фона €чеек */
+    }
+</style>
+
 <table border="0" align = "center">
     <tr>
         <td align="center" valign="top">
@@ -33,6 +43,7 @@
     </tr>
 </table>
 
+
 <table border="1" align = "center">
     <tr>
         <th>»м€</th>
@@ -44,17 +55,17 @@
     </tr>
     <c:forEach var="Employe" items="${requestScope.Employers}">
         <tr>
-            <td> ${Employe.firstName} </td>
+            <td> ${Employe.firstName} ${Employe.employeID}</td>
             <td> ${Employe.lastName} </td>
             <td> ${Employe.email} </td>
             <td> ${Employe.salary} </td>
-            <td> ${Employe.birthday} </td>
+            <td> ${Employe.birthday}  </td>
             <td>
                 <form method="get" action="EditEmploye.html">
-                    <input type="hidden" name="page" value="EditEmployeWithDep">
-                    <input type="hidden" name="EmployeID" value=${Employe.employeID}>
-                    <input type="hidden" name="departmentID" value=${departmentID}>
-
+                    <input type="hidden" name="page" value="EditEmploye">
+                    <input type="hidden" name="pageType" value="EditEmployeDep">
+                    <input type="hidden" name="employeID" value=${Employe.employeID}>
+                    <input type="hidden" name="departmentID" value=${Employe.departmentID}>
                     <p><input type="submit" name="submit" value="–едактировать"></p>
                 </form>
             </td>

@@ -1,4 +1,4 @@
-package com.rom4.departments.model;
+package com.rom4.departments.validation;
 
 import net.sf.oval.guard.GuardAspect;
 

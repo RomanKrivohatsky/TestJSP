@@ -24,10 +24,11 @@ public class ControllerServlet extends HttpServlet {
 
     private final HashMap<String, Handler> handlers = new HashMap<String, Handler>();
     {
-        handlers.put("AddDepartment",new AddDepartment());
+      /*  handlers.put("AddDepartment",new AddDepartment());
         handlers.put("SaveDepartment",new SaveDepartment());
         handlers.put("SaveEmploye",new SaveEmploye());
         handlers.put("EditDepartment",new EditDepartment());
+        handlers.put("EditEmploye",new EditEmploye());
         handlers.put("DeleteDepartment",new DeleteDepartment());
         handlers.put("DeleteEmploye",new DeleteEmploye());
         handlers.put("DepartmentList",new DepartmentList());
@@ -35,6 +36,20 @@ public class ControllerServlet extends HttpServlet {
         handlers.put("AddEmploye",new AddEmploye());
         handlers.put("Contacts",new Contacts());
         handlers.put("home",new MainPage());
+*/
+        handlers.put("AddDepartment.html",new AddDepartment());
+        handlers.put("SaveDepartment",new SaveDepartment());
+        handlers.put("SaveEmploye",new SaveEmploye());
+        handlers.put("EditDepartment",new EditDepartment());
+        handlers.put("EditEmploye",new EditEmploye());
+        handlers.put("DeleteDepartment",new DeleteDepartment());
+        handlers.put("DeleteEmploye",new DeleteEmploye());
+        handlers.put("Departments.html",new DepartmentList());
+        handlers.put("Employers.html",new EmployersList());
+        handlers.put("AddEmploye.html",new AddEmploye());
+        handlers.put("contact.html",new Contacts());
+        handlers.put("home",new MainPage());
+
     }
 
     @Override

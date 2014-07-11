@@ -169,7 +169,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         }
 
         try {
-            ps = conn.prepareStatement("select department_id, name, city from departments order by department_id");
+            ps = conn.prepareStatement(" select department_id, name, city from departments where department_id = -1 order by department_id");
             rs = ps.executeQuery();
 
             while (rs.next()) {

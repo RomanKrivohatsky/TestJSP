@@ -21,9 +21,7 @@ public class AddDepartment implements Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
         System.err.println("add dep");
 
-        RequestDispatcher rd;
-        rd = request.getRequestDispatcher("AddDepartment.jsp");
-        rd.forward(request, response);
+        PageUtil.forwardToPage(request, response, "AddDepartment.jsp");
 
     }
 }

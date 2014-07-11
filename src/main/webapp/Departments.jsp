@@ -13,6 +13,16 @@
 </head>
 <body>
 
+<style type="text/css">
+    TABLE {
+        background: maroon; /* ÷вет фона таблицы */
+        color: white; /* ÷вет текста */
+    }
+    TD {
+        background: navy; /* ÷вет фона €чеек */
+    }
+</style>
+
 <table align="center" border="0">
     <tr>
         <td  align="center" valign="top">

@@ -22,22 +22,23 @@ public class AddEmploye implements Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
         System.err.println("add employe");
 
-        List<Department> departments = null;
+        List<Department> departments ;
         try {
             departments = depDAO.getDepartments();
         } catch (AppException a) {
             a.printStackTrace();
-            request.setAttribute("errorStatus", a.getMessage());
-            response.sendRedirect("ErrorPage.jsp");
+            PageUtil.redirectToErrorPage(request, response, a.getMessage());
+            return ;
         }
+
         request.setAttribute("Departments", departments);
 
         if (request.getParameter("pageType").equals("AddEmployeWithDep")) {
             request.setAttribute("departmentID", request.getParameter("departmentID"));
         }
 
-        RequestDispatcher rd;
-        rd = request.getRequestDispatcher("AddEmploye.jsp");
-        rd.forward(request, response);
+        PageUtil.forwardToPage(request, response, "AddEmploye.jsp");
     }
+
+
 }

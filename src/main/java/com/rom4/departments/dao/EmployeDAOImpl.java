@@ -107,6 +107,50 @@ public class EmployeDAOImpl implements EmployeDAO  {
     }
 
     @Override
+    public Employe getEmployeByEmail(String email) throws AppException {
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Employe emp = null;
+
+        conn = ConnectionInstance.getConnection();
+
+        if (conn == null) {
+            return emp;
+        }
+
+        try {
+            ps = conn.prepareStatement("select first_name,last_name, email, salary, birthday,department_id, employe_id from employes where email = ?");
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                emp = new Employe();
+                try {
+                    emp.setFirstName(rs.getString(1));
+                    emp.setLastName(rs.getString(2));
+                    emp.setEmail(rs.getString(3));
+                    emp.setSalary(rs.getFloat(4));
+                    DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+                    emp.setBirthday(sdf.parse(rs.getString(5)));
+                    emp.setDepartmentID(rs.getInt(6));
+                    emp.setEmployeID(rs.getInt(7));
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new AppException("Can't read employe by email" + e.getMessage(), e);
+        } finally {
+            closeConnection(rs, ps, conn);
+        }
+        return emp;
+    }
+
+    @Override
     public boolean udpateEmploye(Employe emp) throws AppException {
 
         Connection conn;
@@ -125,8 +169,8 @@ public class EmployeDAOImpl implements EmployeDAO  {
                     "email = ?, " +
                     "salary = ?, " +
                     "birthday = ?," +
-                    "department_id = ?) " +
-                    "values (?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+                    "department_id = ? " +
+                    "where employe_id = ?", java.sql.Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, emp.getFirstName());
             ps.setString(2, emp.getLastName());
             ps.setString(3, emp.getEmail());
@@ -134,6 +178,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
             DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
             ps.setString(5, sdf.format(emp.getBirthday()));
             ps.setInt(6, emp.getDepartmentID());
+            ps.setInt(7, emp.getEmployeID());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -200,7 +245,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
                     emp.setSalary(rs.getFloat(4));
                     DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
                     emp.setBirthday(sdf.parse(rs.getString(5)));
-                    emp.setEmployeID(rs.getInt(6));
+                    emp.setDepartmentID(rs.getInt(6));
                     emp.setEmployeID(rs.getInt(7));
                     Employes.add(emp);
                 } catch (ParseException e) {
@@ -246,7 +291,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
                     emp.setSalary(rs.getFloat(4));
                     DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
                     emp.setBirthday(sdf.parse(rs.getString(5)));
-                    emp.setEmployeID(rs.getInt(6));
+                    emp.setDepartmentID(rs.getInt(6));
                     emp.setEmployeID(rs.getInt(7));
                     Employes.add(emp);
                 } catch (ParseException e) {

@@ -20,6 +20,7 @@ public class EditDepartment implements  Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
         System.err.println("edit");
+
         RequestDispatcher rd;
         Department dep = null;
         Integer departmentID;
@@ -29,8 +30,8 @@ public class EditDepartment implements  Handler {
             dep = depDAO.readDepartment(departmentID);
         } catch (AppException a) {
             a.printStackTrace();
-            request.setAttribute("errorStatus", a.getMessage());
-            response.sendRedirect("ErrorPage.jsp");
+            PageUtil.redirectToErrorPage(request, response, a.getMessage());
+            return;
         }
 
         if (dep != null) {
@@ -38,13 +39,7 @@ public class EditDepartment implements  Handler {
             request.setAttribute("name", dep.getName());
             request.setAttribute("city", dep.getCity());
         }
-        else {
-            request.setAttribute("departmentID", "0");
-            request.setAttribute("name", "");
-            request.setAttribute("city", "");
-        }
 
-        System.err.println("go to EditDepartment");
         rd = request.getRequestDispatcher("EditDepartment.jsp");
         rd.forward(request, response);
     }

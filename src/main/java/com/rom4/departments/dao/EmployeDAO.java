@@ -13,8 +13,10 @@ import java.util.List;
 public interface EmployeDAO {
     Employe createEmploye(Employe emp) throws AppException;
     Employe readEmploye(int EmployeID) throws AppException;
+    Employe getEmployeByEmail(String email ) throws AppException;
     boolean udpateEmploye(Employe emp) throws AppException;
     boolean deleteEmploye(int EmployeID)throws AppException;
     List<Employe> getEmployes() throws AppException;
     List<Employe> getEmployes(int departmentID) throws AppException;
+
 }

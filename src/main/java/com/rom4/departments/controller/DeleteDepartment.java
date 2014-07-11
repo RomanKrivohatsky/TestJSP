@@ -25,11 +25,8 @@ public class DeleteDepartment implements Handler {
             depDAO.deleteDepartment(Integer.parseInt(request.getParameter("departmentID")));
         } catch (AppException a) {
             a.printStackTrace();
-            saveStatus = a.getMessage();
-            System.err.println(saveStatus);
-            request.setAttribute("errorStatus", saveStatus);
-            response.sendRedirect("ErrorPage");
-            return;
+            PageUtil.redirectToErrorPage(request, response, a.getMessage());
+            return ;
         }
 
         RequestDispatcher rd;

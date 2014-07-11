@@ -6,6 +6,7 @@ import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Employe;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
+import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,11 +28,27 @@ public class SaveEmploye implements  Handler {
 
         String saveStatus = "Error saving";
         String validateError;
+        String pageType;
+
+        pageType = request.getParameter("pageType");
+
+        Employe emp = parseEmployeFromRequest(request, response, pageType);
+
+        if (emp != null) {
+            validateError = validateEmploye(request, response, emp, pageType);
+            //validate done
+            if (validateError == null) {
+                 processEmploye(emp, request , response, pageType, empDAO);
+                response.sendRedirect("SaveEmploye.jsp");
+            }
+        }
+    }
+
+    private Employe parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse responce, String pageType) throws IOException {
 
         Employe emp = new Employe();
 
         try {
-
             emp.setFirstName(request.getParameter("firstName"));
             emp.setLastName(request.getParameter("lastName"));
             emp.setEmail(request.getParameter("email"));
@@ -40,53 +57,77 @@ public class SaveEmploye implements  Handler {
             emp.setBirthday(sdf.parse(request.getParameter("birthday")));
             emp.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
 
-            Validator validator = new net.sf.oval.Validator();
-            java.util.List violations = validator.validate(emp);
-
-            if (!violations.isEmpty()) {
-                validateError = ((ConstraintViolation)violations.get(0)).getMessage();
-                System.err.println(validateError);
+            if (pageType.equals("edit")) {
+                emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
             }
 
         } catch (ParseException e) {
             e.printStackTrace();
+            /*redirectToErrorPage(request, responce, e.getMessage());
+            return null;*/
         }
 
-        if (request.getParameter("pageType").equals("add")) {
+      return emp;
+    }
+
+    private String validateEmploye(HttpServletRequest request, HttpServletResponse response, Employe emp, String pageType) throws ServletException, IOException {
+        String validateError = null;
+
+        Validator validator = new net.sf.oval.Validator();
+        java.util.List violations = validator.validate(emp);
+
+        if (!violations.isEmpty()) {
+            validateError = ((ConstraintViolation) violations.get(0)).getMessage();
+
+            RequestDispatcher rd;
+
+            request.setAttribute("errorValidate", validateError);
+            request.setAttribute("firstName", emp.getFirstName());
+            request.setAttribute("lastName", emp.getLastName());
+            request.setAttribute("email", emp.getEmail());
+            request.setAttribute("salary", emp.getSalary());
+            request.setAttribute("birthday", emp.getBirthday());
+            if (pageType.equals("add")) {
+                rd = request.getRequestDispatcher("AddEmploye.jsp");
+                rd.forward(request, response);
+            } else if (pageType.equals("edit")) {
+                request.setAttribute("employeID", Integer.parseInt(request.getParameter("employeID")));
+                request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
+                rd = request.getRequestDispatcher("EditEmploye.jsp");
+                rd.forward(request, response);
+            }
+        }
+        return validateError;
+    }
+
+    private void processEmploye (Employe emp,  HttpServletRequest request, HttpServletResponse response, String pageType, EmployeDAO empDAO)  throws IOException {
+        String saveStatus;
+        if (pageType.equals("add")) {
             try {
                 saveStatus = "Employe created";
-
                 emp = empDAO.createEmploye(emp);
             }
             catch (AppException a) {
                 a.printStackTrace();
                 saveStatus = a.getMessage();
-                request.setAttribute("errorStatus",saveStatus);
-                response.sendRedirect("ErrorPage");
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
                 return;
             }
-       }
-        else if (request.getParameter("pageType").equals("edit")) {
+        }
+        else if (pageType.equals("edit")) {
             emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
 
             try {
                 saveStatus = "Employe updated";
                 empDAO.udpateEmploye(emp);
             } catch (AppException a) {
-                 a.printStackTrace();
-                saveStatus = a.getMessage();
-                request.setAttribute("errorStatus",saveStatus);
-                response.sendRedirect("ErrorPage");
+                a.printStackTrace();
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
                 return;
             }
-
         }
 
-        /*RequestDispatcher rd;
-        request.setAttribute("saveStatus", saveStatus);
-        rd = request.getRequestDispatcher("SaveEmploye");
-        rd.forward(request, response);*/
-
-        response.sendRedirect("SaveEmploye.jsp");
     }
+
+
 }
