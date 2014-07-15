@@ -3,6 +3,7 @@ package com.rom4.departments.controller;
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
+import com.rom4.departments.model.Department;
 import com.rom4.departments.model.Employe;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Created by rom4 on 07.07.14.
@@ -26,21 +28,25 @@ public class SaveEmploye implements  Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
 
-        String saveStatus = "Error saving";
+        String saveStatus;
         String validateError;
         String pageType;
 
         pageType = request.getParameter("pageType");
 
-        Employe emp = parseEmployeFromRequest(request, response, pageType);
+        Employe emp = parseEmployeFromRequest(request, pageType);
 
         if (emp != null) {
-            validateError = validateEmploye(request, response, emp, pageType);
+            validateError = validateEmploye(request, response, emp, pageType, depDAO);
             //validate done
             if (validateError == null) {
                 saveStatus =  processEmploye(emp, request , response, pageType, empDAO);
                 if (saveStatus !=null) {
                     request.setAttribute("saveStatus", saveStatus);
+                    PageUtil.forwardToPage(request, response, "SaveEmploye.jsp");
+                }
+                else {
+                    request.setAttribute("saveStatus", "Can't determine type of saving page");
                     PageUtil.forwardToPage(request, response, "SaveEmploye.jsp");
                 }
 
@@ -49,7 +55,7 @@ public class SaveEmploye implements  Handler {
     }
 
 
-    private Employe parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse responce, String pageType) throws IOException {
+    private Employe parseEmployeFromRequest(HttpServletRequest request, String pageType) throws IOException {
 
         Employe emp = new Employe();
 
@@ -75,7 +81,7 @@ public class SaveEmploye implements  Handler {
       return emp;
     }
 
-    private String validateEmploye(HttpServletRequest request, HttpServletResponse response, Employe emp, String pageType) throws ServletException, IOException {
+    private String validateEmploye(HttpServletRequest request, HttpServletResponse response, Employe emp, String pageType, DepartmentDAO depDAO) throws ServletException, IOException {
         String validateError = null;
 
         Validator validator = new net.sf.oval.Validator();
@@ -86,36 +92,49 @@ public class SaveEmploye implements  Handler {
 
             RequestDispatcher rd;
 
+            List<Department> departments;
+            try {
+                departments = depDAO.getDepartments();
+            } catch (AppException a) {
+                a.printStackTrace();
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
+                return "error";
+            }
+
+            request.setAttribute("Departments", departments);
+
             request.setAttribute("errorValidate", validateError);
             request.setAttribute("firstName", emp.getFirstName());
             request.setAttribute("lastName", emp.getLastName());
             request.setAttribute("email", emp.getEmail());
             request.setAttribute("salary", emp.getSalary());
             request.setAttribute("birthday", emp.getBirthday());
-            if (pageType.equals("add")) {
-                rd = request.getRequestDispatcher("AddEmploye.jsp");
-                rd.forward(request, response);
-            } else if (pageType.equals("edit")) {
+             if (pageType.equals("add")) {
+                 rd = request.getRequestDispatcher("AddEmploye.jsp");
+                 rd.forward(request, response);
+            }
+             else if (pageType.equals("edit")) {
                 request.setAttribute("employeID", Integer.parseInt(request.getParameter("employeID")));
                 request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
-                rd = request.getRequestDispatcher("EditEmploye.jsp");
-                rd.forward(request, response);
+                 rd = request.getRequestDispatcher("EditEmploye.jsp");
+                 rd.forward(request, response);
             }
+
         }
         return validateError;
     }
 
     private String  processEmploye (Employe emp,  HttpServletRequest request, HttpServletResponse response, String pageType, EmployeDAO empDAO) throws IOException, ServletException {
-        String saveStatus = "Employe created";
+        String saveStatus = null ;
         if (pageType.equals("add")) {
             try {
-                emp = empDAO.createEmploye(emp);
+                saveStatus = "Employe created";
+                empDAO.createEmploye(emp);
             }
             catch (AppException a) {
                 a.printStackTrace();
-                saveStatus = a.getMessage();
                 request.setAttribute("errorStatus", a.getMessage());
-                PageUtil.forwardToPage(request, response, "ErrorPage");
+                PageUtil.forwardToPage(request, response, "ErrorPage.jsp");
                 return null;
             }
         }
@@ -128,7 +147,7 @@ public class SaveEmploye implements  Handler {
             } catch (AppException a) {
                 a.printStackTrace();
                 request.setAttribute("errorStatus", a.getMessage());
-                PageUtil.forwardToPage(request, response, "ErrorPage");
+                PageUtil.forwardToPage(request, response, "ErrorPage.jsp");
                 return null;
             }
         }

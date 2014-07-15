@@ -49,7 +49,7 @@ public class EditEmploye implements Handler {
             }
 
             if (request.getParameter("pageType").equals("EditEmployeDep")) {
-                request.setAttribute("departmentID", request.getParameter("departmentID"));
+                    request.setAttribute("departmentID", request.getParameter("departmentID"));
             }
 
             request.setAttribute("Departments", departments);

@@ -14,7 +14,6 @@ import java.io.IOException;
 public class PageUtil {
     public static void redirectToErrorPage(HttpServletRequest request, HttpServletResponse response, String errorMessage) throws IOException {
         request.setAttribute("errorStatus",errorMessage);
-        request.setAttribute("errorStatus","1111111112333");
         response.sendRedirect("ErrorPage.jsp");
     }
 

@@ -25,20 +25,15 @@
         <h2 id="slogan">table with employers...</h2>
     </div>
 
-    <table border="0" align="center">
-        <tr>
-            <td align="center" valign="top">
-                <form method="get" action="AddEmploye.html">
-                    <input type="hidden" name="page" value="AddEmploye">
-                    <input type="hidden" name="pageType" value="AddEmployeWithDep">
-                    <input type="hidden" name="departmentID" value=${departmentID}>
+    <form method="get" action="AddEmploye.html">
+        <input type="hidden" name="page" value="AddEmploye">
+        <input type="hidden" name="pageType" value="AddEmployeWithDep">
+        <input type="hidden" name="departmentID" value=${departmentID}>
 
-                    <p><input type="submit" name="submit" value="добавить сотрудника"></p>
-                </form>
-            </td>
-        </tr>
-    </table>
+        <p><input type="submit" name="submit" value="добавить сотрудника"></p>
+    </form>
 
+    <input type="hidden" name="departmentID" value=${Employe.departmentID}>
     <table class="CSSTableGenerator" border="1" align="center">
         <tr>
             <td>Имя</td>
@@ -63,7 +58,6 @@
                         <input type="hidden" name="pageType" value="EditEmployeDep">
                         <input type="hidden" name="employeID" value=${Employe.employeID}>
                         <input type="hidden" name="departmentID" value=${Employe.departmentID}>
-
                         <p><input CLASS="button" type="submit" name="submit" value="Редактировать"></p>
                     </form>
                 </td>
@@ -71,13 +65,14 @@
                     <form metdod="get" action="DeleteEmploye.html">
                         <input type="hidden" name="page" value="DeleteEmploye">
                         <input type="hidden" name="EmployeID" value=${Employe.employeID}>
-
                         <p><input CLASS="button" type="submit" name="submit" value="Удалить"></p>
                     </form>
                 </td>
             </tr>
         </c:forEach>
     </table>
+
+
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a
@@ -88,6 +83,7 @@
             Attribution 3.0 License</a></p>
     </div>
 </div>
+
 
 </body>
 </html>

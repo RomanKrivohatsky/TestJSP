@@ -24,7 +24,6 @@ public class DeleteEmploye implements  Handler {
         try {
             saveStatus = "Employe deleted";
             empDAO.deleteEmploye(Integer.parseInt(request.getParameter("EmployeID")));
-            System.err.println(" Integer.parseInt(request.getParameter(\"EmployeID\")) = " + Integer.parseInt(request.getParameter("EmployeID")));
         } catch (AppException a) {
             a.printStackTrace();
             saveStatus = a.getMessage();
@@ -35,7 +34,7 @@ public class DeleteEmploye implements  Handler {
 
         RequestDispatcher rd;
         request.setAttribute("saveStatus", saveStatus);
-        rd = request.getRequestDispatcher("SaveEmploye");
+        rd = request.getRequestDispatcher("SaveEmploye.jsp");
         rd.forward(request, response);
     }
 }

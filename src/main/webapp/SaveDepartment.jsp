@@ -23,25 +23,13 @@
     <div id="header">
         <h1 id="logo">DEPARTMENTS </h1>
 
-        <h2 id="slogan">table with employers...</h2>
+        <h2 id="slogan">Save status department...</h2>
     </div>
 
-    <p>${saveStatus}</p>
+    <H2><p>${saveStatus}</p></H2>
 
-    <p>${saveStatus}</p>
-
-    <form method="get" action="home.html">
-        <input type="hidden" name="page" value="home">
-        <input type="submit" name="submit" value="На главную">
-    </form>
-
-    <form method="get" action="Departments.html">
-        <input type="hidden" name="page" value="DepartmentList">
-        <p><input type="submit" name="submit" value = "Список отделов"></p>
-    </form>
-
-    <div id="footer">
-        <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a
+     <div id="footer">
+        <p><a href="home.html">Homepage</a> | <a href="Departments.html"> Departments</a> | <a href="contact.html">contact</a> | <a
                 href="http://validator.w3.org/check?uri=referer">html</a> | <a
                 href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a
                 href="http://www.mitchinson.net"> www.mitchinson.net</a> | tdis work is licensed under a <a

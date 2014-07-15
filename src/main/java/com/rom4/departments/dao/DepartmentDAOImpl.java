@@ -17,6 +17,42 @@ import java.util.List;
 public class DepartmentDAOImpl implements DepartmentDAO {
 
     @Override
+    public Department getDepartmentByName(String name) throws AppException {
+        Department dep = null;
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = ConnectionInstance.getConnection();
+
+        if (conn == null) {
+            return dep;
+        }
+
+        try {
+            ps = conn.prepareStatement("select department_id, name, city from departments where name = ?");
+            ps.setString(1, name);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                dep = new Department();
+                dep.setDepartmentID(rs.getInt(1));
+                dep.setName(rs.getString(2));
+                dep.setCity(rs.getString(3));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw  new AppException("Can't read department from DB /n" + e.getMessage(), e);
+        } finally {
+            closeConnection(rs, ps, conn);
+        }
+
+        return dep;
+    }
+
+    @Override
     public Department createDepartment(Department dep) throws AppException {
 
         Connection conn;

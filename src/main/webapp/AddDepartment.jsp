@@ -30,17 +30,12 @@
 
 <form method="post" action="SaveDepartment.html">
     <p>Введите название</p><input type="text" name="name" value="название" >
+    <c:if test="${not empty errorValidate}"> Ошибка валидации ${errorValidate} </c:if>
     <p>Введите город</p><input type="text" name="city" value="город">
     <input type="hidden" name="page" value="SaveDepartment">
     <input type="hidden" name="pageType" value="add">
     <input type="submit" name="submit" value="Сохранить">
 </form>
-
-<form method="get" action="home.html">
-    <input type="hidden" name="page" value="home">
-    <input type="submit" name="submit" value="На главную">
-</form>
-
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a

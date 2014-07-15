@@ -28,7 +28,7 @@ import net.sf.oval.configuration.annotation.Constraint;
 public @interface Email {
 
 
-    String message() default "email not unique";
+    String message() default "Email is not unique";
 
 
 

@@ -1,5 +1,7 @@
 package com.rom4.departments.model;
 
+import com.rom4.departments.validation.DepartmentNameUnique;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,8 @@ import java.io.Serializable;
  * This is a department bean
  */
 public class Department implements Serializable{
+
+    @DepartmentNameUnique
     private String name = null;
     private String city = null;
     private Integer departmentID;

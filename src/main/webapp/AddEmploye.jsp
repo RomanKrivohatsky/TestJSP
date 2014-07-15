@@ -24,16 +24,17 @@
     <div id="header">
         <h1 id="logo">DEPARTMENTS </h1>
 
-        <h2 id="slogan">add a department...</h2>
+        <h2 id="slogan">add a employe...</h2>
     </div>
 
 
     <form method="post" action="SaveEmploye.html">
-    <p>Введите имя</p><input type="text" name="firstName" value="имя">
-    <p>Введите фамилию</p><input type="text" name="lastName" value="фамилия">
-    <p>Введите e-mail</p><input type="email" name="email" value="e-mail"> <${errorValidate}>
-    <p>Введите оклад</p><input type="number" name="salary" value="0.0">
-    <p>Введите дату рождения</p><input type="date" name="birthday" value="01.01.1900">
+    <p>Введите имя</p><input type="text" name="firstName" value=${firstName}>
+    <p>Введите фамилию</p><input type="text" name="lastName" value=${lastName}>
+    <p>Введите e-mail</p><input type="email" name="email" value="e-mail">
+        <c:if test="${not empty errorValidate}"> Ошибка валидации ${errorValidate} </c:if>
+    <p>Введите оклад</p><input type="number" name="salary" value=${salary}>
+    <p>Введите дату рождения</p><input type="date" name="birthday" value=${birthday}>
     <p>Выберите отдел</p>
     <p><select name="departmentID">
 
@@ -53,12 +54,6 @@
     <input type="hidden" name="pageType" value="add">
     <input type="submit" name="submit" value="Сохранить">
 </form>
-
-<form method="get" action="home.html">
-    <input type="hidden" name="page" value="home">
-    <input type="submit" name="submit" value="На главную">
-</form>
-
 
 <div id="footer">
     <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a

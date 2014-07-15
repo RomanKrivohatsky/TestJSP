@@ -23,12 +23,10 @@
     <div id="header">
         <h1 id="logo">DEPARTMENTS </h1>
 
-        <h2 id="slogan">table with employers...</h2>
+        <h2 id="slogan">Save status employe..</h2>
     </div>
 
-<p>${saveStatus}</p>
-
-
+<H2><p>${saveStatus}</p></H2>
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a
