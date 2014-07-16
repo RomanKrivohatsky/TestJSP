@@ -2,15 +2,12 @@ package com.rom4.departments.model;
 
 
 
-import com.rom4.departments.dao.DAOFactory;
-import com.rom4.departments.dao.EmployeDAO;
-import com.rom4.departments.exception.AppException;
 import com.rom4.departments.validation.Email;
-import net.sf.oval.ConstraintViolation;
-import net.sf.oval.Validator;
 import net.sf.oval.constraint.*;
 import net.sf.oval.guard.Guarded;
 
+import javax.persistence.*;
+import javax.persistence.IdClass;
 import java.util.*;
 
 /**
@@ -18,17 +15,20 @@ import java.util.*;
  */
 
 
+@Entity
+@Table(name="employes")
 @Guarded
 public class Employe {
 
-
-    //@ValidateWithMethod(methodName = "checkID", parameterType = int.class)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeID;
 
-    //@ValidateWithMethod(methodName = "checkFirstNameUnique" , parameterType = String.class, errorCode = "10")
-    //@CheckWith(checkFirstName.class)
-    private String firstName = null;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name="department_id")
+    Department department;
 
+    private String firstName = null;
     private String lastName = null;
 
     @Email
@@ -39,35 +39,14 @@ public class Employe {
 
     public Employe() {
     }
-/*
 
-    private boolean checkID (int employeID) {
-        if (employeID == 0) {return false;}
-        return true;
+    public Department getDepartment() {
+        return department;
     }
 
-    private boolean checkFirstNameUnique (String firstName) {
-        EmployeDAO dao = DAOFactory.getEmployeDAO();
-
-        if (firstName == null) {
-            return false;
-        }
-        try {
-            List<Employe> employes = dao.getEmployes();
-            for (Employe e:employes) {
-                if (e.getFirstName().equals(firstName)) {
-                    return false;
-                }
-            }
-        } catch (AppException appException) {
-            appException.printStackTrace();
-            return false;
-        }
-
-        return true;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
-*/
-
 
     public Integer getEmployeID() {
         return employeID;

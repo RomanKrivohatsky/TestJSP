@@ -44,7 +44,6 @@ public class SaveDepartment implements Handler {
             }
         }
 
-
     }
     public Department parseDepartmentFromRequest (HttpServletRequest request, String pageType) {
 

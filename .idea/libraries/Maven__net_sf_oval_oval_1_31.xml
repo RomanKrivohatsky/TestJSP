@@ -9,7 +9,6 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/net/sf/oval/oval/1.31/oval-1.31-sources.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/net/sf/oval/oval/1.31/oval-1.31-sources.zip!/" />
     </SOURCES>
   </library>
 </component>
