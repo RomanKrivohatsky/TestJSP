@@ -15,17 +15,32 @@ import org.hibernate.service.ServiceRegistryBuilder;
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
+  /*  private static  SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory buildSessionFactory() {
+        try {
+            return new Configuration().configure().buildSessionFactory(
+                    new StandardServiceRegistryBuilder().build() );
+        }
+        catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            System.err.println(ex.getCause());
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+*/
+
 
 
     static {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration();
-            configuration.configure();
+            configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+             configuration.configure();
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties())
-                    .getBootstrapServiceRegistry();
+                    .applySettings(configuration.getProperties()).build();
+
 
             // A SessionFactory is set up once for an application// configures settings from hibernate.cfg.xml
             sessionFactory = new Configuration().configure().buildSessionFactory(serviceRegistry);

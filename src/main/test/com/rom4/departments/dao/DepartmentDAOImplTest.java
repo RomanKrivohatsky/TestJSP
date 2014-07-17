@@ -28,10 +28,12 @@ public class DepartmentDAOImplTest extends TestCase {
 
     public void testReadDepartment() throws Exception {
         DepartmentDAO dao = DAOFactory.getDepartmentDAO();
+        Integer id;
         Department d = new Department();
-        d.setCity("texas2");
-        d.setName("ibm2");
-        d = dao.createDepartment(d);
+        d.setCity("texas234");
+        d.setName("ibm234");
+        id = dao.createDepartment(d);
+        d.setDepartmentID(id);
         Department dNew;
         dNew = dao.readDepartment(d.getDepartmentID());
 

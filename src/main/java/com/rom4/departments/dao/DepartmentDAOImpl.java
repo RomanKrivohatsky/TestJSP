@@ -53,7 +53,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public Department createDepartment(Department dep) throws AppException {
+    public Integer createDepartment(Department dep) throws AppException {
 
         Connection conn;
         PreparedStatement ps = null;
@@ -62,8 +62,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         conn = ConnectionInstance.getConnection();
 
         if (conn == null) {
-            dep = null;
-            return dep;
+            return null;
         }
 
         try {
@@ -88,7 +87,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
             closeConnection(rs, ps, conn);
         }
 
-        return dep;
+        return dep.getDepartmentID();
 
     }
 

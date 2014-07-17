@@ -9,9 +9,15 @@ import java.util.List;
  */
 public class DAOFactory {
 
+    public static DepartmentHibDAO getDepartmentHibDAO () {
+        return new DepartmentDAOImplHib();
+    }
+
+
     public static DepartmentDAO getDepartmentDAO () {
         return new DepartmentDAOImpl();
     }
+
 
     public static EmployeDAO getEmployeDAO() {
         return new EmployeDAOImpl();
