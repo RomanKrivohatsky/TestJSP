@@ -1,13 +1,10 @@
 package com.rom4.departments.model;
 
-
-
 import com.rom4.departments.validation.Email;
 import net.sf.oval.constraint.*;
 import net.sf.oval.guard.Guarded;
 
 import javax.persistence.*;
-import javax.persistence.IdClass;
 import java.util.*;
 
 /**
@@ -40,10 +37,15 @@ public class Employe {
     private float salary = 0.0F;
     @Column(name = "birthday")
     private Date birthday = null;
+    @Column(name = "department_id", insertable = false, updatable = false)
+    private Integer departmentID;
 
-    private Integer departmentID = 0;
+    public Integer getDepartmentID() {
+        return departmentID;
+    }
 
-    public Employe() {
+    public void setDepartmentID(Integer departmentID) {
+        this.departmentID = departmentID;
     }
 
     public Department getDepartment() {
@@ -102,13 +104,6 @@ public class Employe {
         this.birthday = birthday;
     }
 
-    public Integer getDepartmentID() {
-        return departmentID;
-    }
-
-    public void setDepartmentID(Integer departmentID) {
-        this.departmentID = departmentID;
-    }
 
     @Override
     public String toString() {
@@ -119,7 +114,6 @@ public class Employe {
                 ", email='" + email + '\'' +
                 ", salary=" + salary +
                 ", birthday=" + birthday +
-                ", departmentID=" + departmentID +
                 '}';
     }
 
@@ -167,3 +161,4 @@ public class Employe {
         }
     }
 }
+

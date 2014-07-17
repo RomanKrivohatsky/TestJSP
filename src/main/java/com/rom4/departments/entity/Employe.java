@@ -38,6 +38,7 @@ public class Employe {
     @Column(name = "birthday")
     private Date birthday = null;
 
+    private Integer departmentID;
 
     public Employe() {
     }

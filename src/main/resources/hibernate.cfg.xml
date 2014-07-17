@@ -13,8 +13,8 @@
         <property name="connection.autocommit">false</property>
 
         <!-- Mapping files -->
-        <mapping class="com.rom4.departments.entity.Department"/>
-        <mapping class="com.rom4.departments.entity.Employe"/>
+        <mapping class="com.rom4.departments.model.Department"/>
+        <mapping class="com.rom4.departments.model.Employe"/>
 
     </session-factory>
 </hibernate-configuration>

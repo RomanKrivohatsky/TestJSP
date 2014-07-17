@@ -2,6 +2,8 @@ package com.rom4.departments.model;
 
 import com.rom4.departments.validation.DepartmentNameUnique;
 import net.sf.oval.guard.Guarded;
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +26,7 @@ import java.util.Collection;
 @Entity
 @Table(name="departments")
 @Guarded
-public class Department implements Serializable{
+public class Department implements Serializable {
 
     @DepartmentNameUnique
     @Column (name="name")
@@ -38,12 +40,9 @@ public class Department implements Serializable{
     @Column(name = "department_id")
     private Integer departmentID;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     @JoinColumn(name="department_id")
     private Collection<Employe> employes;
-
-    public Department() {
-    }
 
     public Collection<Employe> getEmployes() {
         return employes;
@@ -85,9 +84,9 @@ public class Department implements Serializable{
         if (this == o) return true;
         if (!(o instanceof Department)) return false;
 
-        Department that = (Department) o;
+        Department that = (com.rom4.departments.model.Department) o;
 
-        if (!departmentID.equals(that.departmentID)) return false;
+        if (!departmentID.equals(that.getDepartmentID())) return false;
 
         return true;
     }

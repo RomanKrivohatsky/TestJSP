@@ -1,11 +1,8 @@
 package com.rom4.departments.dao;
 
 
-import com.rom4.departments.entity.Department;
-import com.rom4.departments.entity.Employe;
+import com.rom4.departments.model.Department;
 import junit.framework.TestCase;
-
-import java.util.Collection;
 
 /**
  * Created by rom4 on 16.07.14.
@@ -34,7 +31,7 @@ public class DepartmentDAOImplHibTest extends TestCase {
 
     public void testReadDepartment() throws Exception {
 
-        DepartmentHibDAO dao = DAOFactory.getDepartmentHibDAO();
+        DepartmentDAO dao = DAOFactory.getDepartmentHibDAO();
        // Department dep = new Department();
      /*   dep.setCity("moscow");
         dep.setName("it50022");

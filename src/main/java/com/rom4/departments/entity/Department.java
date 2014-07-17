@@ -26,7 +26,7 @@ import java.util.Collection;
 @Entity
 @Table(name="departments")
 @Guarded
-public class Department implements Serializable{
+public class Department implements Serializable {
 
     @DepartmentNameUnique
     @Column (name="name")
@@ -42,11 +42,7 @@ public class Department implements Serializable{
 
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     @JoinColumn(name="department_id")
-
     private Collection<Employe> employes;
-
-    public Department() {
-    }
 
     public Collection<Employe> getEmployes() {
         return employes;
@@ -86,11 +82,11 @@ public class Department implements Serializable{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Department)) return false;
+        if (!(o instanceof com.rom4.departments.model.Department)) return false;
 
-        Department that = (Department) o;
+        com.rom4.departments.model.Department that = (com.rom4.departments.model.Department) o;
 
-        if (!departmentID.equals(that.departmentID)) return false;
+        if (!departmentID.equals(that.getDepartmentID())) return false;
 
         return true;
     }

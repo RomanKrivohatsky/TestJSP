@@ -5,7 +5,6 @@ import com.rom4.departments.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Department;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -39,7 +39,6 @@
     </p><input type="hidden" name="departmentID" value=${departmentID}>
     <input type="hidden" name="page" value="SaveEmploye">
     <input type="hidden" name="pageType" value="edit">
-    <input type="submit" name="submit" value="Сохранить">
 
     <p><select name="departmentID">
 
@@ -55,6 +54,7 @@
         </c:forEach>
     </select></p>
 
+    <input type="submit" name="submit" value="Сохранить">
 </form>
 
 <form method="get" action="home.html">

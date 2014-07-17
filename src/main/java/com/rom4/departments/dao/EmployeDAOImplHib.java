@@ -2,6 +2,7 @@ package com.rom4.departments.dao;
 
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Department;
+import com.rom4.departments.model.Employe;
 import com.rom4.departments.utils.HibernateUtil;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
@@ -9,15 +10,64 @@ import org.hibernate.criterion.Restrictions;
 import java.util.List;
 
 /**
- * Created by rom4 on 16.07.14.
- * Creation time 12:32
+ * Created by rom4 on 17.07.14.
+ * Creation time 18:15
  * Project name Departments
  */
-public class DepartmentDAOImplHib implements DepartmentDAO {
+public class EmployeDAOImplHib implements EmployeDAO {
+    @Override
+    public Integer createEmploye(Employe emp) throws AppException {
+        Session session = null;
+        Transaction tr = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tr = session.getTransaction();
+            tr.begin();
+            session.save(emp);
+            tr.commit();
+        }
+        catch (HibernateException e) {
+            e.printStackTrace();
+            tr.rollback();
+            throw new AppException("Hibernate exception:" + e.getMessage(), e);
+        }
+        finally {
+            if (session!=null) {
+                session.close();
+            }
+        }
+
+        return emp.getEmployeID();
+    }
 
     @Override
-    public Department getDepartmentByName(String name) throws AppException {
-        Department department;
+    public Employe readEmploye(int EmployeID) throws AppException {
+        Employe employe;
+        Session session = null;
+        Transaction tr = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tr = session.getTransaction();
+            tr.begin();
+            employe = (Employe)session.load(Employe.class, EmployeID);
+            tr.commit();
+        }
+        catch (HibernateException e) {
+            e.printStackTrace();
+            tr.rollback();
+            throw new AppException("Hibernate exception:" + e.getMessage(), e);
+        }
+        finally {
+            if (session!=null) {
+                session.close();
+            }
+        }
+        return employe;
+    }
+
+    @Override
+    public Employe getEmployeByEmail(String email) throws AppException {
+        Employe employe;
         Session session = null;
         Transaction tr = null;
         try {
@@ -25,10 +75,8 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
             tr = session.getTransaction();
             tr.begin();
             Criteria cr = session.createCriteria(Department.class);
-            cr.add(Restrictions.eq("name", name));
-            department = (Department)cr.list().get(0);
-            //Hibernate.initialize(department);
-            Hibernate.initialize(department.getEmployes());
+            cr.add(Restrictions.eq("email", email));
+            employe = (Employe)cr.list().get(0);
             tr.commit();
         }
         catch (HibernateException e) {
@@ -41,19 +89,18 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
                 session.close();
             }
         }
-        return department;
+        return employe;
     }
 
     @Override
-    public Integer createDepartment(Department dep) throws AppException {
-
+    public boolean deleteEmploye(int EmployeID) throws AppException {
         Session session = null;
         Transaction tr = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-            session.save(dep);
+            session.delete(session.load(Employe.class, EmployeID));
             tr.commit();
         }
         catch (HibernateException e) {
@@ -67,47 +114,18 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
             }
         }
 
-        return dep.getDepartmentID();
+        return true;
     }
 
     @Override
-    public Department readDepartment(Integer departmentID) throws AppException{
-
-        Department department;
+    public boolean udpateEmploye(Employe emp) throws AppException {
         Session session = null;
         Transaction tr = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-            department = (Department)session.load(Department.class, departmentID);
-            Hibernate.initialize(department);
-            Hibernate.initialize(department.getEmployes());
-            tr.commit();
-        }
-        catch (HibernateException e) {
-            e.printStackTrace();
-            tr.rollback();
-            throw new AppException("Hibernate exception:" + e.getMessage(), e);
-        }
-        finally {
-            if (session!=null) {
-                session.close();
-            }
-        }
-        return department;
-    }
-
-    @Override
-    public boolean udpateDepartment(Department dep) throws AppException {
-
-        Session session = null;
-        Transaction tr = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tr = session.getTransaction();
-            tr.begin();
-            session.update(dep);
+            session.update(emp);
             tr.commit();
         }
         catch (HibernateException e) {
@@ -125,15 +143,15 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     }
 
     @Override
-    public boolean deleteDepartment(Integer departmentID) throws AppException {
-
+    public List<Employe> getEmployes() throws AppException {
+        List<Employe> employes = null;
         Session session = null;
         Transaction tr = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-            session.delete(session.load(Department.class, departmentID));
+            employes = session.createQuery("from Employe order by employeID").list();
             tr.commit();
         }
         catch (HibernateException e) {
@@ -147,19 +165,21 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
             }
         }
 
-        return true;
+        return employes;
     }
 
     @Override
-    public List<Department> getDepartments() throws AppException {
-        List<Department> departments = null;
+    public List<Employe> getEmployes(int departmentID) throws AppException {
+        List<Employe> employes = null;
         Session session = null;
         Transaction tr = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-            departments = session.createQuery("from Department order by departmentID").list();
+            Criteria cr = session.createCriteria(Employe.class);
+            cr.add(Restrictions.eq("departmentID",departmentID ));
+            employes = cr.list();
             tr.commit();
         }
         catch (HibernateException e) {
@@ -173,6 +193,6 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
             }
         }
 
-        return departments;
+        return employes;
     }
 }

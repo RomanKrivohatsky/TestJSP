@@ -19,7 +19,7 @@ import java.util.HashMap;
  * Project name Departments
  */
 public class ControllerServlet extends HttpServlet {
-    private final DepartmentDAO daoDep = DAOFactory.getDepartmentDAO();
+    private final DepartmentDAO daoDep = DAOFactory.getDepartmentHibDAO();
     private final EmployeDAO daoEmp = DAOFactory.getEmployeDAO();
 
     private final HashMap<String, Handler> handlers = new HashMap<String, Handler>();

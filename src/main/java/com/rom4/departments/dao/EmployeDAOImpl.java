@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class EmployeDAOImpl implements EmployeDAO  {
     @Override
-    public Employe createEmploye(Employe emp) throws AppException {
+    public Integer createEmploye(Employe emp) throws AppException {
 
         Connection conn;
         PreparedStatement ps = null;
@@ -26,8 +26,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
         conn = ConnectionInstance.getConnection();
 
         if (conn == null) {
-            emp = null;
-            return emp;
+            return null;
         }
 
         try {
@@ -62,7 +61,7 @@ public class EmployeDAOImpl implements EmployeDAO  {
             closeConnection(rs, ps, conn);
         }
 
-        return emp;
+        return emp.getEmployeID();
     }
 
     @Override

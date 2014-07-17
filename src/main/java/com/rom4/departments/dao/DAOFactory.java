@@ -1,15 +1,11 @@
 package com.rom4.departments.dao;
 
-import com.rom4.departments.model.Department;
-
-import java.util.List;
-
 /**
  * Created by rom4 on 02.07.14.
  */
 public class DAOFactory {
 
-    public static DepartmentHibDAO getDepartmentHibDAO () {
+    public static DepartmentDAO getDepartmentHibDAO () {
         return new DepartmentDAOImplHib();
     }
 
@@ -22,6 +18,11 @@ public class DAOFactory {
     public static EmployeDAO getEmployeDAO() {
         return new EmployeDAOImpl();
     }
+
+    public static EmployeDAO getEmployeHibDAO() {
+        return new EmployeDAOImplHib();
+    }
+
 
 
     public static void main(String args[]) {
