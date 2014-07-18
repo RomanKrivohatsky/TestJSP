@@ -40,8 +40,7 @@ public class Department implements Serializable {
     @Column(name = "department_id")
     private Integer departmentID;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    @JoinColumn(name="department_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY,  mappedBy = "department")
     private Collection<Employe> employes;
 
     public Collection<Employe> getEmployes() {

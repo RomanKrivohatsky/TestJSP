@@ -29,8 +29,6 @@ public class HibernateUtil {
     }
 */
 
-
-
     static {
         try {
             // Create the SessionFactory from hibernate.cfg.xml

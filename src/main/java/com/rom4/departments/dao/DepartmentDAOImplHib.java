@@ -18,28 +18,16 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     @Override
     public Department getDepartmentByName(String name) throws AppException {
         Department department;
-        Session session = null;
-        Transaction tr = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tr = session.getTransaction();
-            tr.begin();
+            Session session = null;
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             Criteria cr = session.createCriteria(Department.class);
             cr.add(Restrictions.eq("name", name));
             department = (Department)cr.list().get(0);
-            //Hibernate.initialize(department);
-            Hibernate.initialize(department.getEmployes());
-            tr.commit();
         }
         catch (HibernateException e) {
             e.printStackTrace();
-            tr.rollback();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
-        }
-        finally {
-            if (session!=null) {
-                session.close();
-            }
         }
         return department;
     }
@@ -48,23 +36,13 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     public Integer createDepartment(Department dep) throws AppException {
 
         Session session = null;
-        Transaction tr = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tr = session.getTransaction();
-            tr.begin();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.save(dep);
-            tr.commit();
         }
         catch (HibernateException e) {
             e.printStackTrace();
-            tr.rollback();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
-        }
-        finally {
-            if (session!=null) {
-                session.close();
-            }
         }
 
         return dep.getDepartmentID();
@@ -75,25 +53,13 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
 
         Department department;
         Session session = null;
-        Transaction tr = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tr = session.getTransaction();
-            tr.begin();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             department = (Department)session.load(Department.class, departmentID);
-            Hibernate.initialize(department);
-            Hibernate.initialize(department.getEmployes());
-            tr.commit();
         }
         catch (HibernateException e) {
             e.printStackTrace();
-            tr.rollback();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
-        }
-        finally {
-            if (session!=null) {
-                session.close();
-            }
         }
         return department;
     }
@@ -102,23 +68,13 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     public boolean udpateDepartment(Department dep) throws AppException {
 
         Session session = null;
-        Transaction tr = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tr = session.getTransaction();
-            tr.begin();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.update(dep);
-            tr.commit();
         }
         catch (HibernateException e) {
             e.printStackTrace();
-            tr.rollback();
             throw new AppException("Hibernate exception:" + e.getMessage() + e.getMessage(), e);
-        }
-        finally {
-            if (session!=null) {
-                session.close();
-            }
         }
 
         return true;
@@ -128,25 +84,14 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     public boolean deleteDepartment(Integer departmentID) throws AppException {
 
         Session session = null;
-        Transaction tr = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tr = session.getTransaction();
-            tr.begin();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.delete(session.load(Department.class, departmentID));
-            tr.commit();
         }
         catch (HibernateException e) {
             e.printStackTrace();
-            tr.rollback();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
         }
-        finally {
-            if (session!=null) {
-                session.close();
-            }
-        }
-
         return true;
     }
 
@@ -154,23 +99,13 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     public List<Department> getDepartments() throws AppException {
         List<Department> departments = null;
         Session session = null;
-        Transaction tr = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tr = session.getTransaction();
-            tr.begin();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             departments = session.createQuery("from Department order by departmentID").list();
-            tr.commit();
         }
         catch (HibernateException e) {
             e.printStackTrace();
-            tr.rollback();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
-        }
-        finally {
-            if (session!=null) {
-                session.close();
-            }
         }
 
         return departments;
