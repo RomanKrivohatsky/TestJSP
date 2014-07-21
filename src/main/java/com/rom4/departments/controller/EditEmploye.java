@@ -36,7 +36,8 @@ public class EditEmploye implements Handler {
                 request.setAttribute("email", emp.getEmail());
                 request.setAttribute("salary", emp.getSalary());
                 request.setAttribute("birthday", emp.getBirthday());
-                request.setAttribute("departmentID", emp.getDepartment());
+                request.setAttribute("departmentID", emp.getDepartmentID());
+
             }
             request.setAttribute("pageType", "edit");
             request.setAttribute("Departments", departments);

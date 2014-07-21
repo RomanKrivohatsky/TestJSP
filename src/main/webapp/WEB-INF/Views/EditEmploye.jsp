@@ -41,7 +41,7 @@
 
                 <c:forEach var="Department" items="${Departments}">
                     <c:choose>
-                        <c:when test="${not empty departmentID and Department.departmentID == departmentID  }">
+                        <c:when test="${not empty departmentID and Department.departmentID == departmentID}">
                             <option selected value="${Department.departmentID}">${Department.name}</option>
                         </c:when>
                         <c:otherwise>

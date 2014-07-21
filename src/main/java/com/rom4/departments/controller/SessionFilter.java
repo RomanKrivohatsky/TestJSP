@@ -25,8 +25,9 @@ public class SessionFilter implements Filter {
         Transaction tr = null;
         Session session = null;
         try {
-            session = sf.openSession();
+            session = sf.getCurrentSession();
             tr = session.beginTransaction();
+           // tr = sf.getCurrentSession().beginTransaction();
             chain.doFilter(req, resp);
             tr.commit();
         } catch (Throwable e) {
@@ -37,7 +38,7 @@ public class SessionFilter implements Filter {
                 }
             }
         } finally {
-            if (session != null) {
+            if (session != null&&session.isOpen()) {
                 session.close();
             }
         }

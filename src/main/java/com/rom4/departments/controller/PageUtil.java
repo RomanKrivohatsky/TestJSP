@@ -18,10 +18,8 @@ public class PageUtil {
     }
 
     public static void redirectToPage(HttpServletRequest request, HttpServletResponse response, String pageName) throws IOException {
-
         response.sendRedirect( pageName);
     }
-
 
     public static void forwardToPage(HttpServletRequest request, HttpServletResponse response, String pageName) throws IOException, ServletException {
         RequestDispatcher rd;
