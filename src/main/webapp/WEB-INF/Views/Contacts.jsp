@@ -15,7 +15,7 @@
 <head>
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <link rel="stylesheet" href="../../style.css" type="text/css"/>
 </head>
 
 <body>
@@ -24,18 +24,13 @@
     <div id="header">
         <h1 id="logo">DEPARTMENTS </h1>
 
-        <h2 id="slogan">add a department...</h2>
+        <h2 id="slogan">table with employers...</h2>
     </div>
 
 
-<form method="post" action="SaveDepartment.html">
-    <p>¬ведите название</p><input type="text" name="name" value="название" >
-    <c:if test="${not empty errorValidate}"> ќшибка валидации ${errorValidate} </c:if>
-    <p>¬ведите город</p><input type="text" name="city" value="город">
-    <input type="hidden" name="page" value="SaveDepartment">
-    <input type="hidden" name="pageType" value="add">
-    <input type="submit" name="submit" value="—охранить">
-</form>
+    <h2> Contacts1 </h2>
+<p> Kharkov </p>
+<p>  Tarasovskaya str.</p>
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a

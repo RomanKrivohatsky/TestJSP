@@ -17,10 +17,9 @@ import java.util.List;
 public class EmployeDAOImplHib implements EmployeDAO {
     @Override
     public Integer createEmploye(Employe emp) throws AppException {
-        Session session = null;
-        Transaction tr = null;
+        Session session ;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.save(emp);
            }
         catch (HibernateException e) {
@@ -34,9 +33,9 @@ public class EmployeDAOImplHib implements EmployeDAO {
     @Override
     public Employe readEmploye(int EmployeID) throws AppException {
         Employe employe;
-        Session session = null;
+        Session session;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             employe = (Employe)session.load(Employe.class, EmployeID);
         }
         catch (HibernateException e) {
@@ -49,9 +48,9 @@ public class EmployeDAOImplHib implements EmployeDAO {
     @Override
     public Employe getEmployeByEmail(String email) throws AppException {
         Employe employe;
-        Session session = null;
+        Session session;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             Criteria cr = session.createCriteria(Department.class);
             cr.add(Restrictions.eq("email", email));
             employe = (Employe)cr.list().get(0);
@@ -65,9 +64,9 @@ public class EmployeDAOImplHib implements EmployeDAO {
 
     @Override
     public boolean deleteEmploye(int EmployeID) throws AppException {
-        Session session = null;
+        Session session;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.delete(session.load(Employe.class, EmployeID));
         }
         catch (HibernateException e) {
@@ -79,7 +78,7 @@ public class EmployeDAOImplHib implements EmployeDAO {
 
     @Override
     public boolean udpateEmploye(Employe emp) throws AppException {
-        Session session = null;
+        Session session ;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.update(emp);
@@ -93,10 +92,10 @@ public class EmployeDAOImplHib implements EmployeDAO {
 
     @Override
     public List<Employe> getEmployes() throws AppException {
-        List<Employe> employes = null;
-        Session session = null;
+        List<Employe> employes ;
+        Session session ;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             employes = session.createQuery("from Employe order by employeID").list();
         }
         catch (HibernateException e) {
@@ -109,10 +108,10 @@ public class EmployeDAOImplHib implements EmployeDAO {
 
     @Override
     public List<Employe> getEmployes(int departmentID) throws AppException {
-        List<Employe> employes = null;
-        Session session = null;
+        List<Employe> employes ;
+        Session session ;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             Criteria cr = session.createCriteria(Employe.class);
             cr.add(Restrictions.eq("departmentID",departmentID ));
             employes = cr.list();

@@ -14,7 +14,7 @@
 <head>
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <link rel="stylesheet" href="../../style.css" type="text/css"/>
 </head>
 
 <body>
@@ -22,31 +22,24 @@
 <div id="pagewidth">
     <div id="header">
         <h1 id="logo">DEPARTMENTS </h1>
-
-        <h2 id="slogan">add a department...</h2>
+        <h2 id="slogan">edit a department...</h2>
     </div>
 
 
-    <form method="post" action="SaveEmploye.html">
-        <p>¬ведите им€</p><input type="text" name="firstName" value=${firstName}>
-
-        <p>¬ведите фамилию</p> <input type="text" name="lastName" value=${lastName}>
-
-        <p>¬ведите e-mail</p> <input type="email" name="email" value=${email}>
+    <form method="post" action="SaveEmployee.html">
+        <p>¬ведите им€</p><input type="text" name="firstName" value= <c:out value = "${firstName}"></c:out>  >
+        <p>¬ведите фамилию</p> <input type="text" name="lastName" value= <c:out value = "${lastName}"></c:out> >
+        <p>¬ведите e-mail</p> <input type="email" name="email" value= <c:out value = "${email}"></c:out> >
         <c:if test="${not empty errorValidate}"> ќшибка валидации ${errorValidate} </c:if>
-        <p>¬ведите оклад</p><input type="number" name="salary" value=${salary}>
-
+        <p>¬ведите оклад</p><input type="number" name="salary" value=<c:out value = "${salary}"></c:out>  >
         <fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${birthday}"/>
             <p>¬ведите дату рождени€</p><input type="date" name="birthday" value="${date}"/>
 
             </p><input type="hidden" name="employeID" value=${employeID}>
-            </p><input type="hidden" name="departmentID" value=${departmentID}>
-            <input type="hidden" name="page" value="SaveEmploye">
-            <input type="hidden" name="pageType" value="edit">
-
+            <input type="hidden" name="pageType" value=${pageType}>
             <p><select name="departmentID">
 
-                <c:forEach var="Department" items="${requestScope.Departments}">
+                <c:forEach var="Department" items="${Departments}">
                     <c:choose>
                         <c:when test="${not empty departmentID and Department.departmentID == departmentID  }">
                             <option selected value="${Department.departmentID}">${Department.name}</option>
@@ -58,12 +51,7 @@
                 </c:forEach>
             </select></p>
 
-            <input type="submit" name="submit" value="—охранить">
-    </form>
-
-    <form method="get" action="home.html">
-        <input type="hidden" name="page" value="home">
-        <input type="submit" name="submit" value="Ќа главную">
+            <input type="submit" name="submit" value="Save">
     </form>
 
     <div id="footer">

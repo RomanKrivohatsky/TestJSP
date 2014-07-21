@@ -25,28 +25,4 @@ public class DAOFactory {
 
 
 
-    public static void main(String args[]) {
-        DepartmentDAO dao = DAOFactory.getDepartmentDAO();
-
-        /*Department dep = dao.readDepartment(1);
-
-        //if (dep !=null) System.out.println(dep);
-
-        List<Department> deps = dao.getDepartments();
-
-        for (Department d:deps) {
-            System.out.println(d);
-        }
-
-        dep.setName("it6");
-        dep.setCity("Donetsk");
-
-        dep = dao.createDepartment(dep);
-
-        if (dep != null) {
-            System.out.println(dep);
-        }*/
-    }
-
-
 }

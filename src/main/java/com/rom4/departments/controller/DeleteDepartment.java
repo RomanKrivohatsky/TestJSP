@@ -17,22 +17,18 @@ import java.io.IOException;
 public class DeleteDepartment implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
-        String saveStatus ;
+        String saveStatus;
 
-          try {
+        try {
             saveStatus = "Department deleted";
             depDAO.deleteDepartment(Integer.parseInt(request.getParameter("departmentID")));
+            request.getSession().setAttribute("saveStatus", saveStatus);
+            PageUtil.redirectToPage(request, response, "StatusPage.html");
         } catch (AppException a) {
             a.printStackTrace();
-            System.err.println(a.getMessage());
-            //PageUtil.redirectToErrorPage(request, response, a.getMessage());
-              request.setAttribute("errorStatus", a.getMessage());
-              PageUtil.forwardToPage(request, response, "ErrorPage.jsp");
-            return ;
+            PageUtil.redirectToErrorPage(request, response, a.getMessage());
         }
 
-        request.setAttribute("saveStatus", saveStatus);
-        PageUtil.forwardToPage(request, response, "SaveDepartment.jsp");
 
     }
 }

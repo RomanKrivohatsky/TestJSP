@@ -6,8 +6,6 @@ import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Department;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +20,7 @@ public class SaveDepartment implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
 
-        String saveStatus = null;
+        String saveStatus ;
         String validateError;
         String pageType;
         pageType = request.getParameter("pageType");
@@ -31,14 +29,11 @@ public class SaveDepartment implements Handler {
         if (dep != null) {
             validateError = validateDepartment(request, response, dep, pageType);
             if (validateError == null) {
-
-                saveStatus = processEmploye(dep, request, response, pageType, depDAO);
+                saveStatus = processDepartment(dep, request, response, pageType, depDAO);
                 if (saveStatus != null) {
-                    request.setAttribute("saveStatus", saveStatus);
-                    PageUtil.forwardToPage(request, response, "SaveDepartment.jsp");
+                    request.getSession().setAttribute("saveStatus", saveStatus);
+                    PageUtil.redirectToPage(request, response, "StatusPage.html");
                 }
-                ;
-
             }
         }
 
@@ -64,27 +59,22 @@ public class SaveDepartment implements Handler {
             if (!violations.isEmpty()) {
                 validateError = ((ConstraintViolation) violations.get(0)).getMessage();
 
-                RequestDispatcher rd;
-
-                request.setAttribute("errorValidate", validateError);
                 request.setAttribute("name", dep.getName());
                 request.setAttribute("city", dep.getCity());
+                request.setAttribute("errorValidate", validateError);
+                request.setAttribute("pageType", "add");
 
-                if (pageType.equals("add")) {
-                    rd = request.getRequestDispatcher("AddDepartment.jsp");
-                    rd.forward(request, response);
-                }
-                else if (pageType.equals("edit")) {
+                if (pageType.equals("edit")) {
+                    request.setAttribute("pageType", "edit");
                     request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
-                    rd = request.getRequestDispatcher("EditDepartment.jsp");
-                    rd.forward(request, response);
                 }
+                PageUtil.forwardToPage(request, response, "EditDepartment.jsp");
 
             }
             return validateError;
     }
 
-    private String  processEmploye (Department dep,  HttpServletRequest request, HttpServletResponse response, String pageType, DepartmentDAO depDAO) throws IOException, ServletException {
+    private String processDepartment(Department dep, HttpServletRequest request, HttpServletResponse response, String pageType, DepartmentDAO depDAO) throws IOException, ServletException {
         String saveStatus = null;
 
         if (pageType.equals("add")) {
@@ -93,8 +83,7 @@ public class SaveDepartment implements Handler {
                 depDAO.createDepartment(dep);
             } catch (AppException a) {
                 a.printStackTrace();
-                request.setAttribute("errorStatus",a.getMessage());
-                PageUtil.forwardToPage(request, response, "ErrorPage.jsp");
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
                 return null;
             }
 
@@ -106,8 +95,7 @@ public class SaveDepartment implements Handler {
                 depDAO.udpateDepartment(dep);
             } catch (AppException a) {
                 a.printStackTrace();
-                request.setAttribute("errorStatus", a.getMessage());
-                PageUtil.forwardToPage(request, response, "ErrorPage.jsp");
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
                 return null;
             }
 

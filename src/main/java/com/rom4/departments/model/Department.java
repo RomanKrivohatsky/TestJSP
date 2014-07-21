@@ -2,8 +2,6 @@ package com.rom4.departments.model;
 
 import com.rom4.departments.validation.DepartmentNameUnique;
 import net.sf.oval.guard.Guarded;
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -85,9 +82,7 @@ public class Department implements Serializable {
 
         Department that = (com.rom4.departments.model.Department) o;
 
-        if (!departmentID.equals(that.getDepartmentID())) return false;
-
-        return true;
+        return departmentID.equals(that.getDepartmentID());
     }
 
     @Override

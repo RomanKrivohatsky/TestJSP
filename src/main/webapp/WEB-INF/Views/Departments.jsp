@@ -12,7 +12,7 @@
 <head>
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
 <body>
 <div id="pagewidth">
@@ -20,7 +20,7 @@
         <h1 id="logo">DEPARTMENTS </h1>
         <h2 id="slogan">Table with Departments...</h2>
     </div>
-<table class="CSSTableGenerator" align="center" border="1" >
+<table class="CSSTableGenerator"  >
         <tr>
             <td>Название</td>
             <td>Город</td>
@@ -34,25 +34,22 @@
                 <td> ${Department.city}</td>
                 <td>
                     <form method="get" action="EditDepartment.html">
-                        <input type="hidden" name="page" value="EditDepartment">
                         <input type="hidden" name="departmentID" value=${Department.departmentID}>
-                        <p><input CLASS="button"  type="submit" name="submit" value="Редактировать"></p>
+                        <p><input CLASS="button"  type="submit" name="submit" value="Edit"></p>
                     </form>
                 </td>
                 <td>
                     <form method="get" action="Employers.html">
-                        <input type="hidden" name="page" value="Employers">
                         <input type="hidden" name="pageType" value="byDepartment">
                         <input type="hidden" name="departmentID" value=${Department.departmentID}>
-                        <p><input CLASS="button"  type="submit" name="submit" value="Список"></p>
+                        <p><input CLASS="button"  type="submit" name="submit" value="List"></p>
                     </form>
                 </td>
                 <td>
                     <form method="get" action="DeleteDepartment.html">
-                        <input type="hidden" name="page" value="DeleteDepartment">
                         <input  type="hidden" name="departmentID" value=${Department.departmentID}>
 
-                        <p><input CLASS="button" type="submit" name="submit" value="Удалить"></p>
+                        <p><input CLASS="button" type="submit" name="submit" value="Delete"></p>
                     </form>
                 </td>
             </tr>

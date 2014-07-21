@@ -19,7 +19,7 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     public Department getDepartmentByName(String name) throws AppException {
         Department department;
         try {
-            Session session = null;
+            Session session;
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             Criteria cr = session.createCriteria(Department.class);
             cr.add(Restrictions.eq("name", name));
@@ -35,7 +35,7 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     @Override
     public Integer createDepartment(Department dep) throws AppException {
 
-        Session session = null;
+        Session session;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.save(dep);
@@ -52,7 +52,7 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     public Department readDepartment(Integer departmentID) throws AppException{
 
         Department department;
-        Session session = null;
+        Session session ;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             department = (Department)session.load(Department.class, departmentID);
@@ -67,7 +67,7 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     @Override
     public boolean udpateDepartment(Department dep) throws AppException {
 
-        Session session = null;
+        Session session ;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.update(dep);
@@ -83,7 +83,7 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
     @Override
     public boolean deleteDepartment(Integer departmentID) throws AppException {
 
-        Session session = null;
+        Session session;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.delete(session.load(Department.class, departmentID));
@@ -97,8 +97,8 @@ public class DepartmentDAOImplHib implements DepartmentDAO {
 
     @Override
     public List<Department> getDepartments() throws AppException {
-        List<Department> departments = null;
-        Session session = null;
+        List<Department> departments;
+        Session session;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             departments = session.createQuery("from Department order by departmentID").list();

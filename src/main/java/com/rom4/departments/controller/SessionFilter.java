@@ -1,6 +1,7 @@
 package com.rom4.departments.controller;
 
 import com.rom4.departments.utils.HibernateUtil;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
@@ -13,29 +14,36 @@ import java.io.IOException;
  * Project name Departments
  */
 public class SessionFilter implements Filter {
-    SessionFactory sf;
+    private SessionFactory sf;
+
+    //private static final ThreadLocal<String> THREAD_LOCAL = new ThreadLocal<>();
 
     public void destroy() {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         Transaction tr = null;
+        Session session = null;
         try {
-
-            tr = sf.getCurrentSession().beginTransaction();
+            session = sf.openSession();
+            tr = session.beginTransaction();
             chain.doFilter(req, resp);
             tr.commit();
         } catch (Throwable e) {
             e.printStackTrace();
-            if (tr.isActive()) {
-                tr.rollback();
+            if (tr != null) {
+                if (tr.isActive()) {
+                    tr.rollback();
+                }
             }
-
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     public void init(FilterConfig config) throws ServletException {
-
         sf = HibernateUtil.getSessionFactory();
     }
 

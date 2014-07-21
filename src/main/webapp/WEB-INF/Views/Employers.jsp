@@ -7,13 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=windows-1251" language="java" %>
 <%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <html>
 <head>
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <link rel="stylesheet" href="../../style.css" type="text/css"/>
 </head>
 
 <body>
@@ -21,20 +22,16 @@
 <div id="pagewidth">
     <div id="header">
         <h1 id="logo">DEPARTMENTS </h1>
-
         <h2 id="slogan">table with employers...</h2>
     </div>
 
-    <form method="get" action="AddEmploye.html">
-        <input type="hidden" name="page" value="AddEmploye">
+    <form method="get" action="AddEmployee.html">
         <input type="hidden" name="pageType" value="AddEmployeWithDep">
         <input type="hidden" name="departmentID" value=${departmentID}>
-
-        <p><input type="submit" name="submit" value="добавить сотрудника"></p>
+        <p><input type="submit" name="submit" value="Add employee"></p>
     </form>
 
-    <input type="hidden" name="departmentID" value=${Employe.departmentID}>
-    <table class="CSSTableGenerator" border="1" align="center">
+    <table class="CSSTableGenerator" >
         <tr>
             <td>Имя</td>
             <td>Фамилия</td>
@@ -46,33 +43,28 @@
         </tr>
         <c:forEach var="Employe" items="${requestScope.Employers}">
             <tr>
-                <td> ${Employe.firstName}</td>
+                <td><c:out value="${Employe.firstName}" /></td>
                 <td> ${Employe.lastName} </td>
                 <td> ${Employe.email} </td>
                 <td> ${Employe.salary} </td>
+                <fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${Employe.birthday}"/>
                 <td> ${Employe.birthday} </td>
-
                 <td>
-                    <form metdod="get" action="EditEmploye.html">
-                        <input type="hidden" name="page" value="EditEmploye">
-                        <input type="hidden" name="pageType" value="EditEmployeDep">
+                    <form metdod="get" action="EditEmployee.html">
                         <input type="hidden" name="employeID" value=${Employe.employeID}>
                         <input type="hidden" name="departmentID" value=${Employe.departmentID}>
-                        <p><input CLASS="button" type="submit" name="submit" value="Редактировать"></p>
+                        <p><input CLASS="button" type="submit" name="submit" value="Edit"></p>
                     </form>
                 </td>
                 <td>
-                    <form metdod="get" action="DeleteEmploye.html">
-                        <input type="hidden" name="page" value="DeleteEmploye">
+                    <form metdod="get" action="DeleteEmployee.html">
                         <input type="hidden" name="EmployeID" value=${Employe.employeID}>
-                        <p><input CLASS="button" type="submit" name="submit" value="Удалить"></p>
+                        <p><input class="button" type="submit" name="submit" value="Delete"></p>
                     </form>
                 </td>
             </tr>
         </c:forEach>
     </table>
-
-
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a

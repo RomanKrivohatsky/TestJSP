@@ -4,8 +4,6 @@ import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Employe;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,8 +25,7 @@ public class EmployersList implements Handler {
                 employers = empDAO.getEmployes();
             } catch (AppException a) {
                 a.printStackTrace();
-                request.setAttribute("errorStatus", a.getMessage());
-                response.sendRedirect("ErrorPage.jsp");
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
                 return;
             }
             request.setAttribute("Employers", employers);
@@ -38,17 +35,14 @@ public class EmployersList implements Handler {
                 employers = empDAO.getEmployes(Integer.parseInt(request.getParameter("departmentID")));
             } catch (AppException a) {
                 a.printStackTrace();
-                request.setAttribute("errorStatus", a.getMessage());
-                response.sendRedirect("ErrorPage.jsp");
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
                 return;
             }
             request.setAttribute("Employers", employers);
             request.setAttribute("departmentID", request.getParameter("departmentID"));
         }
 
-       RequestDispatcher rd;
-        rd = request.getRequestDispatcher("Employers.jsp");
-        rd.forward(request, response);
+        PageUtil.forwardToPage(request, response, "Employers.jsp");
 
     }
 }

@@ -20,35 +20,25 @@ import java.util.HashMap;
  */
 public class ControllerServlet extends HttpServlet {
     private final DepartmentDAO daoDep = DAOFactory.getDepartmentHibDAO();
-    private final EmployeDAO daoEmp = DAOFactory.getEmployeDAO();
+    private final EmployeDAO daoEmp = DAOFactory.getEmployeHibDAO();
 
     private final HashMap<String, Handler> handlers = new HashMap<String, Handler>();
     {
-      /*  handlers.put("AddDepartment",new AddDepartment());
-        handlers.put("SaveDepartment",new SaveDepartment());
-        handlers.put("SaveEmploye",new SaveEmploye());
-        handlers.put("EditDepartment",new EditDepartment());
-        handlers.put("EditEmploye",new EditEmploye());
-        handlers.put("DeleteDepartment",new DeleteDepartment());
-        handlers.put("DeleteEmploye",new DeleteEmploye());
-        handlers.put("DepartmentList",new DepartmentList());
-        handlers.put("Employers",new EmployersList());
-        handlers.put("AddEmploye",new AddEmploye());
-        handlers.put("Contacts",new Contacts());
-        handlers.put("home",new MainPage());
-*/
+
         handlers.put("/AddDepartment.html",new AddDepartment());
         handlers.put("/SaveDepartment.html",new SaveDepartment());
-        handlers.put("/SaveEmploye.html",new SaveEmploye());
+        handlers.put("/SaveEmployee.html",new SaveEmploye());
         handlers.put("/EditDepartment.html",new EditDepartment());
-        handlers.put("/EditEmploye.html",new EditEmploye());
+        handlers.put("/EditEmployee.html",new EditEmploye());
         handlers.put("/DeleteDepartment.html",new DeleteDepartment());
-        handlers.put("/DeleteEmploye.html",new DeleteEmploye());
+        handlers.put("/DeleteEmployee.html",new DeleteEmploye());
         handlers.put("/Departments.html",new DepartmentList());
         handlers.put("/Employers.html",new EmployersList());
-        handlers.put("/AddEmploye.html",new AddEmploye());
+        handlers.put("/AddEmployee.html",new AddEmploye());
         handlers.put("/contact.html",new Contacts());
         handlers.put("/home.html",new MainPage());
+        handlers.put("/StatusPage.html",new StatusPage());
+
 
     }
 

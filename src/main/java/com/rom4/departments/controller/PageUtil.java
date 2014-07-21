@@ -13,14 +13,19 @@ import java.io.IOException;
  */
 public class PageUtil {
     public static void redirectToErrorPage(HttpServletRequest request, HttpServletResponse response, String errorMessage) throws IOException {
-        request.setAttribute("errorStatus",errorMessage);
-        response.sendRedirect("ErrorPage.jsp");
+        request.setAttribute("saveStatus",errorMessage);
+        response.sendRedirect("StatusPage.html");
+    }
+
+    public static void redirectToPage(HttpServletRequest request, HttpServletResponse response, String pageName) throws IOException {
+
+        response.sendRedirect( pageName);
     }
 
 
     public static void forwardToPage(HttpServletRequest request, HttpServletResponse response, String pageName) throws IOException, ServletException {
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher(pageName);
+        rd = request.getRequestDispatcher("/WEB-INF/Views/"+pageName);
         rd.forward(request, response);
     }
 

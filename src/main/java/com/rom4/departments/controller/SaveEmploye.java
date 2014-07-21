@@ -7,7 +7,6 @@ import com.rom4.departments.model.Department;
 import com.rom4.departments.model.Employe;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,12 +39,12 @@ public class SaveEmploye implements  Handler {
             if (validateError == null) {
                 saveStatus =  processEmploye(emp, request , response, pageType, empDAO);
                 if (saveStatus !=null) {
-                    request.setAttribute("saveStatus", saveStatus);
-                    PageUtil.forwardToPage(request, response, "SaveEmploye.jsp");
+                    request.getSession().setAttribute("saveStatus", saveStatus);
+                    PageUtil.redirectToPage(request, response, "StatusPage.html");
                 }
                 else {
                     request.setAttribute("saveStatus", "Can't determine type of saving page");
-                    PageUtil.forwardToPage(request, response, "SaveEmploye.jsp");
+                    PageUtil.redirectToPage(request, response, "StatusPage.html");
                 }
 
             }
@@ -72,8 +71,7 @@ public class SaveEmploye implements  Handler {
 
         } catch (ParseException e) {
             e.printStackTrace();
-            /*redirectToErrorPage(request, responce, e.getMessage());
-            return null;*/
+
         }
 
       return emp;
@@ -88,8 +86,6 @@ public class SaveEmploye implements  Handler {
         if (!violations.isEmpty()) {
             validateError = ((ConstraintViolation) violations.get(0)).getMessage();
 
-            RequestDispatcher rd;
-
             List<Department> departments;
             try {
                 departments = depDAO.getDepartments();
@@ -100,23 +96,20 @@ public class SaveEmploye implements  Handler {
             }
 
             request.setAttribute("Departments", departments);
-
             request.setAttribute("errorValidate", validateError);
             request.setAttribute("firstName", emp.getFirstName());
             request.setAttribute("lastName", emp.getLastName());
             request.setAttribute("email", emp.getEmail());
             request.setAttribute("salary", emp.getSalary());
             request.setAttribute("birthday", emp.getBirthday());
-             if (pageType.equals("add")) {
-                 rd = request.getRequestDispatcher("AddEmploye.jsp");
-                 rd.forward(request, response);
-            }
-             else if (pageType.equals("edit")) {
+            request.setAttribute("pageType", "add");
+
+            if (pageType.equals("edit")) {
+                request.setAttribute("pageType", "edit");
                 request.setAttribute("employeID", Integer.parseInt(request.getParameter("employeID")));
                 request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
-                 rd = request.getRequestDispatcher("EditEmploye.jsp");
-                 rd.forward(request, response);
             }
+            PageUtil.forwardToPage(request, response, "EditEmploye.jsp");
 
         }
         return validateError;
@@ -126,13 +119,12 @@ public class SaveEmploye implements  Handler {
         String saveStatus = null ;
         if (pageType.equals("add")) {
             try {
-                saveStatus = "Employe created";
+                saveStatus = "Employee created";
                 empDAO.createEmploye(emp);
             }
             catch (AppException a) {
                 a.printStackTrace();
-                request.setAttribute("errorStatus", a.getMessage());
-                PageUtil.forwardToPage(request, response, "ErrorPage.jsp");
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
                 return null;
             }
         }
@@ -140,12 +132,11 @@ public class SaveEmploye implements  Handler {
             emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
 
             try {
-                saveStatus = "Employe updated";
+                saveStatus = "Employee updated";
                 empDAO.udpateEmploye(emp);
             } catch (AppException a) {
                 a.printStackTrace();
-                request.setAttribute("errorStatus", a.getMessage());
-                PageUtil.forwardToPage(request, response, "ErrorPage.jsp");
+                PageUtil.redirectToErrorPage(request, response, a.getMessage());
                 return null;
             }
         }

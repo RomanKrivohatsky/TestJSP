@@ -9,15 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by rom4 on 03.07.14.
- * Creation time 12:19
+ * Created by rom4 on 21.07.14.
+ * Creation time 13:52
  * Project name Departments
  */
-public class AddDepartment implements Handler {
+public class StatusPage implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
-
-        request.setAttribute("pageType", "add");
-        PageUtil.forwardToPage(request, response, "EditDepartment.jsp");
+        PageUtil.forwardToPage(request, response, "StatusPage.jsp");
     }
 }
