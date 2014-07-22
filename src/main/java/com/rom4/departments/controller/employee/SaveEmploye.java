@@ -117,7 +117,7 @@ public class SaveEmploye implements Handler {
                 request.setAttribute("employeID", Integer.parseInt(request.getParameter("employeID")));
                 request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
             }
-            PageUtil.forwardToPage(request, response, "EditEmploye.jsp");
+            PageUtil.forwardToPage(request, response, "editEmploye.jsp");
 
         }
         return validateError;

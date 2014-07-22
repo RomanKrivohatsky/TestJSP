@@ -32,7 +32,7 @@ public class AddEmploye implements Handler {
                     request.setAttribute("departmentID", request.getParameter("departmentID"));
                 }
             }*/
-            PageUtil.forwardToPage(request, response, "EditEmploye.jsp");
+            PageUtil.forwardToPage(request, response, "editEmploye.jsp");
         } catch (AppException a) {
             a.printStackTrace();
             PageUtil.redirectToErrorPage(request, response, a.getMessage());

@@ -70,7 +70,7 @@ public class SaveDepartment implements Handler {
                     request.setAttribute("pageType", "edit");
                     request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
                 }
-                PageUtil.forwardToPage(request, response, "EditDepartment.jsp");
+                PageUtil.forwardToPage(request, response, "editDepartment.jsp");
 
             }
             return validateError;

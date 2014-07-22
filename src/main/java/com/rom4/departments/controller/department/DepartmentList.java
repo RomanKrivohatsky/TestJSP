@@ -25,7 +25,7 @@ public class DepartmentList implements Handler {
         try {
             departments = depDAO.getDepartments();
             request.setAttribute("Departments", departments);
-            PageUtil.forwardToPage(request, response, "Departments.jsp");
+            PageUtil.forwardToPage(request, response, "departments.jsp");
         } catch (AppException a) {
             a.printStackTrace();
             PageUtil.redirectToErrorPage(request, response, a.getMessage());

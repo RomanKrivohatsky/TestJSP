@@ -17,6 +17,6 @@ import java.io.IOException;
 public class StatusPage implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
-        PageUtil.forwardToPage(request, response, "StatusPage.jsp");
+        PageUtil.forwardToPage(request, response, "statusPage.jsp");
     }
 }

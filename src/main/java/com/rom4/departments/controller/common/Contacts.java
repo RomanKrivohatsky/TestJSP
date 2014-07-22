@@ -21,7 +21,7 @@ public class Contacts implements Handler
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
         System.err.println("contacts");
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher("Contacts.jsp");
+        rd = request.getRequestDispatcher("contacts.jsp");
         rd.forward(request, response);
     }
 }

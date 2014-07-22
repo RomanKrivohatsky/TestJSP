@@ -20,6 +20,6 @@ public class AddDepartment implements Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
 
         request.setAttribute("pageType", "add");
-        PageUtil.forwardToPage(request, response, "EditDepartment.jsp");
+        PageUtil.forwardToPage(request, response, "editDepartment.jsp");
     }
 }

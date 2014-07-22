@@ -31,7 +31,7 @@ public class EditDepartment implements Handler {
                 request.setAttribute("name", dep.getName());
                 request.setAttribute("city", dep.getCity());
                 request.setAttribute("pageType", "edit");
-                PageUtil.forwardToPage(request, response, "EditDepartment.jsp");
+                PageUtil.forwardToPage(request, response, "editDepartment.jsp");
             }
         } catch (AppException a) {
             a.printStackTrace();
