@@ -1,5 +1,7 @@
-package com.rom4.departments.controller;
+package com.rom4.departments.controller.employee;
 
+import com.rom4.departments.controller.Handler;
+import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
@@ -13,7 +15,7 @@ import java.io.IOException;
  * Creation time 15:59
  * Project name Departments
  */
-public class DeleteEmploye implements  Handler {
+public class DeleteEmploye implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
 

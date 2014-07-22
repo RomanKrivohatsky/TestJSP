@@ -1,6 +1,11 @@
 package com.rom4.departments.controller;
 
 
+import com.rom4.departments.controller.common.Contacts;
+import com.rom4.departments.controller.common.MainPage;
+import com.rom4.departments.controller.common.StatusPage;
+import com.rom4.departments.controller.department.*;
+import com.rom4.departments.controller.employee.*;
 import com.rom4.departments.dao.DAOFactory;
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
@@ -38,18 +43,12 @@ public class ControllerServlet extends HttpServlet {
         handlers.put("/contact.html",new Contacts());
         handlers.put("/home.html",new MainPage());
         handlers.put("/StatusPage.html",new StatusPage());
-
-
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         System.err.println("uri " + req.getRequestURI());
-       // System.err.println("url " + req.getRequestURL());
-        //System.err.println("req.getParameter(page)" + req.getParameter("page"));
-
-        //Handler handler = handlers.get(req.getParameter("page"));
 
         Handler handler = handlers.get(req.getRequestURI());
 

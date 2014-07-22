@@ -1,5 +1,10 @@
 package com.rom4.departments.dao;
 
+import com.rom4.departments.dao.impl.DepartmentDAOImpl;
+import com.rom4.departments.dao.impl.DepartmentDAOImplHib;
+import com.rom4.departments.dao.impl.EmployeDAOImpl;
+import com.rom4.departments.dao.impl.EmployeDAOImplHib;
+
 /**
  * Created by rom4 on 02.07.14.
  */

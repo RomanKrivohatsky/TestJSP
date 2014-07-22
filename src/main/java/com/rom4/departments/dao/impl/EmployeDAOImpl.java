@@ -1,6 +1,7 @@
-package com.rom4.departments.dao;
+package com.rom4.departments.dao.impl;
 
 import com.rom4.departments.connection.ConnectionInstance;
+import com.rom4.departments.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Employe;
 import java.sql.*;
@@ -15,7 +16,7 @@ import java.util.List;
  * Creation time 16:39
  * Project name Employes
  */
-public class EmployeDAOImpl implements EmployeDAO  {
+public class EmployeDAOImpl implements EmployeDAO {
     @Override
     public Integer createEmploye(Employe emp) throws AppException {
 

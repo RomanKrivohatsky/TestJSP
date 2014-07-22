@@ -8,7 +8,7 @@
     <display-name>Archetype Created Web Application</display-name>
     <filter>
         <filter-name>SessionFilter</filter-name>
-        <filter-class>com.rom4.departments.controller.SessionFilter</filter-class>
+        <filter-class>com.rom4.departments.controller.filter.SessionFilter</filter-class>
     </filter>
 
     <servlet>

@@ -1,5 +1,6 @@
-package com.rom4.departments.controller;
+package com.rom4.departments.controller.common;
 
+import com.rom4.departments.controller.Handler;
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
 

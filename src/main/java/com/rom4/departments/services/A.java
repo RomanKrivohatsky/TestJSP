@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class  A {
 
+
     DAO dao = new DAO();
 
     public <T> List<T> getEntities (Session session) {

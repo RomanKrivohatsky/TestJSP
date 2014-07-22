@@ -1,4 +1,4 @@
-package com.rom4.departments.controller;
+package com.rom4.departments.controller.filter;
 
 import com.rom4.departments.utils.HibernateUtil;
 import org.hibernate.Session;
@@ -22,26 +22,19 @@ public class SessionFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        Transaction tr = null;
-        Session session = null;
+        /*Transaction tr = null;
+        Session session = null;*/
+
         try {
-            session = sf.getCurrentSession();
-            tr = session.beginTransaction();
-           // tr = sf.getCurrentSession().beginTransaction();
+            sf.getCurrentSession().beginTransaction();
             chain.doFilter(req, resp);
-            tr.commit();
+            sf.getCurrentSession().getTransaction().commit();
         } catch (Throwable e) {
             e.printStackTrace();
-            if (tr != null) {
-                if (tr.isActive()) {
-                    tr.rollback();
-                }
-            }
-        } finally {
-            if (session != null&&session.isOpen()) {
-                session.close();
-            }
+            sf.getCurrentSession().getTransaction().rollback();
+
         }
+
     }
 
     public void init(FilterConfig config) throws ServletException {

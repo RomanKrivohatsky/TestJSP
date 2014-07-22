@@ -24,7 +24,7 @@ public class Employe {
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name="department_id")
-    Department department;
+    private Department department;
 
     @Column(name = "first_name")
     private String firstName = null;
@@ -37,6 +37,10 @@ public class Employe {
     private float salary = 0.0F;
     @Column(name = "birthday")
     private Date birthday = null;
+
+    /*
+    * this column need for DAOimpl JDBC - EmployeDAOImpl
+    * */
     @Column(name = "department_id", insertable = false, updatable = false)
     private Integer departmentID;
 

@@ -2,7 +2,6 @@ package dao;
 
 import com.rom4.departments.dao.DAOFactory;
 import com.rom4.departments.dao.DepartmentDAO;
-import com.rom4.departments.dao.DepartmentDAOImpl;
 import com.rom4.departments.model.Department;
 import junit.framework.TestCase;
 

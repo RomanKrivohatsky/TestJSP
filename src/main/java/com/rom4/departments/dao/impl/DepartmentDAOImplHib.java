@@ -1,5 +1,6 @@
-package com.rom4.departments.dao;
+package com.rom4.departments.dao.impl;
 
+import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Department;
 import com.rom4.departments.utils.HibernateUtil;

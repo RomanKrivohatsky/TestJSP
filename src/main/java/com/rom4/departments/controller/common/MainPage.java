@@ -1,5 +1,6 @@
-package com.rom4.departments.controller;
+package com.rom4.departments.controller.common;
 
+import com.rom4.departments.controller.Handler;
 import com.rom4.departments.dao.DepartmentDAO;
 import com.rom4.departments.dao.EmployeDAO;
 
@@ -14,7 +15,7 @@ import java.io.IOException;
  * Creation time 13:26
  * Project name Departments
  */
-public class MainPage implements Handler  {
+public class MainPage implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response , DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
 

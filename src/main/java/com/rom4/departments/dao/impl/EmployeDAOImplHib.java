@@ -1,5 +1,6 @@
-package com.rom4.departments.dao;
+package com.rom4.departments.dao.impl;
 
+import com.rom4.departments.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.model.Department;
 import com.rom4.departments.model.Employe;
@@ -36,7 +37,7 @@ public class EmployeDAOImplHib implements EmployeDAO {
         Session session;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
-            employe = (Employe)session.load(Employe.class, EmployeID);
+            employe = (Employe)session.get(Employe.class, EmployeID);
         }
         catch (HibernateException e) {
             e.printStackTrace();
@@ -80,7 +81,7 @@ public class EmployeDAOImplHib implements EmployeDAO {
     public boolean udpateEmploye(Employe emp) throws AppException {
         Session session ;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.update(emp);
         }
         catch (HibernateException e) {

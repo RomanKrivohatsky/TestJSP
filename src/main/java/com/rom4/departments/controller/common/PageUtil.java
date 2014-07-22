@@ -1,4 +1,4 @@
-package com.rom4.departments.controller;
+package com.rom4.departments.controller.common;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
