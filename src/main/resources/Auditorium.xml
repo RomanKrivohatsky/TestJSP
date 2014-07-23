@@ -5,7 +5,7 @@
 
     <bean id = "auditorium" class="com.rom4.departments.springtest.Auditorium"
             init-method="turnOnLights" destroy-method="turnOffLights">
-        <constructor-arg value= "#{T(com.rom4.departments.springtest.CounterHumans).getCount()}" />
+        <constructor-arg value= "#{T(com.rom4.departments.springtest.CounterHumans)?.getCount()}" />
 
     </bean>
 

@@ -1,5 +1,7 @@
 package com.rom4.departments.springtest.springdol;
 
+import com.rom4.departments.springtest.Address;
+import com.rom4.departments.springtest.City;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,6 +21,16 @@ public class IdolsMain {
         performer2.perform();
         Performer performer3 = (Performer)ac.getBean("hank");
         performer3.perform();
+
+        Address address = (Address) ac.getBean("address");
+        System.out.println(address.getCity());
+        System.out.println("bigCities");
+        for(City city:address.getBigCities()) {
+            System.out.println(city);
+        }
+
+        performer = (Performer) ac.getBean("harry");
+        performer.perform();
 
 
     }
