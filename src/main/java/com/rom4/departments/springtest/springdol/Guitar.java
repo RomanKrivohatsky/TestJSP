@@ -5,5 +5,9 @@ package com.rom4.departments.springtest.springdol;
  * Creation time 15:40
  * Project name Departments
  */
-public class Guitar {
+public class Guitar implements Instrument {
+    @Override
+    public void play() {
+        System.out.println("vii-vii-vii");
+    }
 }

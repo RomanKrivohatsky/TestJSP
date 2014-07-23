@@ -9,22 +9,24 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 
     <bean id="knight" class="com.rom4.departments.springtest.BraveKnight">
-        <constructor-arg ref="quest" />
+        <constructor-arg ref="quest"/>
     </bean>
     <bean id="quest"
-          class="com.rom4.departments.springtest.SlayDragonQuest" />
+          class="com.rom4.departments.springtest.knight.SlayDragonQuest"/>
     <!-- Объявление компонента Minstrel -->
     <bean id="minstrel"
-          class="com.rom4.departments.springtest.Minstrel" />
+          class="com.rom4.departments.springtest.knight.Minstrel"/>
     <aop:config>
         <aop:aspect ref="minstrel">
             <!-- Объявление точки внедрения -->
             <aop:pointcut id="embark"
-                          expression="execution(* *.embarkOnQuest(..))" />
+                          expression="execution(* *.embarkOnQuest(..))"/>
             <aop:before pointcut-ref="embark"
-                        method="singBeforeQuest"/> <!-- Операция, выполняемая до -->
+                        method="singBeforeQuest"/>
+            <!-- Операция, выполняемая до -->
             <aop:after pointcut-ref="embark"
-                       method="singAfterQuest"/>  <!-- Операция, выполняемая после -->
+                       method="singAfterQuest"/>
+            <!-- Операция, выполняемая после -->
         </aop:aspect>
     </aop:config>
 </beans>

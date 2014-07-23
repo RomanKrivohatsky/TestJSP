@@ -8,6 +8,15 @@ package com.rom4.departments.springtest.springdol;
 public class Instrumentalist implements Performer {
     private String song;
     private Instrument instrument;
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public Instrument getInstrument() {
         return instrument;

@@ -6,4 +6,5 @@ package com.rom4.departments.springtest.springdol;
  * Project name Departments
  */
 public interface Instrument {
+    void play();
 }

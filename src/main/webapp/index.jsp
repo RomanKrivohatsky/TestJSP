@@ -8,8 +8,9 @@
 <body>
 <div id="pagewidth">
     <div id="header">
-        <h1 id="logo">DEPARTMENTS </h1>
-        <h2 id="slogan">training web project...</h2>
+        <h1 id="logo">DEPARTMENTS  </h1>
+        <h2 id="slogan">training web project..4345345345    .</h2>
+
     </div>
     <div id="wrapper" class="clearfix">
         <div id="twocols" class="clearfix">

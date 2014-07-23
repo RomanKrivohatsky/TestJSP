@@ -6,4 +6,9 @@ package com.rom4.departments.springtest;
  * Project name Departments
  */
 public class CounterHumans {
+    private static int count=0;
+
+    public static int getCount() {
+        return count+=10;
+    }
 }

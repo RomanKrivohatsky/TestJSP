@@ -1,5 +1,9 @@
 package com.rom4.departments.springtest;
 
+import com.rom4.departments.springtest.knight.Knight;
+import com.rom4.departments.springtest.knight.Quest;
+import com.rom4.departments.springtest.knight.QuestException;
+
 /**
  * Created by rom4 on 22.07.14.
  * Creation time 15:43

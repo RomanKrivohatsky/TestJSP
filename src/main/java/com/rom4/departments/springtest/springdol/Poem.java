@@ -5,5 +5,6 @@ package com.rom4.departments.springtest.springdol;
  * Creation time 14:20
  * Project name Departments
  */
-public class Poem {
+public interface Poem {
+    void recite();
 }

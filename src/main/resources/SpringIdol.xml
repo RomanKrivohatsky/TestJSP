@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="stage" class="com.rom4.departments.springtest.springdol.Stage"
+          factory-method="getInstance"/>
+
+    <bean id="duke" class="com.rom4.departments.springtest.springdol.Juggler" scope="prototype">
+        <constructor-arg value="123"/>
+    </bean>
+
+    <bean id="poeticDuke" class="com.rom4.departments.springtest.springdol.PoeticJuggler" scope="prototype">
+        <constructor-arg value="123"/>
+        <constructor-arg ref="sonet29"/>
+    </bean>
+
+    <bean id="sonet29" class="com.rom4.departments.springtest.springdol.Sonnet29"/>
+
+    <bean id="kenny" class="com.rom4.departments.springtest.springdol.Instrumentalist"
+          p:song="la-la-la"
+          p:age="34">
+        <property name="instrument">
+            <bean class="com.rom4.departments.springtest.springdol.Saxaphone"/>
+        </property>
+
+    </bean>
+
+    <bean id="hank" class="com.rom4.departments.springtest.springdol.OneManBand">
+        <property name="instruments">
+            <map>
+                <entry key="saxaphone"  value-ref="saxaphone"/>
+                <entry key="piano"  value-ref="piano"/>
+                <entry key="guitar"  value-ref="guitar"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="saxaphone" class="com.rom4.departments.springtest.springdol.Saxaphone"/>
+    <bean id="guitar" class="com.rom4.departments.springtest.springdol.Guitar"/>
+    <bean id="piano" class="com.rom4.departments.springtest.springdol.Piano"/>
+
 
 </beans>

@@ -3,11 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id = "auditorium" class="com.rom4.departments.springtest.Auditorium" scope="singleton"
+    <bean id = "auditorium" class="com.rom4.departments.springtest.Auditorium"
             init-method="turnOnLights" destroy-method="turnOffLights">
-        <constructor-arg value="10" />
+        <constructor-arg value= "#{T(com.rom4.departments.springtest.CounterHumans).getCount()}" />
 
     </bean>
-
 
 </beans>

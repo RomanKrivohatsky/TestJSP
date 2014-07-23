@@ -5,5 +5,9 @@ package com.rom4.departments.springtest.springdol;
  * Creation time 15:22
  * Project name Departments
  */
-public class Saxaphone {
+public class Saxaphone implements Instrument {
+    @Override
+    public void play() {
+        System.out.println("TOOT TOOT TOOT");
+    }
 }

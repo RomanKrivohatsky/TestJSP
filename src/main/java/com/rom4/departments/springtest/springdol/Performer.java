@@ -5,5 +5,6 @@ package com.rom4.departments.springtest.springdol;
  * Creation time 14:06
  * Project name Departments
  */
-public class Performer {
+public interface Performer {
+    void perform() throws  PerformanceException;
 }

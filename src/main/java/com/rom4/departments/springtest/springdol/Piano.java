@@ -5,5 +5,9 @@ package com.rom4.departments.springtest.springdol;
  * Creation time 15:39
  * Project name Departments
  */
-public class Piano {
+public class Piano implements  Instrument{
+    @Override
+    public void play() {
+        System.out.println("plim-plim-plim");
+    }
 }
