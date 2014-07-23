@@ -1,4 +1,4 @@
-package com.rom4.departments.springtest;
+package com.rom4.departments.springtest.knight;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,4 +1,4 @@
-package com.rom4.departments.springtest;
+package com.rom4.departments.springtest.knight;
 
 /**
  * Created by rom4 on 22.07.14.

@@ -1,6 +1,4 @@
-package com.rom4.departments.springtest;
-
-import com.sun.swing.internal.plaf.synth.resources.synth_sv;
+package com.rom4.departments.springtest.knight;
 
 /**
  * Created by rom4 on 22.07.14.
