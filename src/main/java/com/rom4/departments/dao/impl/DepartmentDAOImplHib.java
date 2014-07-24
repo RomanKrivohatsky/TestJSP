@@ -6,6 +6,8 @@ import com.rom4.departments.model.Department;
 import com.rom4.departments.utils.HibernateUtil;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -14,7 +16,19 @@ import java.util.List;
  * Creation time 12:32
  * Project name Departments
  */
+@Repository
 public class DepartmentDAOImplHib implements DepartmentDAO {
+
+    private SessionFactory sessionFactory;
+
+    @Autowired
+    public DepartmentDAOImplHib(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    private Session currentSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
     @Override
     public Department getDepartmentByName(String name) throws AppException {

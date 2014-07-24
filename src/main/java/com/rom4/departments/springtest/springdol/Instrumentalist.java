@@ -18,8 +18,6 @@ public class Instrumentalist implements Performer {
     private Instrument instrument;
     private int age;
 
-    HibernateException
-
     public int getAge() {
         return age;
     }

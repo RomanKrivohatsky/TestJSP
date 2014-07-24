@@ -4,8 +4,41 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <context:annotation-config />
-    <context:component-scan base-package="com.rom4.departments.springtest"/>
-    
+    <!-- using annotation maping -->
+    <context:annotation-config/>
+    <!-- location for componnents -->
+    <context:component-scan base-package="com.rom4.departments"/>
 
+    <!-- resolving issue with exceptions -->
+    <!--PersistenceExceptionTranslationPostProcessor – это механизм пост-
+    обработки компонентов, добавляющий объект-советник во все ком-
+    поненты, отмеченные аннотацией @Repository , который будет пере-
+    хватывать все специфические исключения и преобразовывать их
+    в соответствующие неконтролируемые исключения Spring    -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <!-- template for Datasource base on Commns.DBCP (DataBase connection pool)-->
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/departments"/>
+        <property name="username" value="root"/>
+        <property name="password" value="1"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxTotal" value="10"/>
+    </bean>
+
+    <!-- template for Session factory, base on annotations  -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan"
+                  value="com.rom4.departments.model"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
