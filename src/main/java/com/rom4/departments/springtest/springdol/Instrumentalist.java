@@ -1,14 +1,24 @@
 package com.rom4.departments.springtest.springdol;
 
+import org.hibernate.HibernateException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 /**
  * Created by rom4 on 23.07.14.
  * Creation time 15:15
  * Project name Departments
  */
+
+@Component
 public class Instrumentalist implements Performer {
     private String song;
     private Instrument instrument;
     private int age;
+
+    HibernateException
 
     public int getAge() {
         return age;
@@ -22,9 +32,12 @@ public class Instrumentalist implements Performer {
         return instrument;
     }
 
+    @Autowired
+    @Qualifier("saxaphone")
     public void setInstrument(Instrument instrument) {
         this.instrument = instrument;
     }
+
 
     public String getSong() {
         return song;

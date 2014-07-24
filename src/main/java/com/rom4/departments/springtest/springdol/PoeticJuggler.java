@@ -1,5 +1,8 @@
 package com.rom4.departments.springtest.springdol;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 /**
  * Created by rom4 on 23.07.14.
  * Creation time 14:20
@@ -13,7 +16,8 @@ public class PoeticJuggler extends  Juggler{
         this.poem = poem;
     }
 
-    public PoeticJuggler(Poem poem) {
+
+    public PoeticJuggler( Poem poem) {
         super();
         this.poem = poem;
     }

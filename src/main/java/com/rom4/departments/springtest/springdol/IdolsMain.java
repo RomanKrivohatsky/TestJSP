@@ -32,6 +32,8 @@ public class IdolsMain {
         performer = (Performer) ac.getBean("harry");
         performer.perform();
 
+        Instrumentalist lilu = new Instrumentalist();
+        System.out.println(lilu);
 
     }
 }
