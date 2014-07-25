@@ -1,11 +1,7 @@
 package com.rom4.departments.utils;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+
 
 /**
  * Created by rom4 on 16.07.14.
@@ -13,7 +9,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
  * Project name Departments
  */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
+    private static final SessionFactory sessionFactory = null;
 
   /*  private static  SessionFactory sessionFactory = buildSessionFactory();
     private static SessionFactory buildSessionFactory() {
@@ -30,7 +26,7 @@ public class HibernateUtil {
 */
 
     static {
-        try {
+   /*     try {
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration();
             configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
@@ -47,7 +43,7 @@ public class HibernateUtil {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
-        }
+        }*/
     }
 
     public static SessionFactory getSessionFactory() {

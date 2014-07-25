@@ -1,11 +1,5 @@
 package com.rom4.departments.validation;
 
-import com.rom4.departments.dao.DAOFactory;
-import com.rom4.departments.dao.DepartmentDAO;
-import com.rom4.departments.dao.EmployeDAO;
-import com.rom4.departments.exception.AppException;
-import com.rom4.departments.model.Department;
-import com.rom4.departments.model.Employe;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.context.OValContext;
@@ -19,7 +13,7 @@ import net.sf.oval.exception.OValException;
 public class DepartmentName extends AbstractAnnotationCheck<DepartmentNameUnique> {
     @Override
     public boolean isSatisfied(Object validateObject, Object validateValue, OValContext context, Validator validator) throws OValException {
-
+/*
 
         DepartmentDAO dao = DAOFactory.getDepartmentDAO();
         try {
@@ -33,6 +27,7 @@ public class DepartmentName extends AbstractAnnotationCheck<DepartmentNameUnique
         } catch (AppException e) {
             return false;
         }
+        return true;*/
         return true;
     }
 }

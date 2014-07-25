@@ -2,10 +2,10 @@ package com.rom4.departments.controller.employee;
 
 import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
-import com.rom4.departments.dao.DepartmentDAO;
-import com.rom4.departments.dao.EmployeDAO;
+import com.rom4.departments.service.dao.DepartmentDAO;
+import com.rom4.departments.service.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
-import com.rom4.departments.model.Department;
+import com.rom4.departments.domain.Department;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

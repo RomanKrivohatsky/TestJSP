@@ -2,10 +2,9 @@ package com.rom4.departments.controller.department;
 
 import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
-import com.rom4.departments.dao.DepartmentDAO;
-import com.rom4.departments.dao.EmployeDAO;
-import com.rom4.departments.exception.AppException;
-import com.rom4.departments.model.Department;
+import com.rom4.departments.service.dao.DepartmentDAO;
+import com.rom4.departments.service.dao.EmployeDAO;
+import com.rom4.departments.domain.Department;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
 import javax.servlet.ServletException;
@@ -79,7 +78,7 @@ public class SaveDepartment implements Handler {
     private String processDepartment(Department dep, HttpServletRequest request, HttpServletResponse response, String pageType, DepartmentDAO depDAO) throws IOException, ServletException {
         String saveStatus = null;
 
-        if (pageType.equals("add")) {
+       /* if (pageType.equals("add")) {
             try {
                 saveStatus = "Department created";
                 depDAO.createDepartment(dep);
@@ -101,7 +100,7 @@ public class SaveDepartment implements Handler {
                 return null;
             }
 
-        }
+        }*/
 
 
         return saveStatus;

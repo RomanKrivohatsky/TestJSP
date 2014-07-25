@@ -6,9 +6,11 @@ import com.rom4.departments.controller.common.MainPage;
 import com.rom4.departments.controller.common.StatusPage;
 import com.rom4.departments.controller.department.*;
 import com.rom4.departments.controller.employee.*;
-import com.rom4.departments.dao.DAOFactory;
-import com.rom4.departments.dao.DepartmentDAO;
-import com.rom4.departments.dao.EmployeDAO;
+import com.rom4.departments.service.dao.DepartmentDAO;
+import com.rom4.departments.service.dao.EmployeDAO;
+import com.rom4.departments.service.impl.DepartmentDAOImplHib;
+import com.rom4.departments.service.impl.EmployeDAOImplHib;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -23,9 +25,11 @@ import java.util.HashMap;
  * Creation time 12:20
  * Project name Departments
  */
+@Component
 public class ControllerServlet extends HttpServlet {
-    private final DepartmentDAO daoDep = DAOFactory.getDepartmentHibDAO();
-    private final EmployeDAO daoEmp = DAOFactory.getEmployeHibDAO();
+
+    private final DepartmentDAO daoDep = new DepartmentDAOImplHib();
+    private final EmployeDAO daoEmp = new EmployeDAOImplHib();
 
     private final HashMap<String, Handler> handlers = new HashMap<String, Handler>();
     {
