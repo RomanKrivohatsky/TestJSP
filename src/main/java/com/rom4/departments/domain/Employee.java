@@ -38,19 +38,6 @@ public class Employee {
     @Column(name = "birthday")
     private Date birthday = null;
 
-    /*
-    * this column need for DAOimpl JDBC - EmployeDAOImp
-    * */
-    @Column(name = "department_id", insertable = false, updatable = false)
-    private Integer departmentID;
-
-    public Integer getDepartmentID() {
-        return departmentID;
-    }
-
-    public void setDepartmentID(Integer departmentID) {
-        this.departmentID = departmentID;
-    }
 
     public Department getDepartment() {
         return department;

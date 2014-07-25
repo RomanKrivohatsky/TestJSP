@@ -5,7 +5,6 @@ import com.rom4.departments.service.dao.EmployeeDAOhib;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 /**
@@ -52,6 +51,4 @@ public class EmployeeService {
     public List getList() {
         return dao.getEmployees();
     }
-
-
 }

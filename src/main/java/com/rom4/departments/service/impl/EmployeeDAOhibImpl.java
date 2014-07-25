@@ -34,39 +34,39 @@ public class EmployeeDAOhibImpl implements EmployeeDAOhib {
     }
 
     @Override
-    public void createEmploye(Employee emp) {
+    public void createEmployee(Employee emp) {
         currentSession().save(emp);
     }
 
     @Override
-    public Employee readEmploye(int EmployeID) {
+    public Employee readEmployee(int EmployeID) {
         return (Employee) currentSession().get(Employee.class, EmployeID);
     }
 
     @Override
-    public Employee getEmployeByEmail(String email) {
-        Criteria cr = currentSession().createCriteria(Department.class);
+    public Employee getEmployeeByEmail(String email) {
+        Criteria cr = currentSession().createCriteria(Employee.class);
         cr.add(Restrictions.eq("email", email));
         return (Employee) cr.list().get(0);
     }
 
     @Override
-    public void deleteEmploye(Employee employe) {
+    public void deleteEmployee(Employee employe) {
         currentSession().delete(employe);
     }
 
     @Override
-    public void udpateEmploye(Employee emp) {
+    public void udpateEmployee(Employee emp) {
         currentSession().update(emp);
     }
 
     @Override
-    public List<Employee> getEmployes() {
+    public List<Employee> getEmployees() {
         return currentSession().createQuery("from Employee order by employeID").list();
     }
 
     @Override
-    public List<Employee> getEmployes(int departmentID) {
+    public List<Employee> getEmployees(int departmentID) {
             Criteria cr = currentSession().createCriteria(Employee.class);
             cr.add(Restrictions.eq("departmentID", departmentID));
             return cr.list();
