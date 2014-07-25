@@ -1,6 +1,7 @@
 package com.rom4.departments.service.impl;
 
 import com.rom4.departments.domain.Employee;
+import com.rom4.departments.service.dao.EmployeeService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -57,11 +58,10 @@ public class EmployeeServiceTest extends AbstractJUnit4SpringContextTests {
     }
     @Test
     public void testDelete() throws Exception {
-        assertNotNull(service.read(39));
-        Employee employee = service.read(39);
+        //assertNotNull(service.read(39));
+        Employee employee = service.read(35);
         service.delete(employee);
-        assertNull(service.read(39));
-
+        assertNull(service.read(35));
     }
     @Test
     public void testGetList() throws Exception {
