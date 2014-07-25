@@ -11,10 +11,10 @@ import java.util.List;
  * Project name Departments
  */
 public interface DepartmentDAOhib {
-    Department getDepartmentByName(String name);
-    void createDepartment(Department dep);
-    Department readDepartment(Integer departmentID);
-    void udpateDepartment(Department dep);
-    void deleteDepartment(Integer departmentID);
-    List<Department> getDepartments();
+        Department getDepartmentByName(String name);
+        void createDepartment(Department dep);
+        Department readDepartment(Integer departmentID);
+        void udpateDepartment(Department dep);
+        void deleteDepartment(Department dep);
+        List<Department> getDepartments();
 }

@@ -15,7 +15,7 @@ import java.util.*;
 @Entity
 @Table(name="employes")
 @Guarded
-public class Employe {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -111,7 +111,7 @@ public class Employe {
 
     @Override
     public String toString() {
-        return "Employe{" +
+        return "Employee{" +
                 "employeID=" + employeID +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -124,11 +124,11 @@ public class Employe {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Employe)) return false;
+        if (!(o instanceof Employee)) return false;
 
-        Employe employe = (Employe) o;
+        Employee employee = (Employee) o;
 
-        if (employeID != employe.employeID) return false;
+        if (employeID != employee.employeID) return false;
 
         return true;
     }
@@ -139,7 +139,7 @@ public class Employe {
     }
 
     public static void main (String args[]) {
-        /*Employe e = new Employe();
+        /*Employee e = new Employee();
 
         e.setEmployeID(0);
         //e.setEmail("email");

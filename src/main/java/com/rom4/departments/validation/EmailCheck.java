@@ -17,9 +17,9 @@ public class EmailCheck extends AbstractAnnotationCheck<Email> {
 
       /*  EmployeDAO dao = DAOFactory.getEmployeDAO();
         try {
-            Employe employe = dao.getEmployeByEmail((String) validateValue);
+            Employee employe = dao.getEmployeByEmail((String) validateValue);
             if (employe != null) {
-                if (!employe.getEmployeID().equals(((Employe)validateObject).getEmployeID())) {
+                if (!employe.getEmployeID().equals(((Employee)validateObject).getEmployeID())) {
                     return false;
                 }
             }

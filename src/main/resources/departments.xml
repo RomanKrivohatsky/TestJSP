@@ -39,6 +39,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="show_sql">true</prop>
             </props>
         </property>
     </bean>

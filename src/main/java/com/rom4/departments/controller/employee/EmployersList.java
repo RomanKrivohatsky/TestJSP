@@ -5,7 +5,7 @@ import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.service.dao.DepartmentDAO;
 import com.rom4.departments.service.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
-import com.rom4.departments.domain.Employe;
+import com.rom4.departments.domain.Employee;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ import java.util.List;
 public class EmployersList implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
-        List<Employe> employers ;
+        List<Employee> employers ;
 
         if (request.getParameter("pageType") == null)  {
             try {

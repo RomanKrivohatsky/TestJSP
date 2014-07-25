@@ -28,6 +28,7 @@ public class DepartmentService {
     @Transactional
     public Department read(int departmentID) {
         return dao.readDepartment(departmentID);
+
     }
 
     @Transactional
@@ -46,13 +47,8 @@ public class DepartmentService {
     }
 
     @Transactional
-    public void delete(Integer departmentID) {
-        dao.deleteDepartment(departmentID);
-    }
-
-    @Transactional
-    public void getList(Integer departmentID) {
-        dao.deleteDepartment(departmentID);
+    public void delete(Department department) {
+        dao.deleteDepartment(department);
     }
 
     @Transactional

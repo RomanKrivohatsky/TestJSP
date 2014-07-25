@@ -14,7 +14,7 @@
 
         <!-- Mapping files -->
         <mapping class="com.rom4.departments.domain.Department"/>
-        <mapping class="com.rom4.departments.domain.Employe"/>
+        <mapping class="com.rom4.departments.domain.Employee"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -1,8 +1,8 @@
 package com.rom4.departments.service.impl;
 
+import com.rom4.departments.domain.Employee;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.domain.Department;
-import com.rom4.departments.domain.Employe;
 import com.rom4.departments.service.dao.EmployeDAO;
 import com.rom4.departments.utils.HibernateUtil;
 import org.hibernate.*;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class EmployeDAOImplHib implements EmployeDAO {
     @Override
-    public Integer createEmploye(Employe emp) throws AppException {
+    public Integer createEmploye(Employee emp) throws AppException {
         Session session ;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -32,35 +32,35 @@ public class EmployeDAOImplHib implements EmployeDAO {
     }
 
     @Override
-    public Employe readEmploye(int EmployeID) throws AppException {
-        Employe employe;
+    public Employee readEmploye(int EmployeID) throws AppException {
+        Employee employee;
         Session session;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
-            employe = (Employe)session.get(Employe.class, EmployeID);
+            employee = (Employee)session.get(Employee.class, EmployeID);
         }
         catch (HibernateException e) {
             e.printStackTrace();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
         }
-        return employe;
+        return employee;
     }
 
     @Override
-    public Employe getEmployeByEmail(String email) throws AppException {
-        Employe employe;
+    public Employee getEmployeByEmail(String email) throws AppException {
+        Employee employee;
         Session session;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             Criteria cr = session.createCriteria(Department.class);
             cr.add(Restrictions.eq("email", email));
-            employe = (Employe)cr.list().get(0);
+            employee = (Employee)cr.list().get(0);
         }
         catch (HibernateException e) {
             e.printStackTrace();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
         }
-        return employe;
+        return employee;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class EmployeDAOImplHib implements EmployeDAO {
         Session session;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
-            session.delete(session.load(Employe.class, EmployeID));
+            session.delete(session.load(Employee.class, EmployeID));
         }
         catch (HibernateException e) {
             e.printStackTrace();
@@ -78,7 +78,7 @@ public class EmployeDAOImplHib implements EmployeDAO {
     }
 
     @Override
-    public boolean udpateEmploye(Employe emp) throws AppException {
+    public boolean udpateEmploye(Employee emp) throws AppException {
         Session session ;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -92,35 +92,35 @@ public class EmployeDAOImplHib implements EmployeDAO {
     }
 
     @Override
-    public List<Employe> getEmployes() throws AppException {
-        List<Employe> employes ;
+    public List<Employee> getEmployes() throws AppException {
+        List<Employee> employees;
         Session session ;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
-            employes = session.createQuery("from Employe order by employeID").list();
+            employees = session.createQuery("from Employee order by employeID").list();
         }
         catch (HibernateException e) {
             e.printStackTrace();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
         }
 
-        return employes;
+        return employees;
     }
 
     @Override
-    public List<Employe> getEmployes(int departmentID) throws AppException {
-        List<Employe> employes ;
+    public List<Employee> getEmployes(int departmentID) throws AppException {
+        List<Employee> employees;
         Session session ;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Criteria cr = session.createCriteria(Employe.class);
+            Criteria cr = session.createCriteria(Employee.class);
             cr.add(Restrictions.eq("departmentID",departmentID ));
-            employes = cr.list();
+            employees = cr.list();
         }
         catch (HibernateException e) {
             e.printStackTrace();
             throw new AppException("Hibernate exception:" + e.getMessage(), e);
         }
-        return employes;
+        return employees;
     }
 }

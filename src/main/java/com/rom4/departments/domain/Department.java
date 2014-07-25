@@ -38,14 +38,14 @@ public class Department implements Serializable {
     private Integer departmentID;
 
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY,  mappedBy = "department")
-    private Collection<Employe> employes;
+    private Collection<Employee> employees;
 
-    public Collection<Employe> getEmployes() {
-        return employes;
+    public Collection<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmployes(Collection<Employe> employes) {
-        this.employes = employes;
+    public void setEmployees(Collection<Employee> employees) {
+        this.employees = employees;
     }
 
     public Integer getDepartmentID() {

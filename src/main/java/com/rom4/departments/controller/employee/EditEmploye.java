@@ -6,7 +6,7 @@ import com.rom4.departments.service.dao.DepartmentDAO;
 import com.rom4.departments.service.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.domain.Department;
-import com.rom4.departments.domain.Employe;
+import com.rom4.departments.domain.Employee;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ public class EditEmploye implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
 
-        Employe emp ;
+        Employee emp ;
         Integer employeID;
         List<Department> departments;
 

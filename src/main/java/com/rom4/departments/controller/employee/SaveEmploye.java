@@ -2,11 +2,11 @@ package com.rom4.departments.controller.employee;
 
 import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
+import com.rom4.departments.domain.Employee;
 import com.rom4.departments.service.dao.DepartmentDAO;
 import com.rom4.departments.service.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.domain.Department;
-import com.rom4.departments.domain.Employe;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
 import javax.servlet.ServletException;
@@ -33,7 +33,7 @@ public class SaveEmploye implements Handler {
 
         pageType = request.getParameter("pageType");
 
-        Employe emp = parseEmployeFromRequest(request, response, pageType, depDAO);
+        Employee emp = parseEmployeFromRequest(request, response, pageType, depDAO);
 
         if (emp != null) {
             validateError = validateEmploye(request, response, emp, pageType, depDAO);
@@ -54,9 +54,9 @@ public class SaveEmploye implements Handler {
     }
 
 
-    private Employe parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse response, String pageType, DepartmentDAO  depDAO) throws IOException {
+    private Employee parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse response, String pageType, DepartmentDAO  depDAO) throws IOException {
 
-        Employe emp = new Employe();
+        Employee emp = new Employee();
         Department dep;
         try {
 
@@ -85,7 +85,7 @@ public class SaveEmploye implements Handler {
         return emp;
     }
 
-    private String validateEmploye(HttpServletRequest request, HttpServletResponse response, Employe emp, String pageType, DepartmentDAO depDAO) throws ServletException, IOException {
+    private String validateEmploye(HttpServletRequest request, HttpServletResponse response, Employee emp, String pageType, DepartmentDAO depDAO) throws ServletException, IOException {
         String validateError = null;
 
         Validator validator = new net.sf.oval.Validator();
@@ -123,7 +123,7 @@ public class SaveEmploye implements Handler {
         return validateError;
     }
 
-    private String  processEmploye (Employe emp,  HttpServletRequest request, HttpServletResponse response, String pageType, EmployeDAO empDAO) throws IOException, ServletException {
+    private String  processEmploye (Employee emp,  HttpServletRequest request, HttpServletResponse response, String pageType, EmployeDAO empDAO) throws IOException, ServletException {
         String saveStatus = null ;
         if (pageType.equals("add")) {
             try {

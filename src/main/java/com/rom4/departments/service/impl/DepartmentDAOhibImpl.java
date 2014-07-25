@@ -18,16 +18,12 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class DepartmentHibDAOimpl implements DepartmentDAOhib {
+public class DepartmentDAOhibImpl implements DepartmentDAOhib {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public DepartmentHibDAOimpl() {
         this.sessionFactory = sessionFactory;
     }
 
@@ -65,9 +61,8 @@ public class DepartmentHibDAOimpl implements DepartmentDAOhib {
 
     @Override
     @Transactional
-    public void deleteDepartment(Integer departmentID) {
-        currentSession().delete(currentSession().load(Department.class, departmentID));
-
+    public void deleteDepartment(Department department) {
+        currentSession().delete(department);
     }
 
     @Override
