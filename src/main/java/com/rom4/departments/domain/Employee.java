@@ -22,7 +22,7 @@ public class Employee {
     @Column(name = "employe_id")
     private int employeID;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name="department_id")
     private Department department;
 

@@ -26,6 +26,5 @@ public class MainPage implements Handler {
         RequestDispatcher rd;
         rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
-
     }
 }

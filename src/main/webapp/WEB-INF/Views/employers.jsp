@@ -52,7 +52,8 @@
                 <td>
                     <form metdod="get" action="EditEmployee.html">
                         <input type="hidden" name="employeID" value=${Employe.employeID}>
-                        <input type="hidden" name="departmentID" value=${Employe.departmentID}>
+                       <!-- <input type="hidden" name="departmentID" value="Employe.department.departmentID> -->
+
                         <p><input CLASS="button" type="submit" name="submit" value="Edit"></p>
                     </form>
                 </td>

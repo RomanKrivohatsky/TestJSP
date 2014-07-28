@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * Creation time 14:33
  * Project name Departments
  */
-@ContextConfiguration (locations = "/departments.xml")
+@ContextConfiguration (locations = "/WEB-INF/departments.xml")
 public class DepartmentServiceTest extends AbstractJUnit4SpringContextTests {
 
     @Autowired

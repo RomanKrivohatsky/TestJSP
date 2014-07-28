@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNull;
  * Creation time 16:11
  * Project name Departments
  */
-@ContextConfiguration(locations = "/departments.xml")
+@ContextConfiguration(locations = "/WEB-INF/departments.xml")
 
 public class EmployeeServiceTest extends AbstractJUnit4SpringContextTests {
 
