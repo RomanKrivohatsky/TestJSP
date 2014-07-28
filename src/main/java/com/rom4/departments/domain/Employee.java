@@ -7,6 +7,8 @@ import net.sf.oval.guard.Guarded;
 import javax.persistence.*;
 import java.util.*;
 
+
+
 /**
  * Created by rom4 on 02.07.14.
  */
@@ -16,6 +18,7 @@ import java.util.*;
 @Table(name="employes")
 @Guarded
 public class Employee {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,60 +1,35 @@
 package com.rom4.departments.service.dao;
 
 import com.rom4.departments.domain.Department;
-import com.rom4.departments.service.dao.DepartmentDAOhib;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Created by rom4 on 25.07.14.
- * Creation time 11:07
+ * Created by rom4 on 28.07.14.
+ * Creation time 18:13
  * Project name Departments
  */
-@Service
-@Transactional
-public class DepartmentService {
-    private DepartmentDAOhib dao;
-
+public interface DepartmentService {
     @Autowired
-     public void setDao(DepartmentDAOhib dao) {
-        this.dao = dao;
-    }
+    void setDao(DepartmentDAOhib dao);
 
     @Transactional
-    public Department read(int departmentID) {
-        return dao.readDepartment(departmentID);
-
-    }
+    Department read(int departmentID);
 
     @Transactional
-    public Department byName(String name) {
-        return dao.getDepartmentByName(name);
-    }
+    Department byName(String name);
 
     @Transactional
-    public void create(Department dep) {
-         dao.createDepartment(dep);
-    }
+    void create(Department dep);
 
     @Transactional
-    public void update(Department dep) {
-        dao.udpateDepartment(dep);
-    }
+    void update(Department dep);
 
     @Transactional
-    public void delete(Department department) {
-        dao.deleteDepartment(department);
-    }
+    void delete(Department department);
 
     @Transactional
-    public List getList() {
-        return dao.getDepartments();
-    }
-
-
+    List getList();
 }

@@ -28,6 +28,8 @@ public class EmailCheck extends AbstractAnnotationCheck<Email> {
             return false;
         }
         return true;*/
+
+        net.sf.oval.integration.spring.SpringValidator
         return true;
     }
 }

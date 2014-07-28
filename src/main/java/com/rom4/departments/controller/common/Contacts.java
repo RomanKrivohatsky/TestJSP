@@ -1,9 +1,7 @@
 package com.rom4.departments.controller.common;
 
 import com.rom4.departments.controller.Handler;
-import com.rom4.departments.service.dao.DepartmentDAO;
-import com.rom4.departments.service.dao.DepartmentService;
-import com.rom4.departments.service.dao.EmployeDAO;
+import com.rom4.departments.service.dao.DepartmentServiceImpl;
 import com.rom4.departments.service.dao.EmployeeService;
 
 import javax.servlet.RequestDispatcher;
@@ -21,7 +19,7 @@ public class Contacts implements Handler
 {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
+                       DepartmentServiceImpl departmentService, EmployeeService employeeService) throws IOException, ServletException {
         System.err.println("contacts");
         RequestDispatcher rd;
         rd = request.getRequestDispatcher("contacts.jsp");

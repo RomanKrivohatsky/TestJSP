@@ -6,8 +6,9 @@ import com.rom4.departments.controller.common.MainPage;
 import com.rom4.departments.controller.common.StatusPage;
 import com.rom4.departments.controller.department.*;
 import com.rom4.departments.controller.employee.*;
-import com.rom4.departments.service.dao.EmployeeService;
 import com.rom4.departments.service.dao.DepartmentService;
+import com.rom4.departments.service.dao.EmployeeService;
+import com.rom4.departments.service.dao.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
@@ -34,7 +35,6 @@ public class RequestHandler implements HttpRequestHandler {
 
     private final HashMap<String, Handler> handlers = new HashMap<String, Handler>();
     {
-
         handlers.put("/AddDepartment.html",new AddDepartment());
         handlers.put("/SaveDepartment.html",new SaveDepartment());
         handlers.put("/SaveEmployee.html",new SaveEmploye());

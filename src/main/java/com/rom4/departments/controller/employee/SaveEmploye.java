@@ -3,10 +3,8 @@ package com.rom4.departments.controller.employee;
 import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.domain.Employee;
-import com.rom4.departments.service.dao.DepartmentDAO;
 import com.rom4.departments.service.dao.DepartmentService;
-import com.rom4.departments.service.dao.EmployeDAO;
-import com.rom4.departments.exception.AppException;
+import com.rom4.departments.service.dao.DepartmentServiceImpl;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.ConstraintViolation;
@@ -57,7 +55,7 @@ public class SaveEmploye implements Handler {
     }
 
     private Employee parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse response,
-                                             String pageType,DepartmentService departmentService) throws IOException {
+                                             String pageType, DepartmentService departmentService) throws IOException {
 
         Employee emp = new Employee();
         Department dep;

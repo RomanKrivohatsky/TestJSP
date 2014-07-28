@@ -1,7 +1,7 @@
 package service.impl;
 
 import com.rom4.departments.domain.Department;
-import com.rom4.departments.service.dao.DepartmentService;
+import com.rom4.departments.service.dao.DepartmentServiceImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class DepartmentServiceTest extends AbstractJUnit4SpringContextTests {
 
     @Autowired
-    private DepartmentService service;
+    private DepartmentServiceImpl service;
 
     @Test
     public void testRead() throws Exception {
