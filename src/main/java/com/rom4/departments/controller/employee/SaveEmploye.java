@@ -4,9 +4,11 @@ import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.domain.Employee;
 import com.rom4.departments.service.dao.DepartmentDAO;
+import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeDAO;
 import com.rom4.departments.exception.AppException;
 import com.rom4.departments.domain.Department;
+import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
 import javax.servlet.ServletException;
@@ -25,7 +27,8 @@ import java.util.List;
  */
 public class SaveEmploye implements Handler {
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
 
         String saveStatus;
         String validateError;
@@ -33,13 +36,13 @@ public class SaveEmploye implements Handler {
 
         pageType = request.getParameter("pageType");
 
-        Employee emp = parseEmployeFromRequest(request, response, pageType, depDAO);
+        Employee emp = parseEmployeFromRequest(request, response, pageType, departmentService);
 
         if (emp != null) {
-            validateError = validateEmploye(request, response, emp, pageType, depDAO);
+            validateError = validateEmploye(request, response, emp, pageType, departmentService);
             //validate done
             if (validateError == null) {
-                saveStatus =  processEmploye(emp, request , response, pageType, empDAO);
+                saveStatus =  processEmploye(emp, request , response, pageType, employeeService);
                 if (saveStatus !=null) {
                     request.getSession().setAttribute("saveStatus", saveStatus);
                     PageUtil.redirectToPage(request, response, "StatusPage.html");
@@ -53,22 +56,20 @@ public class SaveEmploye implements Handler {
         }
     }
 
-
-    private Employee parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse response, String pageType, DepartmentDAO  depDAO) throws IOException {
+    private Employee parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse response,
+                                             String pageType,DepartmentService departmentService) throws IOException {
 
         Employee emp = new Employee();
         Department dep;
         try {
-
             emp.setFirstName(request.getParameter("firstName"));
             emp.setLastName(request.getParameter("lastName"));
             emp.setEmail(request.getParameter("email"));
             emp.setSalary(Float.parseFloat(request.getParameter("salary")));
             DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
             emp.setBirthday(sdf.parse(request.getParameter("birthday")));
-            dep = depDAO.readDepartment(Integer.parseInt(request.getParameter("departmentID")));
+            dep = departmentService.read(Integer.parseInt(request.getParameter("departmentID")));
             emp.setDepartment(dep);
-
 
             if (pageType.equals("edit")) {
                 emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
@@ -76,18 +77,13 @@ public class SaveEmploye implements Handler {
 
         } catch (ParseException e) {
             e.printStackTrace();
-
-        } catch (AppException e) {
-            e.printStackTrace();
-            PageUtil.redirectToErrorPage(request, response, e.getMessage());
         }
-
-        return emp;
+     return emp;
     }
 
-    private String validateEmploye(HttpServletRequest request, HttpServletResponse response, Employee emp, String pageType, DepartmentDAO depDAO) throws ServletException, IOException {
+    private String validateEmploye(HttpServletRequest request, HttpServletResponse response, Employee emp,
+                                   String pageType, DepartmentService departmentService) throws ServletException, IOException {
         String validateError = null;
-
         Validator validator = new net.sf.oval.Validator();
         java.util.List violations = validator.validate(emp);
 
@@ -95,13 +91,7 @@ public class SaveEmploye implements Handler {
             validateError = ((ConstraintViolation) violations.get(0)).getMessage();
 
             List<Department> departments;
-            try {
-                departments = depDAO.getDepartments();
-            } catch (AppException a) {
-                a.printStackTrace();
-                PageUtil.redirectToErrorPage(request, response, a.getMessage());
-                return "error";
-            }
+            departments = departmentService.getList();
 
             request.setAttribute("Departments", departments);
             request.setAttribute("errorValidate", validateError);
@@ -123,33 +113,19 @@ public class SaveEmploye implements Handler {
         return validateError;
     }
 
-    private String  processEmploye (Employee emp,  HttpServletRequest request, HttpServletResponse response, String pageType, EmployeDAO empDAO) throws IOException, ServletException {
+    private String  processEmploye (Employee emp,  HttpServletRequest request, HttpServletResponse response,
+                                    String pageType,  EmployeeService employeeService) throws IOException, ServletException {
         String saveStatus = null ;
         if (pageType.equals("add")) {
-            try {
-                saveStatus = "Employee created";
-                empDAO.createEmploye(emp);
-            }
-            catch (AppException a) {
-                a.printStackTrace();
-                PageUtil.redirectToErrorPage(request, response, a.getMessage());
-                return null;
-            }
+                 saveStatus = "Employee created";
+                employeeService.create(emp);
         }
         else if (pageType.equals("edit")) {
             emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
 
-            try {
-                saveStatus = "Employee updated";
-                empDAO.udpateEmploye(emp);
-            } catch (AppException a) {
-                a.printStackTrace();
-                PageUtil.redirectToErrorPage(request, response, a.getMessage());
-                return null;
-            }
+                 saveStatus = "Employee updated";
+                employeeService.update(emp);
         }
         return saveStatus;
     }
-
-
 }

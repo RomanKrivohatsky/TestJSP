@@ -59,4 +59,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List getList() {
         return dao.getEmployees();
     }
+
+    @Override
+    @Transactional
+    public List getList(int departmentID) {
+        return dao.getEmployees(departmentID);
+    }
+
 }

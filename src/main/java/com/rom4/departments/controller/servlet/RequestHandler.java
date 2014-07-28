@@ -1,35 +1,36 @@
-package com.rom4.departments.controller;
+package com.rom4.departments.controller.servlet;
 
-
+import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.Contacts;
 import com.rom4.departments.controller.common.MainPage;
 import com.rom4.departments.controller.common.StatusPage;
 import com.rom4.departments.controller.department.*;
 import com.rom4.departments.controller.employee.*;
-import com.rom4.departments.service.dao.DepartmentDAO;
-import com.rom4.departments.service.dao.EmployeDAO;
-import com.rom4.departments.service.impl.DepartmentDAOImplHib;
-import com.rom4.departments.service.impl.EmployeDAOImplHib;
+import com.rom4.departments.service.dao.EmployeeService;
+import com.rom4.departments.service.dao.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.HttpRequestHandler;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 
 /**
- * Created by rom4 on 03.07.14.
- * Creation time 12:20
+ * Created by rom4 on 28.07.14.
+ * Creation time 11:21
  * Project name Departments
  */
-@Component
-public class ControllerServlet extends HttpServlet {
 
-    private final DepartmentDAO daoDep = new DepartmentDAOImplHib();
-    private final EmployeDAO daoEmp = new EmployeDAOImplHib();
+@Component("mainServlet")
+public class RequestHandler implements HttpRequestHandler {
+
+    @Autowired
+    private DepartmentService departmentService;
+    @Autowired
+    private EmployeeService employeeService;
 
     private final HashMap<String, Handler> handlers = new HashMap<String, Handler>();
     {
@@ -50,20 +51,12 @@ public class ControllerServlet extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.err.println("uri " + req.getRequestURI());
-
-        Handler handler = handlers.get(req.getRequestURI());
+        Handler handler = handlers.get(request.getRequestURI());
 
         if (handler != null) {
-            handler.handle(req, resp, daoDep, daoEmp);
+            handler.handle(request, response, departmentService, employeeService);
         }
-
-        ServletContext sc = this.getServletContext();
-        sc.log("go to "  + req.getRequestURI());
-        //super.service(req, resp);
     }
-
-   }
-
+}

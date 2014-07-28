@@ -1,4 +1,4 @@
-package com.rom4.departments.service.impl;
+package com.rom4.departments.service.dao;
 
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.DepartmentDAOhib;

@@ -6,24 +6,30 @@
          version="2.5">
 
     <display-name>Archetype Created Web Application</display-name>
+
+    <!--
     <filter>
         <filter-name>SessionFilter</filter-name>
         <filter-class>com.rom4.departments.controller.filter.SessionFilter</filter-class>
     </filter>
+    -->
 
+    <!--
     <servlet>
         <servlet-name>ControllerServlet</servlet-name>
-        <servlet-class>com.rom4.departments.controller.ControllerServlet</servlet-class>
+        <servlet-class>com.rom4.departments.controller.servlet.ControllerServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
-
-    <filter-mapping>
-        <filter-name>SessionFilter</filter-name>
-        <url-pattern>*.html</url-pattern>
-    </filter-mapping>
+-->
+    <!--
+   <filter-mapping>
+       <filter-name>SessionFilter</filter-name>
+       <url-pattern>*.html</url-pattern>
+   </filter-mapping>
+   -->
 
 </web-app>

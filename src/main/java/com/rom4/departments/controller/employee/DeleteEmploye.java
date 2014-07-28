@@ -2,9 +2,9 @@ package com.rom4.departments.controller.employee;
 
 import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
-import com.rom4.departments.service.dao.DepartmentDAO;
-import com.rom4.departments.service.dao.EmployeDAO;
-import com.rom4.departments.exception.AppException;
+import com.rom4.departments.service.dao.EmployeeService;
+import com.rom4.departments.service.dao.DepartmentService;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,19 +17,14 @@ import java.io.IOException;
  */
 public class DeleteEmploye implements Handler {
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
 
         String saveStatus;
-        try {
-            saveStatus = "Employee deleted";
-            empDAO.deleteEmploye(Integer.parseInt(request.getParameter("EmployeID")));
-            request.getSession().setAttribute("saveStatus", saveStatus);
-            PageUtil.redirectToPage(request, response, "StatusPage.html");
-        } catch (AppException a) {
-            a.printStackTrace();
-            PageUtil.redirectToErrorPage(request, response, a.getMessage());
-        }
-
+        saveStatus = "Employee deleted";
+        employeeService.delete(employeeService.read(Integer.parseInt(request.getParameter("EmployeID"))));
+        request.getSession().setAttribute("saveStatus", saveStatus);
+        PageUtil.redirectToPage(request, response, "StatusPage.html");
 
     }
 }

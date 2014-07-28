@@ -25,7 +25,7 @@ public class SessionFilter implements Filter {
         /*Transaction tr = null;
         Session session = null;*/
 
-        try {
+      /*  try {
             sf.getCurrentSession().beginTransaction();
             chain.doFilter(req, resp);
             sf.getCurrentSession().getTransaction().commit();
@@ -33,7 +33,7 @@ public class SessionFilter implements Filter {
             e.printStackTrace();
             sf.getCurrentSession().getTransaction().rollback();
 
-        }
+        }*/
 
     }
 

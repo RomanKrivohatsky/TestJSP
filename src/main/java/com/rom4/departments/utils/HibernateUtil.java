@@ -9,9 +9,10 @@ import org.hibernate.SessionFactory;
  * Project name Departments
  */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory = null;
+   private static final SessionFactory sessionFactory = null;
 
-  /*  private static  SessionFactory sessionFactory = buildSessionFactory();
+    /*
+    private static  SessionFactory sessionFactory = buildSessionFactory();
     private static SessionFactory buildSessionFactory() {
         try {
             return new Configuration().configure().buildSessionFactory(
@@ -22,11 +23,10 @@ public class HibernateUtil {
             System.err.println(ex.getCause());
             throw new ExceptionInInitializerError(ex);
         }
-    }
-*/
+    }*/
 
-    static {
-   /*     try {
+  /*  static {
+        try {
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration();
             configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
@@ -43,8 +43,8 @@ public class HibernateUtil {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
-        }*/
-    }
+        }
+    }*/
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;

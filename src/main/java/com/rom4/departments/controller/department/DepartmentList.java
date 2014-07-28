@@ -2,10 +2,11 @@ package com.rom4.departments.controller.department;
 
 import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
-import com.rom4.departments.service.dao.DepartmentDAO;
-import com.rom4.departments.service.dao.EmployeDAO;
-import com.rom4.departments.exception.AppException;
 import com.rom4.departments.domain.Department;
+import com.rom4.departments.service.dao.EmployeeService;
+import com.rom4.departments.service.dao.DepartmentService;
+import org.springframework.stereotype.Component;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,19 +18,25 @@ import java.util.List;
  * Creation time 12:18
  * Project name Departments
  */
+@Component
 public class DepartmentList implements Handler {
 
+
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
         List<Department> departments ;
-        try {
+        departments = departmentService.getList();
+        request.setAttribute("Departments", departments);
+        PageUtil.forwardToPage(request, response, "departments.jsp");
+
+     /*   try {
             departments = depDAO.getDepartments();
             request.setAttribute("Departments", departments);
             PageUtil.forwardToPage(request, response, "departments.jsp");
         } catch (AppException a) {
             a.printStackTrace();
             PageUtil.redirectToErrorPage(request, response, a.getMessage());
-        }
+        }*/
 
     }
 }

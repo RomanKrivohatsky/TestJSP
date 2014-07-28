@@ -1,8 +1,7 @@
 package com.rom4.departments.controller;
 
-import com.rom4.departments.service.dao.DepartmentDAO;
-import com.rom4.departments.service.dao.EmployeDAO;
-
+import com.rom4.departments.service.dao.EmployeeService;
+import com.rom4.departments.service.dao.DepartmentService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +13,8 @@ import java.io.IOException;
  * Project name Departments
  */
 public interface Handler {
-    public void handle(HttpServletRequest request, HttpServletResponse response, DepartmentDAO depDAO, EmployeDAO empDAO) throws IOException, ServletException;
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       DepartmentService departmentService, EmployeeService employeeService)
+            throws IOException, ServletException;
 
 }

@@ -33,4 +33,7 @@ public interface EmployeeService {
 
     @Transactional
     List getList();
+
+    @Transactional
+    List getList(int departmentID);
 }
