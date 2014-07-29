@@ -5,6 +5,7 @@ import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.EmployeeDAOhib;
 import com.rom4.departments.service.dao.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -31,23 +32,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Autowired
+    @Qualifier("employeeValidation")
     org.springframework.validation.Validator springValidator ;
 
-    public void setValidator2(Validator springValidator) {
+    public void setValidator(Validator springValidator) {
         this.springValidator = springValidator;
     }
 
     public List<ObjectError> validate(Employee employee) {
         BeanPropertyBindingResult result = new BeanPropertyBindingResult(employee, "employee");
         ValidationUtils.invokeValidator(springValidator, employee, result);
-
         List<ObjectError> errors = result.getAllErrors();
 
         if(errors.size()>0) {
             return errors;
         }
         return null;
-
     }
 
     @Override

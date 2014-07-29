@@ -11,6 +11,7 @@ import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
 import javax.servlet.ServletException;
@@ -40,11 +41,11 @@ public class SaveEmploye implements Handler {
         Employee emp = parseEmployeFromRequest(request, response, pageType, departmentService);
 
         if (emp != null) {
-                saveStatus =  processEmploye(emp, request , response, pageType, departmentService, employeeService);
-                if (saveStatus !=null) {
-                    request.getSession().setAttribute("saveStatus", saveStatus);
-                    PageUtil.redirectToPage(request, response, "editEmploye.html");
-                }
+            saveStatus = processEmploye(emp, request, response, pageType, departmentService, employeeService);
+            if (saveStatus != null) {
+                request.getSession().setAttribute("saveStatus", saveStatus);
+                PageUtil.redirectToPage(request, response, "editEmploye.html");
+            }
         }
     }
 
@@ -70,56 +71,57 @@ public class SaveEmploye implements Handler {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-     return emp;
+        return emp;
     }
 
     private void validateEmploye(HttpServletRequest request, HttpServletResponse response, Employee emp,
-                                   String pageType, DepartmentService departmentService, List< ObjectError > errors) throws ServletException, IOException {
+                                 String pageType, DepartmentService departmentService, List<ObjectError> errors) throws ServletException, IOException {
 
-            List<Department> departments;
-            departments = departmentService.getList();
+        List<Department> departments;
+        departments = departmentService.getList();
 
-            request.setAttribute("Departments", departments);
-            request.setAttribute("errorValidate", errors.get(0).getDefaultMessage());
-            request.setAttribute("firstName", emp.getFirstName());
-            request.setAttribute("lastName", emp.getLastName());
-            request.setAttribute("email", emp.getEmail());
-            request.setAttribute("salary", emp.getSalary());
-            request.setAttribute("birthday", emp.getBirthday());
-            request.setAttribute("pageType", "add");
-
-            if (pageType.equals("edit")) {
-                request.setAttribute("pageType", "edit");
-                request.setAttribute("employeID", Integer.parseInt(request.getParameter("employeID")));
-                request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
+        for (ObjectError objectError : errors) {
+            if (objectError instanceof FieldError) {
+                request.setAttribute(((FieldError) objectError).getField() + "error", objectError.getDefaultMessage());
             }
-            PageUtil.forwardToPage(request, response, "editEmploye.jsp");
+        }
+
+        request.setAttribute("Departments", departments);
+        request.setAttribute("errorValidate", errors.get(0).getDefaultMessage());
+        request.setAttribute("firstName", emp.getFirstName());
+        request.setAttribute("lastName", emp.getLastName());
+        request.setAttribute("email", emp.getEmail());
+        request.setAttribute("salary", emp.getSalary());
+        request.setAttribute("birthday", emp.getBirthday());
+        request.setAttribute("pageType", "add");
+
+        if (pageType.equals("edit")) {
+            request.setAttribute("pageType", "edit");
+            request.setAttribute("employeID", Integer.parseInt(request.getParameter("employeID")));
+            request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
+        }
+        PageUtil.forwardToPage(request, response, "editEmploye.jsp");
     }
 
-    private String  processEmploye (Employee emp,  HttpServletRequest request, HttpServletResponse response,
-                                    String pageType,   DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
-        String saveStatus = null ;
-        if (pageType.equals("add")) {
-                 saveStatus = "Employee created";
+    private String processEmploye(Employee emp, HttpServletRequest request, HttpServletResponse response,
+                                  String pageType, DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
+        String saveStatus = null;
+
             try {
-                employeeService.create(emp);
-            }
-            catch (ValidateException e) {
+                if (pageType.equals("add")) {
+                    saveStatus = "Employee created";
+                    employeeService.create(emp);
+                }
+                else if (pageType.equals("edit")) {
+                    emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
+                    saveStatus = "Employee updated";
+                    employeeService.update(emp);
+                }
+            } catch (ValidateException e) {
                 validateEmploye(request, response, emp, pageType, departmentService, e.getErrors());
                 return null;
             }
-        }
-        else if (pageType.equals("edit")) {
-            emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
-            saveStatus = "Employee updated";
-            try {
-                employeeService.update(emp);
-            }
-            catch (ValidateException e) {
-                validateEmploye(request, response, emp, pageType, departmentService, e.getErrors());
-                return null;
-            }
-        }
+
         return saveStatus;
     }
 }

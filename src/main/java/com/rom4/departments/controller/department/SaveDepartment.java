@@ -3,15 +3,19 @@ package com.rom4.departments.controller.department;
 import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.domain.Department;
+import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by rom4 on 04.07.14.
@@ -30,14 +34,12 @@ public class SaveDepartment implements Handler {
 
         Department dep = parseDepartmentFromRequest(request, pageType);
         if (dep != null) {
-            validateError = validateDepartment(request, response, dep, pageType, validator);
-            if (validateError == null) {
                 saveStatus = processDepartment(dep, request, response, pageType, departmentService);
                 if (saveStatus != null) {
                     request.getSession().setAttribute("saveStatus", saveStatus);
-                    PageUtil.redirectToPage(request, response, "StatusPage.html");
+                    PageUtil.redirectToPage(request, response, "editDepartment.html");
                 }
-            }
+
         }
     }
 
@@ -52,15 +54,17 @@ public class SaveDepartment implements Handler {
         return dep;
     }
 
-    public String validateDepartment(HttpServletRequest request, HttpServletResponse response, Department dep, String pageType, Validator validator) throws IOException, ServletException {
+    public void validateDepartment(HttpServletRequest request, HttpServletResponse response,
+                                     Department dep, String pageType, List<ObjectError> errors) throws IOException, ServletException {
         String validateError = null;
-        java.util.List violations = validator.validate(dep);
 
-        if (!violations.isEmpty()) {
-            validateError = ((ConstraintViolation) violations.get(0)).getMessage();
+        for (ObjectError objectError : errors) {
+            if (objectError instanceof FieldError) {
+                request.setAttribute(((FieldError) objectError).getField() + "error", objectError.getDefaultMessage());
+            }
+        }
             request.setAttribute("name", dep.getName());
             request.setAttribute("city", dep.getCity());
-            request.setAttribute("errorValidate", validateError);
             request.setAttribute("pageType", "add");
 
             if (pageType.equals("edit")) {
@@ -68,21 +72,27 @@ public class SaveDepartment implements Handler {
                 request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
             }
             PageUtil.forwardToPage(request, response, "editDepartment.jsp");
-        }
-        return validateError;
     }
 
     private String processDepartment(Department dep, HttpServletRequest request, HttpServletResponse response, String pageType, DepartmentService departmentService) throws IOException, ServletException {
         String saveStatus = null;
-        if (pageType.equals("add")) {
-            saveStatus = "Department created";
-            departmentService.create(dep);
-        } else if (pageType.equals("edit")) {
-            dep.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
-            saveStatus = "Department updated";
-            departmentService.update(dep);
 
+        try {
+            if (pageType.equals("add")) {
+                saveStatus = "Department created";
+            departmentService.create(dep);
+            }
+            else if (pageType.equals("edit")) {
+                dep.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
+                saveStatus = "Department updated";
+                departmentService.update(dep);
+            }
         }
+        catch (ValidateException e) {
+            validateDepartment(request, response, dep, pageType,  e.getErrors());
+            return null;
+        }
+
         return saveStatus;
     }
 

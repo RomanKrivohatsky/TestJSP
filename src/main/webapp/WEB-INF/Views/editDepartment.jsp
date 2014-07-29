@@ -25,6 +25,8 @@
         <h2 id="slogan">add a department...</h2>
     </div>
 
+    <H2>${saveStatus}</H2>
+
     <form method="post" action="SaveDepartment.html">
         <p>¬ведите название</p><input type="text" name="name" value= <c:out value = "${name}"></c:out> >
         <c:if test="${not empty errorValidate}"> ќшибка валидации ${errorValidate} </c:if>

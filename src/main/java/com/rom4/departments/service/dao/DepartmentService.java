@@ -1,6 +1,7 @@
 package com.rom4.departments.service.dao;
 
 import com.rom4.departments.domain.Department;
+import com.rom4.departments.exception.ValidateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,10 +23,10 @@ public interface DepartmentService {
     Department byName(String name);
 
     @Transactional
-    void create(Department dep);
+    void create(Department dep) throws ValidateException;
 
     @Transactional
-    void update(Department dep);
+    void update(Department dep) throws ValidateException ;
 
     @Transactional
     void delete(Department department);

@@ -1,8 +1,10 @@
 package com.rom4.departments.validation;
 
+import com.rom4.departments.domain.Department;
 import com.rom4.departments.domain.Employee;
 import com.rom4.departments.service.dao.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -12,6 +14,7 @@ import org.springframework.validation.Validator;
  */
 
 @Component
+@Qualifier("employeeValidation")
 public class EmployeeValidation implements Validator {
 
     @Autowired
@@ -27,8 +30,11 @@ public class EmployeeValidation implements Validator {
         Employee employe = service.byEmail(((Employee) target).getEmail());
         if (employe != null) {
             if (!employe.getEmployeID().equals(((Employee) target).getEmployeID())) {
-                errors.reject("name.email", "duplicate email");
+                errors.rejectValue("email", "duplicate email");
             }
+        }
+        if ( ((Employee)target).getSalary() < 0 ) {
+            errors.reject("salary", "Salary must be positive");
         }
     }
 
