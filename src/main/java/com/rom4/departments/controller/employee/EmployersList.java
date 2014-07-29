@@ -24,6 +24,8 @@ public class EmployersList implements Handler {
                        DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
         List<Employee> employers;
 
+        request.getSession().setAttribute("saveStatus", "");
+
         if (request.getParameter("pageType") == null) {
             employers = employeeService.getList();
             request.setAttribute("Employers", employers);

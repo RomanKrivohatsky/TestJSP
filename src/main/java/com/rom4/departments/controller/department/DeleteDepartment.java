@@ -23,20 +23,9 @@ public class DeleteDepartment implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
-        //String saveStatus;
 
         Department department = departmentService.read(Integer.parseInt(request.getParameter("departmentID")));
         departmentService.delete(department);
-
-      /*  try {
-            saveStatus = "Department deleted";
-            depDAO.deleteDepartment(Integer.parseInt(request.getParameter("departmentID")));
-            request.getSession().setAttribute("saveStatus", saveStatus);
-            PageUtil.redirectToPage(request, response, "StatusPage.html");
-        } catch (AppException a) {
-            a.printStackTrace();
-            PageUtil.redirectToErrorPage(request, response, a.getMessage());
-        }*/
 
 
     }

@@ -61,7 +61,7 @@ public class SaveDepartment implements Handler {
                 request.setAttribute(((FieldError) objectError).getField() + "Error", objectError.getDefaultMessage());
             }
         }
-            request.setAttribute("saveStatus", "");
+
             request.setAttribute("name", dep.getName());
             request.setAttribute("city", dep.getCity());
             request.setAttribute("pageType", "add");
@@ -77,6 +77,7 @@ public class SaveDepartment implements Handler {
         String saveStatus = null;
 
         try {
+            request.getSession().setAttribute("saveStatus", "");
             if (pageType.equals("add")) {
                 saveStatus = "Department " + dep.getName() +" was created";
             departmentService.create(dep);

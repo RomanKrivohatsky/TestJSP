@@ -23,6 +23,7 @@ public class MainPage implements Handler {
 
         System.err.println("main ");
         RequestDispatcher rd;
+        request.getSession().setAttribute("saveStatus", "");
         rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
     }

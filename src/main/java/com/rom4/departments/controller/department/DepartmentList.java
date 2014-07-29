@@ -28,17 +28,10 @@ public class DepartmentList implements Handler {
                        DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
         List<Department> departments ;
         departments = departmentService.getList();
+        request.getSession().setAttribute("saveStatus", "");
         request.setAttribute("Departments", departments);
         PageUtil.forwardToPage(request, response, "departments.jsp");
 
-     /*   try {
-            departments = depDAO.getDepartments();
-            request.setAttribute("Departments", departments);
-            PageUtil.forwardToPage(request, response, "departments.jsp");
-        } catch (AppException a) {
-            a.printStackTrace();
-            PageUtil.redirectToErrorPage(request, response, a.getMessage());
-        }*/
 
     }
 }
