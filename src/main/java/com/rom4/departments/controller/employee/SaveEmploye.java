@@ -7,13 +7,10 @@ import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.EmployeeService;
-import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,18 +35,18 @@ public class SaveEmploye implements Handler {
         String pageType;
         pageType = request.getParameter("pageType");
 
-        Employee emp = parseEmployeFromRequest(request, response, pageType, departmentService);
+        Employee emp = parseEmployeFromRequest(request, pageType, departmentService);
 
         if (emp != null) {
             saveStatus = processEmploye(emp, request, response, pageType, departmentService, employeeService);
             if (saveStatus != null) {
                 request.getSession().setAttribute("saveStatus", saveStatus);
-                PageUtil.redirectToPage(request, response, "editEmploye.html");
+                PageUtil.redirectToPage(request, response, "AddEmploye.html");
             }
         }
     }
 
-    private Employee parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse response,
+    private Employee parseEmployeFromRequest(HttpServletRequest request,
                                              String pageType, DepartmentService departmentService) throws IOException {
 
         Employee emp = new Employee();
@@ -86,8 +83,8 @@ public class SaveEmploye implements Handler {
             }
         }
 
+        request.setAttribute("saveStatus", "");
         request.setAttribute("Departments", departments);
-        request.setAttribute("errorValidate", errors.get(0).getDefaultMessage());
         request.setAttribute("firstName", emp.getFirstName());
         request.setAttribute("lastName", emp.getLastName());
         request.setAttribute("email", emp.getEmail());
@@ -109,7 +106,7 @@ public class SaveEmploye implements Handler {
 
             try {
                 if (pageType.equals("add")) {
-                    saveStatus = "Employee created";
+                    saveStatus = "Employee " + emp.getLastName() +" was created";
                     employeeService.create(emp);
                 }
                 else if (pageType.equals("edit")) {

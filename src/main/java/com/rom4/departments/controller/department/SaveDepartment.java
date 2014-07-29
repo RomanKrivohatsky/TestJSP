@@ -36,7 +36,7 @@ public class SaveDepartment implements Handler {
                 saveStatus = processDepartment(dep, request, response, pageType, departmentService);
                 if (saveStatus != null) {
                     request.getSession().setAttribute("saveStatus", saveStatus);
-                    PageUtil.redirectToPage(request, response, "editDepartment.html");
+                    PageUtil.redirectToPage(request, response, "AddDepartment.html");
                 }
 
         }
@@ -61,6 +61,7 @@ public class SaveDepartment implements Handler {
                 request.setAttribute(((FieldError) objectError).getField() + "Error", objectError.getDefaultMessage());
             }
         }
+            request.setAttribute("saveStatus", "");
             request.setAttribute("name", dep.getName());
             request.setAttribute("city", dep.getCity());
             request.setAttribute("pageType", "add");
@@ -77,7 +78,7 @@ public class SaveDepartment implements Handler {
 
         try {
             if (pageType.equals("add")) {
-                saveStatus = "Department created";
+                saveStatus = "Department " + dep.getName() +" was created";
             departmentService.create(dep);
             }
             else if (pageType.equals("edit")) {
