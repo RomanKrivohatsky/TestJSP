@@ -31,9 +31,9 @@
         <p>¬ведите им€</p><input type="text" name="firstName" value= <c:out value = "${firstName}"></c:out>  >
         <p>¬ведите фамилию</p> <input type="text" name="lastName" value= <c:out value = "${lastName}"></c:out> >
         <p>¬ведите e-mail</p> <input type="email" name="email" value= <c:out value = "${email}"></c:out> >
-        <c:if test="${not empty emailError}"> ќшибка валидации ${emailError} </c:if>
+        <c:if test="${not empty emailError}"> Validation error: ${emailError} </c:if>
         <p>¬ведите оклад</p><input type="number" name="salary" value=<c:out value = "${salary}"></c:out>  >
-        <c:if test="${not empty salaryError}"> ќшибка валидации ${salaryError} </c:if>
+        <c:if test="${not empty salaryError}"> Validation error: ${salaryError} </c:if>
         <fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${birthday}"/>
             <p>¬ведите дату рождени€</p><input type="date" name="birthday" value="${date}"/>
 

@@ -77,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void update(Employee employee) throws ValidateException {
         List<ObjectError> errors = validate(employee);
-        if ( errors.size()>0) {
+        if (errors != null) {
             throw new ValidateException("Employee validation error!", errors);
         }
         dao.udpateEmployee(employee);

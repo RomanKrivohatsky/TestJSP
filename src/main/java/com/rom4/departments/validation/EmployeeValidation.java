@@ -30,11 +30,11 @@ public class EmployeeValidation implements Validator {
         Employee employe = service.byEmail(((Employee) target).getEmail());
         if (employe != null) {
             if (!employe.getEmployeID().equals(((Employee) target).getEmployeID())) {
-                errors.rejectValue("email", "duplicate email");
+                errors.rejectValue("email", "email.duplicate", "duplicate email");
             }
         }
         if ( ((Employee)target).getSalary() < 0 ) {
-            errors.reject("salary", "Salary must be positive");
+            errors.rejectValue("salary", "salary.negative","Salary must be positive");
         }
     }
 

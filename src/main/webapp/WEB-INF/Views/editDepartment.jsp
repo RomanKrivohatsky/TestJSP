@@ -29,7 +29,7 @@
 
     <form method="post" action="SaveDepartment.html">
         <p>¬ведите название</p><input type="text" name="name" value= <c:out value = "${name}"></c:out> >
-        <c:if test="${not empty errorValidate}"> ќшибка валидации ${errorValidate} </c:if>
+        <c:if test="${not empty nameError}"> Validation error: ${nameError} </c:if>
         <p>¬ведите город</p><input type="text" name="city" value= <c:out value = "${city}"></c:out> >
         </p><input type="hidden" name="departmentID" value=${departmentID}>
         <input type="hidden" name="pageType" value=${pageType}>

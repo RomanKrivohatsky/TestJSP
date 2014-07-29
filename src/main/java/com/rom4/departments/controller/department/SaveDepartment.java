@@ -28,7 +28,6 @@ public class SaveDepartment implements Handler {
                        DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
 
         String saveStatus;
-        String validateError;
         String pageType;
         pageType = request.getParameter("pageType");
 
@@ -56,11 +55,10 @@ public class SaveDepartment implements Handler {
 
     public void validateDepartment(HttpServletRequest request, HttpServletResponse response,
                                      Department dep, String pageType, List<ObjectError> errors) throws IOException, ServletException {
-        String validateError = null;
 
         for (ObjectError objectError : errors) {
             if (objectError instanceof FieldError) {
-                request.setAttribute(((FieldError) objectError).getField() + "error", objectError.getDefaultMessage());
+                request.setAttribute(((FieldError) objectError).getField() + "Error", objectError.getDefaultMessage());
             }
         }
             request.setAttribute("name", dep.getName());

@@ -28,7 +28,7 @@ public class DepartmentValidation implements Validator {
         Department department = service.byName(((Department) target).getName());
         if (department != null) {
             if (!department.getDepartmentID().equals(((Department) target).getDepartmentID())) {
-                errors.reject("Department.name", "duplicate department name");
+                errors.rejectValue("name", "name.duplicate", "duplicate department name");
             }
         }
     }

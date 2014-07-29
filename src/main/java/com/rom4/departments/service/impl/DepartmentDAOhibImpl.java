@@ -34,11 +34,12 @@ public class DepartmentDAOhibImpl implements DepartmentDAOhib {
     @Override
     @Transactional
     public Department getDepartmentByName(String name) {
-        Department department;
         Criteria cr = currentSession().createCriteria(Department.class);
         cr.add(Restrictions.eq("name", name));
-        department = (Department) cr.list().get(0);
-        return department;
+        if (cr.list().size()>0) {
+            return (Department) cr.list().get(0);
+        }
+        return null;
     }
 
     @Override

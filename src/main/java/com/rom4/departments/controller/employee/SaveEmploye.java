@@ -82,7 +82,7 @@ public class SaveEmploye implements Handler {
 
         for (ObjectError objectError : errors) {
             if (objectError instanceof FieldError) {
-                request.setAttribute(((FieldError) objectError).getField() + "error", objectError.getDefaultMessage());
+                request.setAttribute(((FieldError) objectError).getField() + "Error", objectError.getDefaultMessage());
             }
         }
 
