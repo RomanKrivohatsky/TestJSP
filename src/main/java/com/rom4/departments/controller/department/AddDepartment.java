@@ -16,6 +16,7 @@ import java.io.IOException;
  * Creation time 12:19
  * Project name Departments
  */
+
 public class AddDepartment implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,

@@ -29,7 +29,7 @@ public class SaveDepartment implements Handler {
 
         String saveStatus;
         String pageType;
-        pageType = request.getParameter("pageType");
+         pageType = request.getParameter("pageType");
 
         Department dep = parseDepartmentFromRequest(request, pageType);
         if (dep != null) {
@@ -47,9 +47,12 @@ public class SaveDepartment implements Handler {
         dep.setName(request.getParameter("name"));
         dep.setCity(request.getParameter("city"));
 
-        if (pageType.equals("edit")) {
-            dep.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
+        if (pageType!=null) {
+            if (pageType.equals("edit")) {
+                dep.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
+            }
         }
+
         return dep;
     }
 
