@@ -4,7 +4,7 @@ import com.rom4.departments.controller.Handler;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
+import net.sf.oval.Validator;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ public class DeleteDepartment implements Handler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
+                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
         //String saveStatus;
 
         Department department = departmentService.read(Integer.parseInt(request.getParameter("departmentID")));

@@ -3,12 +3,15 @@ package com.rom4.departments.controller.employee;
 import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.domain.Employee;
+import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentService;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,10 +26,13 @@ import java.util.List;
  * Creation time 19:58
  * Project name Departments
  */
+@Component
 public class SaveEmploye implements Handler {
+
+
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
+                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
 
         String saveStatus;
         String validateError;
@@ -37,7 +43,21 @@ public class SaveEmploye implements Handler {
         Employee emp = parseEmployeFromRequest(request, response, pageType, departmentService);
 
         if (emp != null) {
-            validateError = validateEmploye(request, response, emp, pageType, departmentService);
+                saveStatus =  processEmploye(emp, request , response, pageType, employeeService);
+                if (saveStatus !=null) {
+                    request.getSession().setAttribute("saveStatus", saveStatus);
+                    PageUtil.redirectToPage(request, response, "StatusPage.html");
+                }
+                else {
+                    request.setAttribute("saveStatus", "Can't determine type of saving page");
+                    PageUtil.redirectToPage(request, response, "StatusPage.html");
+                }
+
+
+        }
+
+   /*     if (emp != null) {
+            //validateError = validateEmploye(request, response, emp, pageType, departmentService, validator);
             //validate done
             if (validateError == null) {
                 saveStatus =  processEmploye(emp, request , response, pageType, employeeService);
@@ -51,7 +71,7 @@ public class SaveEmploye implements Handler {
                 }
 
             }
-        }
+        }*/
     }
 
     private Employee parseEmployeFromRequest(HttpServletRequest request, HttpServletResponse response,
@@ -80,9 +100,9 @@ public class SaveEmploye implements Handler {
     }
 
     private String validateEmploye(HttpServletRequest request, HttpServletResponse response, Employee emp,
-                                   String pageType, DepartmentService departmentService) throws ServletException, IOException {
+                                   String pageType, DepartmentService departmentService, Validator validator) throws ServletException, IOException {
         String validateError = null;
-        Validator validator = new net.sf.oval.Validator();
+
         java.util.List violations = validator.validate(emp);
 
         if (!violations.isEmpty()) {
@@ -116,7 +136,13 @@ public class SaveEmploye implements Handler {
         String saveStatus = null ;
         if (pageType.equals("add")) {
                  saveStatus = "Employee created";
+            try {
                 employeeService.create(emp);
+            }
+            catch (ValidateException e) {
+
+            }
+
         }
         else if (pageType.equals("edit")) {
             emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));

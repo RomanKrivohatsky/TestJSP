@@ -2,7 +2,8 @@ package com.rom4.departments.controller;
 
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
+import net.sf.oval.Validator;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ import java.io.IOException;
  */
 public interface Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService)
+                       DepartmentService departmentService, EmployeeService employeeService, Validator validator)
             throws IOException, ServletException;
 
 }

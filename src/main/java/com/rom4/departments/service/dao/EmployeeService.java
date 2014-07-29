@@ -1,9 +1,11 @@
 package com.rom4.departments.service.dao;
 
 import com.rom4.departments.domain.Employee;
+import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.EmployeeDAOhib;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.ObjectError;
 
 import java.util.List;
 
@@ -23,10 +25,10 @@ public interface EmployeeService {
     Employee byEmail(String email);
 
     @Transactional
-    void create(Employee dep);
+    void create(Employee dep) throws ValidateException;
 
     @Transactional
-    void update(Employee dep);
+    void update(Employee dep) throws ValidateException;
 
     @Transactional
     void delete(Employee Employee);

@@ -1,11 +1,17 @@
 package com.rom4.departments.service.impl;
 
 import com.rom4.departments.domain.Employee;
+import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.EmployeeDAOhib;
 import com.rom4.departments.service.dao.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
 import java.util.List;
 
 /**
@@ -24,6 +30,26 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.dao = dao;
     }
 
+    @Autowired
+    org.springframework.validation.Validator springValidator ;
+
+    public void setValidator2(Validator springValidator) {
+        this.springValidator = springValidator;
+    }
+
+    public List<ObjectError> validate(Employee employee) {
+        BeanPropertyBindingResult result = new BeanPropertyBindingResult(employee, "employee");
+        ValidationUtils.invokeValidator(springValidator, employee, result);
+
+        List<ObjectError> errors = result.getAllErrors();
+
+        if(errors.size()>0) {
+            return errors;
+        }
+        return null;
+
+    }
+
     @Override
     @Transactional
     public Employee read(int EmployeeID) {
@@ -38,14 +64,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void create(Employee dep) {
-        dao.createEmployee(dep);
+    public void create(Employee employee)  throws ValidateException {
+        List<ObjectError> errors = validate(employee);
+        if ( errors.size()>0) {
+            throw new ValidateException("Employee validation error!", errors);
+        }
+        dao.createEmployee(employee);
     }
 
     @Override
     @Transactional
-    public void update(Employee dep) {
-        dao.udpateEmployee(dep);
+    public void update(Employee employee) throws ValidateException {
+        List<ObjectError> errors = validate(employee);
+        if ( errors.size()>0) {
+            throw new ValidateException("Employee validation error!", errors);
+        }
+        dao.udpateEmployee(employee);
     }
 
     @Override

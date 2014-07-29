@@ -1,7 +1,8 @@
-package com.rom4.departments.service.dao;
+package com.rom4.departments.service.impl;
 
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.DepartmentDAOhib;
+import com.rom4.departments.service.dao.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

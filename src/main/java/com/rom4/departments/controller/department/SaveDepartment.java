@@ -5,7 +5,6 @@ import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
 
@@ -22,7 +21,7 @@ import java.io.IOException;
 public class SaveDepartment implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
+                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
 
         String saveStatus;
         String validateError;
@@ -31,7 +30,7 @@ public class SaveDepartment implements Handler {
 
         Department dep = parseDepartmentFromRequest(request, pageType);
         if (dep != null) {
-            validateError = validateDepartment(request, response, dep, pageType);
+            validateError = validateDepartment(request, response, dep, pageType, validator);
             if (validateError == null) {
                 saveStatus = processDepartment(dep, request, response, pageType, departmentService);
                 if (saveStatus != null) {
@@ -53,9 +52,8 @@ public class SaveDepartment implements Handler {
         return dep;
     }
 
-    public String validateDepartment(HttpServletRequest request, HttpServletResponse response, Department dep, String pageType) throws IOException, ServletException {
+    public String validateDepartment(HttpServletRequest request, HttpServletResponse response, Department dep, String pageType, Validator validator) throws IOException, ServletException {
         String validateError = null;
-        Validator validator = new net.sf.oval.Validator();
         java.util.List violations = validator.validate(dep);
 
         if (!violations.isEmpty()) {

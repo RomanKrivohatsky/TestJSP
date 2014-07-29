@@ -8,7 +8,7 @@ import com.rom4.departments.controller.department.*;
 import com.rom4.departments.controller.employee.*;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
@@ -33,6 +33,14 @@ public class RequestHandler implements HttpRequestHandler {
     @Autowired
     private EmployeeService employeeService;
 
+
+    @Autowired
+    Validator validator ;
+    @Autowired
+    public void setValidator(Validator validator) {
+        this.validator = validator;
+    }
+
     private final HashMap<String, Handler> handlers = new HashMap<String, Handler>();
     {
         handlers.put("/AddDepartment.html",new AddDepartment());
@@ -56,7 +64,7 @@ public class RequestHandler implements HttpRequestHandler {
         Handler handler = handlers.get(request.getRequestURI());
 
         if (handler != null) {
-            handler.handle(request, response, departmentService, employeeService);
+            handler.handle(request, response, departmentService, employeeService, validator);
         }
     }
 }

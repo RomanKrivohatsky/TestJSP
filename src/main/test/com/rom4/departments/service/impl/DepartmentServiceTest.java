@@ -1,7 +1,7 @@
 package service.impl;
 
 import com.rom4.departments.domain.Department;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
+import com.rom4.departments.service.impl.DepartmentServiceImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

@@ -6,7 +6,7 @@ import com.rom4.departments.domain.Department;
 import com.rom4.departments.domain.Employee;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
+import net.sf.oval.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import java.util.List;
 public class EditEmploye implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
+                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
 
         Employee emp;
         Integer employeID;

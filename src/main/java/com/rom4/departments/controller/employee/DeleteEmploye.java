@@ -4,7 +4,7 @@ import com.rom4.departments.controller.Handler;
 import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
+import net.sf.oval.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import java.io.IOException;
 public class DeleteEmploye implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
+                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
 
         String saveStatus;
         saveStatus = "Employee deleted";

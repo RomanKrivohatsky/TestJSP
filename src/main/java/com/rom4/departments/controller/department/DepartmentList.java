@@ -5,7 +5,7 @@ import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
-import com.rom4.departments.service.dao.DepartmentServiceImpl;
+import net.sf.oval.Validator;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class DepartmentList implements Handler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService) throws IOException, ServletException {
+                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
         List<Department> departments ;
         departments = departmentService.getList();
         request.setAttribute("Departments", departments);

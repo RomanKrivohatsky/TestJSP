@@ -58,4 +58,7 @@
         <property name="maxTotal" value="10"/>
     </bean>
 
+    <bean id="validator" class="net.sf.oval.Validator"/>
+
+
 </beans>
