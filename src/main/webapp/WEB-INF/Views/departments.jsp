@@ -17,7 +17,7 @@
 <body>
 <div id="pagewidth">
     <div id="header">
-        <h1 id="logo">DEPARTMENTS </h1>
+        <a href="home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
         <h2 id="slogan">Table with Departments...</h2>
     </div>
 <table class="CSSTableGenerator"  >

@@ -21,7 +21,7 @@
 
 <div id="pagewidth">
     <div id="header">
-        <h1 id="logo">DEPARTMENTS </h1>
+        <a href="home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
         <h2 id="slogan">table with employers...</h2>
     </div>
 

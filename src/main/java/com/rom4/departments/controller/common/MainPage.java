@@ -21,10 +21,7 @@ public class MainPage implements Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response ,
                        DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
 
-        System.err.println("main ");
-        RequestDispatcher rd;
         request.getSession().setAttribute("saveStatus", "");
-        rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
+        PageUtil.forwardToPage(request, response, "index.jsp");
     }
 }

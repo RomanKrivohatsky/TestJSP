@@ -21,9 +21,7 @@ public class Contacts implements Handler
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
-        System.err.println("contacts");
-        RequestDispatcher rd;
-        rd = request.getRequestDispatcher("contacts.jsp");
-        rd.forward(request, response);
+
+        PageUtil.forwardToPage(request, response, "contacts.jsp");
     }
 }
