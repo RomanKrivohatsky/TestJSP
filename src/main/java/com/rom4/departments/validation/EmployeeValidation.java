@@ -12,7 +12,7 @@ import org.springframework.validation.Validator;
  */
 
 @Component
-public class EmployeeValidation implements Validator{
+public class EmployeeValidation implements Validator {
 
     @Autowired
     EmployeeService service;
@@ -21,18 +21,15 @@ public class EmployeeValidation implements Validator{
         this.service = service;
     }
 
-
     @Override
     public void validate(Object target, Errors errors) {
 
-        Employee employe = service.byEmail(((Employee)target).getEmail() );
+        Employee employe = service.byEmail(((Employee) target).getEmail());
         if (employe != null) {
             if (!employe.getEmployeID().equals(((Employee) target).getEmployeID())) {
                 errors.reject("name.email", "duplicate email");
             }
-    }
-
-
+        }
     }
 
     @Override

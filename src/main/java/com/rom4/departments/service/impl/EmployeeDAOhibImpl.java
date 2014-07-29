@@ -48,7 +48,10 @@ public class EmployeeDAOhibImpl implements EmployeeDAOhib {
     public Employee getEmployeeByEmail(String email) {
         Criteria cr = currentSession().createCriteria(Employee.class);
         cr.add(Restrictions.eq("email", email));
-        return (Employee) cr.list().get(0);
+        if (cr.list().size()>0) {
+            return (Employee)cr.list().get(0);
+        }
+        return null;
     }
 
     @Override
