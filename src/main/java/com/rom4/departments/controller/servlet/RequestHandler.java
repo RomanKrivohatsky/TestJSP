@@ -34,6 +34,9 @@ public class RequestHandler implements HttpRequestHandler {
     @Autowired
     ApplicationContext ctx;
 
+    //@Autowired
+   // private  HashMap<String, Handler> handlers;
+
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

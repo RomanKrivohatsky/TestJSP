@@ -29,13 +29,16 @@
 
     <form method="post" action="SaveEmployee.html">
         <p>¬ведите им€</p><input type="text" name="firstName" value= <c:out value = "${firstName}"></c:out>  >
+        <font color="#ff0000" size="+1">  <c:if test="${not empty firstNameError}"> Validation error: ${firstNameError} </c:if></font>
         <p>¬ведите фамилию</p> <input type="text" name="lastName" value= <c:out value = "${lastName}"></c:out> >
+        <font color="#ff0000" size="+1">  <c:if test="${not empty lastNameError}"> Validation error: ${lastNameError} </c:if></font>
         <p>¬ведите e-mail</p> <input type="email" name="email" value= <c:out value = "${email}"></c:out> >
         <font color="#ff0000" size="+1">  <c:if test="${not empty emailError}"> Validation error: ${emailError} </c:if></font>
         <p>¬ведите оклад</p><input type="number" name="salary" value=<c:out value = "${salary}"></c:out>  >
         <font color="#ff0000" size="+1"> <c:if test="${not empty salaryError}"> Validation error: ${salaryError} </c:if></font>
         <fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${birthday}"/>
-            <p>¬ведите дату рождени€</p><input type="date" name="birthday" value="${date}"/>
+        <p>¬ведите дату рождени€</p><input type="date" name="birthday" value="${date}"/>
+        <font color="#ff0000" size="+1">  <c:if test="${not empty birthdayError}"> Validation error: ${birthdayError} </c:if></font>
 
             </p><input type="hidden" name="employeID" value=${employeID}>
             <input type="hidden" name="pageType" value=${pageType}>

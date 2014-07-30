@@ -35,7 +35,15 @@ public class SaveDepartment implements Handler {
 
         String saveStatus;
         String pageType;
-         pageType = request.getParameter("pageType");
+
+        if (request.getMethod().equals("GET")) {
+            PageUtil.redirectToPage(request, response, "AddDepartment.html");
+            return;
+        }
+
+        pageType = request.getParameter("pageType");
+
+
 
         Department dep = parseDepartmentFromRequest(request, pageType);
         if (dep != null) {

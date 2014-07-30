@@ -63,7 +63,7 @@ public class EmployeeDAOhibImpl implements EmployeeDAOhib {
     @Override
     @Transactional
     public void udpateEmployee(Employee emp) {
-        currentSession().update(emp);
+        currentSession().merge(emp);
     }
 
     @Override

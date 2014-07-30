@@ -27,14 +27,31 @@ public class EmployeeValidation implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
+        if ( ((Employee)target).getEmail().equals("") || ((Employee)target).getEmail() == null ) {
+            errors.rejectValue("email", "email.empty","Email must be not empty");
+        }
+
+        if ( ((Employee)target).getFirstName().equals("") || ((Employee)target).getFirstName() == null ) {
+            errors.rejectValue("firstName", "firstName.empty","First name must be not empty");
+        }
+
+        if ( ((Employee)target).getLastName().equals("") || ((Employee)target).getLastName() == null ) {
+            errors.rejectValue("lastName", "lastName.empty","Last name must be not empty");
+        }
+
+        if ( ((Employee)target).getSalary() < 1 ) {
+            errors.rejectValue("salary", "salary.negative","Salary must be positive and more than 0");
+        }
+        if ( ((Employee)target).getBirthday() == null ) {
+            errors.rejectValue("birthday", "birthday.birthday.null","Birthday must be not empty");
+        }
+
         Employee employe = service.byEmail(((Employee) target).getEmail());
+
         if (employe != null) {
             if (!employe.getEmployeID().equals(((Employee) target).getEmployeID())) {
                 errors.rejectValue("email", "email.duplicate", "duplicate email");
             }
-        }
-        if ( ((Employee)target).getSalary() < 0 ) {
-            errors.rejectValue("salary", "salary.negative","Salary must be positive");
         }
     }
 

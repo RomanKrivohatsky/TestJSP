@@ -39,6 +39,12 @@ public class SaveEmploye implements Handler {
     public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String saveStatus;
         String pageType;
+
+        if (request.getMethod().equals("GET")) {
+            PageUtil.redirectToPage(request, response, "AddEmployee.html");
+            return;
+        }
+
         pageType = request.getParameter("pageType");
 
         Employee emp = parseEmployeFromRequest(request, pageType, departmentService);
@@ -61,9 +67,20 @@ public class SaveEmploye implements Handler {
             emp.setFirstName(request.getParameter("firstName"));
             emp.setLastName(request.getParameter("lastName"));
             emp.setEmail(request.getParameter("email"));
-            emp.setSalary(Float.parseFloat(request.getParameter("salary")));
+            if (request.getParameter("salary").equals("")) {
+                emp.setSalary(0);
+            }
+            else {
+                emp.setSalary(Float.parseFloat(request.getParameter("salary")));
+            }
+
             DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-            emp.setBirthday(sdf.parse(request.getParameter("birthday")));
+            if (request.getParameter("birthday").equals("")) {
+                emp.setBirthday(null);
+            }
+            else {
+                emp.setBirthday(sdf.parse(request.getParameter("birthday")));
+            }
             dep = departmentService.read(Integer.parseInt(request.getParameter("departmentID")));
             emp.setDepartment(dep);
 
@@ -112,12 +129,12 @@ public class SaveEmploye implements Handler {
 
             try {
                 if (pageType.equals("add")) {
-                    saveStatus = "Employee " + emp.getLastName() +" was created";
+                    saveStatus = "Employee " + emp.getLastName() +" has been created";
                     employeeService.create(emp);
                 }
                 else if (pageType.equals("edit")) {
                     emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
-                    saveStatus = "Employee updated";
+                    saveStatus =  "Employee " + emp.getLastName() +" has been updated";
                     employeeService.update(emp);
                 }
             } catch (ValidateException e) {

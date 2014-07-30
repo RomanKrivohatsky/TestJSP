@@ -1,6 +1,7 @@
 package com.rom4.departments.validation;
 
 import com.rom4.departments.domain.Department;
+import com.rom4.departments.domain.Employee;
 import com.rom4.departments.service.dao.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +31,13 @@ public class DepartmentValidation implements Validator {
             if (!department.getDepartmentID().equals(((Department) target).getDepartmentID())) {
                 errors.rejectValue("name", "name.duplicate", "duplicate department name");
             }
+        }
+
+        if ( ((Department)target).getName().equals("") || ((Department)target).getName() == null ) {
+            errors.rejectValue("nameEmpty", "name.empty","Department name must be not empty");
+        }
+        if ( ((Department)target).getCity().equals("") || ((Department)target).getCity() == null ) {
+            errors.rejectValue("city", "city.empty","City name must be not empty");
         }
     }
 
