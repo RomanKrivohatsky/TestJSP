@@ -31,8 +31,9 @@ public class DeleteDepartment implements Handler {
 
         Department department = departmentService.read(Integer.parseInt(request.getParameter("departmentID")));
         departmentService.delete(department);
-        request.getSession().setAttribute("saveStatus", "Employee deleted");
-        PageUtil.redirectToPage(request, response, "StatusPage.html");
+        request.getSession().setAttribute("saveStatus", "Department deleted");
+        PageUtil.redirectToPage(request, response, "Departments.html");
+
 
     }
 }

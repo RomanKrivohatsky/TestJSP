@@ -23,21 +23,13 @@ import java.util.List;
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
-    private EmployeeDAOhib dao;
 
-    @Override
     @Autowired
-    public void setDao(EmployeeDAOhib dao) {
-        this.dao = dao;
-    }
+    private EmployeeDAOhib dao;
 
     @Autowired
     @Qualifier("employeeValidation")
     org.springframework.validation.Validator springValidator ;
-
-    public void setValidator(Validator springValidator) {
-        this.springValidator = springValidator;
-    }
 
     public List<ObjectError> validate(Employee employee) {
         BeanPropertyBindingResult result = new BeanPropertyBindingResult(employee, "employee");

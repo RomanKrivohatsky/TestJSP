@@ -27,21 +27,12 @@ import java.util.List;
 @Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private DepartmentDAOhib dao;
-
-    @Override
     @Autowired
-     public void setDao(DepartmentDAOhib dao) {
-        this.dao = dao;
-    }
+    private DepartmentDAOhib dao;
 
     @Autowired
     @Qualifier("departmentValidation")
     org.springframework.validation.Validator springValidator ;
-
-    public void setSpringValidator(Validator springValidator) {
-        this.springValidator = springValidator;
-    }
 
     public List<ObjectError> validate(Department department) {
         BeanPropertyBindingResult result = new BeanPropertyBindingResult(department, "department");

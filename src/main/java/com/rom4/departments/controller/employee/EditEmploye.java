@@ -53,6 +53,7 @@ public class EditEmploye implements Handler {
         }
         request.setAttribute("pageType", "edit");
         request.setAttribute("Departments", departments);
+        request.getSession().setAttribute("page", this.getClass().getName());
         PageUtil.forwardToPage(request, response, "editEmploye.jsp");
     }
 }

@@ -53,6 +53,8 @@ public class SaveEmploye implements Handler {
             saveStatus = processEmploye(emp, request, response, pageType, departmentService, employeeService);
             if (saveStatus != null) {
                 request.getSession().setAttribute("saveStatus", saveStatus);
+                request.getSession().setAttribute("page", this.getClass().getName());
+
                 PageUtil.redirectToPage(request, response, "AddEmployee.html");
             }
         }

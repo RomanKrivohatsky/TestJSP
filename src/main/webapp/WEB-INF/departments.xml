@@ -58,9 +58,5 @@
         <property name="maxTotal" value="10"/>
     </bean>
 
-    <bean id="validator" class="net.sf.oval.Validator"/>
-
-    <bean id="deleteDepartment" class="com.rom4.departments.controller.department.DeleteDepartment"/>
-
 
 </beans>

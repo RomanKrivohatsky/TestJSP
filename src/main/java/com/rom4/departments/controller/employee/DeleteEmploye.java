@@ -29,7 +29,10 @@ public class DeleteEmploye implements Handler {
 
         employeeService.delete(employeeService.read(Integer.parseInt(request.getParameter("EmployeID"))));
         request.getSession().setAttribute("saveStatus", "Employee deleted");
-        PageUtil.redirectToPage(request, response, "StatusPage.html");
+        request.getSession().setAttribute("page", this.getClass().getName());
+        request.getSession().setAttribute("pageType", request.getParameter("pageType"));
+        request.getSession().setAttribute("departmentID", request.getParameter("departmentID"));
+        PageUtil.redirectToPage(request, response, "Employers.html");
 
     }
 }

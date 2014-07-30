@@ -34,17 +34,8 @@ public class RequestHandler implements HttpRequestHandler {
     @Autowired
     ApplicationContext ctx;
 
-    //@Autowired
-   // private  HashMap<String, Handler> handlers;
-
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-       /* Handler handler = handlers.get(request.getRequestURI());
-
-        if (handler != null) {
-            handler.handle(request, response, departmentService, employeeService, validator);
-        }*/
 
         Handler handler = ctx.getBean(request.getRequestURI(), Handler.class);
         handler.handle(request, response);

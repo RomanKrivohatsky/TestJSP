@@ -20,6 +20,9 @@
         <a href="home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
         <h2 id="slogan">Table with Departments...</h2>
     </div>
+
+    <H2>${deleteStatus}</H2>
+
 <table class="CSSTableGenerator"  >
         <tr>
             <td>Название</td>

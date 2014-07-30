@@ -15,8 +15,6 @@ import java.util.List;
  * Project name Departments
  */
 public interface EmployeeService {
-    @Autowired
-    void setDao(EmployeeDAOhib dao);
 
     @Transactional
     Employee read(int EmployeeID);

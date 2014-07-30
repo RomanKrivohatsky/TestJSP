@@ -22,7 +22,9 @@ public class MainPage implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+        request.getSession().setAttribute("page", this.getClass().getName());
         request.getSession().setAttribute("saveStatus", "");
+        request.getSession().setAttribute("pageType", "");
         PageUtil.forwardToPage(request, response, "index.jsp");
     }
 }

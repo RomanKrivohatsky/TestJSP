@@ -31,6 +31,7 @@ public class AddEmploye implements Handler {
 
         List<Department> departments;
         departments = departmentService.getList();
+        request.getSession().setAttribute("page", this.getClass().getName());
         request.setAttribute("Departments", departments);
         request.setAttribute("pageType", "add");
         PageUtil.forwardToPage(request, response, "editEmploye.jsp");

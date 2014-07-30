@@ -31,10 +31,13 @@
         <p><input type="submit" name="submit" value="Add employee"></p>
     </form>
 
+    <H2>${saveStatus}</H2>
+
     <table class="CSSTableGenerator" >
         <tr>
             <td>Имя</td>
             <td>Фамилия</td>
+            <td>Отдел</td>
             <td>E-mail</td>
             <td>Оклад</td>
             <td>Дата рождения</td>
@@ -45,10 +48,11 @@
             <tr>
                 <td><c:out value="${Employe.firstName}" /></td>
                 <td> ${Employe.lastName} </td>
+                <td> ${Employe.department.name} </td>
                 <td> ${Employe.email} </td>
                 <td> ${Employe.salary} </td>
                 <fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${Employe.birthday}"/>
-                <td> ${Employe.birthday} </td>
+                <td> ${date} </td>
                 <td>
                     <form metdod="get" action="EditEmployee.html">
                         <input type="hidden" name="employeID" value=${Employe.employeID}>
@@ -60,6 +64,8 @@
                 <td>
                     <form metdod="get" action="DeleteEmployee.html">
                         <input type="hidden" name="EmployeID" value=${Employe.employeID}>
+                        <input type="hidden" name="pageType" value="byDepartment">
+                        <input type="hidden" name="departmentID" value=${departmentID}>
                         <p><input class="button" type="submit" name="submit" value="Delete"></p>
                     </form>
                 </td>

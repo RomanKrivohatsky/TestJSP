@@ -13,8 +13,6 @@ import java.util.List;
  * Project name Departments
  */
 public interface DepartmentService {
-    @Autowired
-    void setDao(DepartmentDAOhib dao);
 
     @Transactional
     Department read(int departmentID);

@@ -34,7 +34,7 @@ public class DepartmentValidation implements Validator {
         }
 
         if ( ((Department)target).getName().equals("") || ((Department)target).getName() == null ) {
-            errors.rejectValue("nameEmpty", "name.empty","Department name must be not empty");
+            errors.rejectValue("name", "name.empty","Department name must be not empty");
         }
         if ( ((Department)target).getCity().equals("") || ((Department)target).getCity() == null ) {
             errors.rejectValue("city", "city.empty","City name must be not empty");

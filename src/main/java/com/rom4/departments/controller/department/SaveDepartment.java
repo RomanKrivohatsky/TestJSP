@@ -42,9 +42,6 @@ public class SaveDepartment implements Handler {
         }
 
         pageType = request.getParameter("pageType");
-
-
-
         Department dep = parseDepartmentFromRequest(request, pageType);
         if (dep != null) {
                 saveStatus = processDepartment(dep, request, response, pageType, departmentService);

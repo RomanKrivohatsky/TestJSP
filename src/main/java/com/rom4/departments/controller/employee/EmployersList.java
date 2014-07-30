@@ -29,17 +29,36 @@ public class EmployersList implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         List<Employee> employers;
+        Integer departmentID=0;
 
-        request.getSession().setAttribute("saveStatus", "");
+        //sets the info status, if employe deleted - show status, else empty status
+        if (request.getSession().getAttribute("page")!=null && !request.getSession().getAttribute("page").equals(DeleteEmploye.class.getName())) {
+            request.getSession().setAttribute("saveStatus", "");
+        }
 
-        if (request.getParameter("pageType") == null) {
+        request.getSession().setAttribute("page", this.getClass().getName());
+
+        String pageTypeLocal = request.getParameter("pageType");
+        String pageTypeGlobal = (String)request.getSession().getAttribute("pageType");
+        pageTypeGlobal = pageTypeGlobal==null ?"":pageTypeGlobal;
+
+        pageTypeLocal = !pageTypeGlobal.equals("") ? pageTypeGlobal:pageTypeLocal;
+
+        if ( pageTypeLocal == null ||  pageTypeLocal.equals("")) {
             employers = employeeService.getList();
             request.setAttribute("Employers", employers);
-        } else if (request.getParameter("pageType").equals("byDepartment")) {
-            employers = employeeService.getList(Integer.parseInt(request.getParameter("departmentID")));
+        } else if (pageTypeLocal.equals("byDepartment")   ) {
+            if (request.getParameter("departmentID") != null) {
+                departmentID = Integer.parseInt(request.getParameter("departmentID"));
+            }
+            else if (request.getSession().getAttribute("departmentID")  != null ) {
+                departmentID = Integer.parseInt((String)request.getSession().getAttribute("departmentID"));
+            }
+            employers = employeeService.getList(departmentID);
             request.setAttribute("Employers", employers);
-            request.setAttribute("departmentID", request.getParameter("departmentID"));
+            request.setAttribute("departmentID", departmentID);
         }
+
         PageUtil.forwardToPage(request, response, "employers.jsp");
     }
 }
