@@ -18,7 +18,7 @@ import org.springframework.validation.Validator;
 public class EmployeeValidation implements Validator {
 
     @Autowired
-    EmployeeService service;
+    private EmployeeService service;
 
     public void setService(EmployeeService service) {
         this.service = service;

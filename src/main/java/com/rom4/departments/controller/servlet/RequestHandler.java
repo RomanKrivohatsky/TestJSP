@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by rom4 on 28.07.14.
@@ -32,7 +33,10 @@ import java.util.HashMap;
 public class RequestHandler implements HttpRequestHandler {
 
     @Autowired
-    ApplicationContext ctx;
+    private ApplicationContext ctx;
+
+    @Autowired
+    private Map<String, Handler> handlerMap;
 
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
