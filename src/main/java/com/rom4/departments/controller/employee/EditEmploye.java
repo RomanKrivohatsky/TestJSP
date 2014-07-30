@@ -7,6 +7,8 @@ import com.rom4.departments.domain.Employee;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +21,18 @@ import java.util.List;
  * Creation time 12:18
  * Project name Departments
  */
+@Component("/EditEmployee.html")
 public class EditEmploye implements Handler {
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    @Autowired
+    private DepartmentService departmentService;
+
+
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Employee emp;
         Integer employeID;

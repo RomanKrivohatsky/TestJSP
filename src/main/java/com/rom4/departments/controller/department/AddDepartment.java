@@ -5,6 +5,7 @@ import com.rom4.departments.controller.common.PageUtil;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.Validator;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +17,10 @@ import java.io.IOException;
  * Creation time 12:19
  * Project name Departments
  */
-
+@Component("/AddDepartment.html")
 public class AddDepartment implements Handler {
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         request.setAttribute("pageType", "add");
         PageUtil.forwardToPage(request, response, "editDepartment.jsp");

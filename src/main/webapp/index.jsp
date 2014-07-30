@@ -3,7 +3,7 @@
 <head>
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 <body>
 <div id="pagewidth">
@@ -19,7 +19,7 @@
                 <div id="navcontainer">
                     <ul id="navlist">
                         <li id="active"><a href="Departments.html">Departments</a></li>
-                        <li><a href="Employers.html">Employers</a></li>
+                        <li><a href="Employeers.html">Employers</a></li>
                         <li><a href="AddDepartment.html">AddDepartment</a></li>
                         <li><a href="AddEmployee.html">AddEmployee</a></li>
                         <li><a href="contact.html">Contact</a></li>

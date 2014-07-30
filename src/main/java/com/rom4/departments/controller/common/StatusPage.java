@@ -4,6 +4,7 @@ import com.rom4.departments.controller.Handler;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.Validator;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +16,10 @@ import java.io.IOException;
  * Creation time 13:52
  * Project name Departments
  */
+@Component("/StatusPage.html")
 public class StatusPage implements Handler {
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         PageUtil.forwardToPage(request, response, "statusPage.jsp");
     }
 }

@@ -8,6 +8,8 @@ import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
@@ -22,10 +24,14 @@ import java.util.List;
  * Creation time 18:48
  * Project name Departments
  */
+@Component("/SaveDepartment.html")
 public class SaveDepartment implements Handler {
+
+    @Autowired
+    private DepartmentService departmentService;
+
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         String saveStatus;
         String pageType;
@@ -64,7 +70,6 @@ public class SaveDepartment implements Handler {
                 request.setAttribute(((FieldError) objectError).getField() + "Error", objectError.getDefaultMessage());
             }
         }
-
             request.setAttribute("name", dep.getName());
             request.setAttribute("city", dep.getCity());
             request.setAttribute("pageType", "add");

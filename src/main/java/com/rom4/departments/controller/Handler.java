@@ -15,8 +15,7 @@ import java.io.IOException;
  * Project name Departments
  */
 public interface Handler {
-    public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService, Validator validator)
+    public void handle(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException;
 
 }

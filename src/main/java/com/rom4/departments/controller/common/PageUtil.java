@@ -23,9 +23,12 @@ public class PageUtil {
 
     public static void forwardToPage(HttpServletRequest request, HttpServletResponse response, String pageName) throws IOException, ServletException {
         RequestDispatcher rd;
+        if (pageName.equals("index.jsp")) {
+            rd = request.getRequestDispatcher(pageName);
+        }
+        else {
         rd = request.getRequestDispatcher("/WEB-INF/Views/"+pageName);
+        }
         rd.forward(request, response);
     }
-
-
 }

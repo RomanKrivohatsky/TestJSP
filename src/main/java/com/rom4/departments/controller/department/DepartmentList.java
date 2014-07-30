@@ -6,6 +6,7 @@ import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -19,13 +20,13 @@ import java.util.List;
  * Creation time 12:18
  * Project name Departments
  */
-@Component
+@Component("/Departments.html")
 public class DepartmentList implements Handler {
-
+    @Autowired
+    private DepartmentService departmentService;
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response,
-                       DepartmentService departmentService, EmployeeService employeeService, Validator validator) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         List<Department> departments ;
         departments = departmentService.getList();
         request.getSession().setAttribute("saveStatus", "");

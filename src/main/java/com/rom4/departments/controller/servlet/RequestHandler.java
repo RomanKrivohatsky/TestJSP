@@ -10,8 +10,11 @@ import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
 import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,41 +32,19 @@ import java.util.HashMap;
 public class RequestHandler implements HttpRequestHandler {
 
     @Autowired
-    private DepartmentService departmentService;
-    @Autowired
-    private EmployeeService employeeService;
-
-    @Autowired
-    Validator validator ;
-    @Autowired
-    public void setValidator(Validator validator) {
-        this.validator = validator;
-    }
-
-    private final HashMap<String, Handler> handlers = new HashMap<String, Handler>();
-    {
-        handlers.put("/AddDepartment.html",new AddDepartment());
-        handlers.put("/SaveDepartment.html",new SaveDepartment());
-        handlers.put("/SaveEmployee.html",new SaveEmploye());
-        handlers.put("/EditDepartment.html",new EditDepartment());
-        handlers.put("/EditEmployee.html",new EditEmploye());
-        handlers.put("/DeleteDepartment.html",new DeleteDepartment());
-        handlers.put("/DeleteEmployee.html",new DeleteEmploye());
-        handlers.put("/Departments.html",new DepartmentList());
-        handlers.put("/Employers.html",new EmployersList());
-        handlers.put("/AddEmployee.html",new AddEmploye());
-        handlers.put("/contact.html",new Contacts());
-        handlers.put("/home.html",new MainPage());
-        handlers.put("/StatusPage.html",new StatusPage());
-    }
+    ApplicationContext ctx;
 
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Handler handler = handlers.get(request.getRequestURI());
+       /* Handler handler = handlers.get(request.getRequestURI());
 
         if (handler != null) {
             handler.handle(request, response, departmentService, employeeService, validator);
-        }
+        }*/
+
+        Handler handler = ctx.getBean(request.getRequestURI(), Handler.class);
+        handler.handle(request, response);
+
     }
 }
