@@ -29,7 +29,6 @@
     в соответствующие неконтролируемые исключения Spring    -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-
     <!-- template for Session factory, base on annotations  -->
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
@@ -43,7 +42,6 @@
             </props>
         </property>
     </bean>
-
 
     <!-- template for Datasource base on Commns.DBCP (DataBase connection pool)-->
 
@@ -61,6 +59,13 @@
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:/departments.properties" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/Views/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
 

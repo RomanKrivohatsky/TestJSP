@@ -35,6 +35,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.0.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.0.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:3.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.0.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springmodules:spring-modules-validation:0.8" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.2" />
           <element id="library" level="project" name="Maven: commons-validator:commons-validator:1.3.0" />
