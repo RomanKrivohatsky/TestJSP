@@ -49,7 +49,6 @@ public class SaveDepartment implements Handler {
                     request.getSession().setAttribute("saveStatus", saveStatus);
                     PageUtil.redirectToPage(request, response, "AddDepartment.html");
                 }
-
         }
     }
 
@@ -63,7 +62,6 @@ public class SaveDepartment implements Handler {
                 dep.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
             }
         }
-
         return dep;
     }
 
@@ -89,7 +87,7 @@ public class SaveDepartment implements Handler {
     private String processDepartment(Department dep, HttpServletRequest request, HttpServletResponse response, String pageType, DepartmentService departmentService) throws IOException, ServletException {
         String saveStatus = null;
 
-        try {
+        //try {
             request.getSession().setAttribute("saveStatus", "");
             if (pageType.equals("add")) {
                 saveStatus = "Department " + dep.getName() +" was created";
@@ -100,11 +98,11 @@ public class SaveDepartment implements Handler {
                 saveStatus = "Department updated";
                 departmentService.update(dep);
             }
-        }
-        catch (ValidateException e) {
+        //}
+      /*  catch (ValidateException e) {
             validateDepartment(request, response, dep, pageType,  e.getErrors());
             return null;
-        }
+        }*/
 
         return saveStatus;
     }

@@ -22,7 +22,7 @@ public class AddDepartment implements Handler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        request.setAttribute("pageType", "add");
+
         PageUtil.forwardToPage(request, response, "editDepartment.jsp");
     }
 }

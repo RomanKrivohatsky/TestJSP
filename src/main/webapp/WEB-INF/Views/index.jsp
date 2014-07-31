@@ -3,7 +3,7 @@
 <head>
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resource/style.css" type="text/css" />
 </head>
 <body>
 <div id="pagewidth">
@@ -18,9 +18,9 @@
                 <h2>Main Menu</h2>
                 <div id="navcontainer">
                     <ul id="navlist">
-                        <li id="active"><a href="Departments.html">Departments</a></li>
+                        <li id="active"><a href="/department/list">Departments</a></li>
                         <li><a href="Employers.html">Employers</a></li>
-                        <li><a href="AddDepartment.html">AddDepartment</a></li>
+                        <li><a href="/department/editDepartment">AddDepartment</a></li>
                         <li><a href="AddEmployee.html">AddEmployee</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -44,7 +44,7 @@
             <div class="box">
                 <blockquote>TThis is a training web project by Rom4</blockquote>
             </div>
-            <h2>Who We Are</h2>      <p><img class="imgleft" src="images/img01.jpg" alt="" /> We are from Kharkov! It's a wonderfull city! </p>
+            <h2>Who We Are</h2>      <p><img class="imgleft" src="../../images/img01.jpg" alt="" /> We are from Kharkov! It's a wonderfull city! </p>
             <div class="clear">&nbsp;</div>
             <div class="box">
                 <p>Something more can be here.</p>

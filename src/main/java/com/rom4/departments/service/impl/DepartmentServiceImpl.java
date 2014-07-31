@@ -59,21 +59,21 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public void create(Department dep) throws ValidateException {
-        List<ObjectError> errors = validate(dep);
+    public void create(Department dep)  {
+       /* List<ObjectError> errors = validate(dep);
         if ( errors != null) {
             throw new ValidateException("Employee validation error!", errors);
-        }
+        }*/
          dao.createDepartment(dep);
     }
 
     @Override
     @Transactional
-    public void update(Department dep) throws ValidateException {
-        List<ObjectError> errors = validate(dep);
+    public void update(Department dep) {
+        /*List<ObjectError> errors = validate(dep);
         if ( errors != null) {
             throw new ValidateException("Employee validation error!", errors);
-        }
+        }*/
         dao.udpateDepartment(dep);
     }
 

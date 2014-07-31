@@ -9,8 +9,9 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <org.springframework.version>3.0.0.RELEASE</org.springframework.version>
+        <org.springframework.version>3.0.4.RELEASE</org.springframework.version>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -123,15 +124,7 @@
             <version>${org.springframework.version}</version>
         </dependency>
 
-        <!--
-        <dependency>
-            <groupId>org.springmodules</groupId>
-            <artifactId>spring-modules-validation</artifactId>
-            <version>0.8</version>
-        </dependency>
-        -->
-
-        <dependency>
+         <dependency>
             <groupId>org.springmodules</groupId>
             <artifactId>spring-modules-validation</artifactId>
             <version>0.8</version>
@@ -147,6 +140,23 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.5.4</version>
+        </dependency>
 
         <dependency>
             <groupId>cglib</groupId>

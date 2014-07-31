@@ -7,13 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=windows-1251" language="java" %>
 <%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <html>
 <head>
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-    <link rel="stylesheet" href="../../css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="/resource/style.css" type="text/css"/>
 </head>
 
 <body>
@@ -26,16 +26,16 @@
 
     <H2>${saveStatus}</H2>
 
-    <form method="post" action="SaveDepartment.html">
-        <p>¬ведите название</p><input type="text" name="name" value= <c:out value = "${name}"></c:out> >
+    <sf:form method="post" action="saveDepartment.html?${pageType}"   modelAttribute="department">
+        <p>¬ведите название</p><input type="text" name="name" value= <c:out value = "${department.name}"></c:out> >
         <font color="#ff0000" size="+1"> <c:if test="${not empty nameError}"> Validation error: <b> ${nameError} </b> </c:if> </font>
         <font color="#ff0000" size="+1"> <c:if test="${not empty nameEmptyError}"> Validation error: <b> ${nameEmptyError} </b> </c:if> </font>
-        <p>¬ведите город</p><input type="text" name="city" value= <c:out value = "${city}"></c:out> >
+        <p>¬ведите город</p><input type="text" name="city" value= <c:out value = "${department.city}"></c:out> >
         <font color="#ff0000" size="+1"> <c:if test="${not empty cityError}"> Validation error: <b> ${cityError} </b> </c:if> </font>
         </p><input type="hidden" name="departmentID" value=${departmentID}>
         <input type="hidden" name="pageType" value=${pageType}>
         <input type="submit" name="submit" value="Save">
-    </form>
+    </sf:form>
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a href="Departments.html">Departments</a> |<a

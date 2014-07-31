@@ -21,10 +21,10 @@ public interface DepartmentService {
     Department byName(String name);
 
     @Transactional
-    void create(Department dep) throws ValidateException;
+    void create(Department dep) ;
 
     @Transactional
-    void update(Department dep) throws ValidateException ;
+    void update(Department dep) ;
 
     @Transactional
     void delete(Department department);
