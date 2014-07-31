@@ -32,8 +32,8 @@ import java.util.Map;
 @Component("mainServlet")
 public class RequestHandler implements HttpRequestHandler {
 
-    @Autowired
-    private ApplicationContext ctx;
+    /*@Autowired
+    private ApplicationContext ctx;*/
 
     @Autowired
     private Map<String, Handler> handlerMap;
@@ -41,7 +41,10 @@ public class RequestHandler implements HttpRequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Handler handler = ctx.getBean(request.getRequestURI(), Handler.class);
+        //Handler handler = ctx.getBean(request.getRequestURI(), Handler.class);
+        //handler.handle(request, response);
+
+        Handler handler = handlerMap.get(request.getRequestURI());
         handler.handle(request, response);
 
     }
