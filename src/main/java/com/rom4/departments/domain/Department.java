@@ -1,7 +1,5 @@
 package com.rom4.departments.domain;
 
-import com.rom4.departments.validation.DepartmentNameUnique;
-import net.sf.oval.guard.Guarded;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,10 +20,8 @@ import java.util.Collection;
 
 @Entity
 @Table(name="departments")
-@Guarded
 public class Department implements Serializable {
 
-    @DepartmentNameUnique
     @Column (name="name")
     private String name = null;
 

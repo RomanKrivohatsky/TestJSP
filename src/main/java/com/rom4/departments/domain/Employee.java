@@ -1,9 +1,6 @@
 package com.rom4.departments.domain;
 
-import com.rom4.departments.validation.Email;
 import net.sf.oval.constraint.*;
-import net.sf.oval.guard.Guarded;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -16,7 +13,6 @@ import java.util.*;
 
 @Entity
 @Table(name="employes")
-@Guarded
 public class Employee {
 
 
@@ -33,7 +29,6 @@ public class Employee {
     private String firstName = null;
     @Column(name = "last_name")
     private String lastName = null;
-    @Email
     @Column(name = "email")
     private String email = null;
     @Column(name = "salary")
@@ -118,33 +113,13 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (employeID != employee.employeID) return false;
+        return  employeID == employee.getEmployeID();
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         return employeID;
-    }
-
-    public static void main (String args[]) {
-        /*Employee e = new Employee();
-
-        e.setEmployeID(0);
-        //e.setEmail("email");
-        e.setFirstName("Ivan");
-
-        //throw new ConstraintsViolatedException();
-
-        Validator validator = new net.sf.oval.Validator();
-        java.util.List<ConstraintViolation> violations = validator.validate(e);
-        if (!violations.isEmpty()) {
-
-            System.out.println(violations.get(0).getMessage());
-            System.out.println("1123");
-        }*/
-
     }
 
     private class checkFirstName implements CheckWithCheck.SimpleCheck {
