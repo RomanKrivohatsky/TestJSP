@@ -57,7 +57,7 @@ public class DepartmentDAOhibImpl implements DepartmentDAOhib {
     @Override
     @Transactional
     public void udpateDepartment(Department dep) {
-        currentSession().merge(dep);
+        currentSession().update(dep);
     }
 
     @Override

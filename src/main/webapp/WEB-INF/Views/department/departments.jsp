@@ -18,11 +18,13 @@
 <body>
 <div id="pagewidth">
     <div id="header">
-        <a href="/home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
+        <a href="home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
         <h2 id="slogan">Table with Departments...</h2>
     </div>
 
     <H2>${deleteStatus}</H2>
+
+    <a href="/department/editDepartment?pageType=edit"> <h1 >editDepartment  </h1> </a>
 
 <table class="CSSTableGenerator"  >
         <tr>
@@ -38,22 +40,21 @@
                 <td> ${Department.city}</td>
                 <td>
                     <form method="get" action="/department/editDepartment" >
-                        <input type="hidden" name="pageType" value="edit">
-                        <p><input CLASS="button"  type="submit" name="edit" value="edit"></p>
+                     <input type="hidden" name="departmentID" value=${Department.departmentID}  />
+                     <p><input type="submit" name="submit" value="edit"></p>
                     </form>
                 </td>
                 <td>
                     <form method="get" action="employers.html">
                         <input type="hidden" name="pageType" value="byDepartment">
                         <input type="hidden" name="departmentID" value=${Department.departmentID}>
-                        <p><input CLASS="button"  type="submit" name="submit" value="List"></p>
+                        <p><input type="submit" name="submit" value="List"></p>
                     </form>
                 </td>
                 <td>
                     <form method="get" action="DeleteDepartment.html">
                         <input  type="hidden" name="departmentID" value=${Department.departmentID}>
-
-                        <p><input CLASS="button" type="submit" name="submit" value="Delete"></p>
+                        <p><input type="submit" name="submit" value="Delete"></p>
                     </form>
                 </td>
             </tr>
