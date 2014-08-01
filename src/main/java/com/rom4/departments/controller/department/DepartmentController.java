@@ -19,41 +19,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DepartmentController {
 
     @Autowired
-    DepartmentService service;
+    private DepartmentService service;
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.html")
     public String departments (Model model) {
         model.addAttribute(service.getList());
         return "department/departments";
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/editDepartment")
+    @RequestMapping(method = RequestMethod.GET,value = "/edit.html")
     public String addDepartment (Model model) {
         model.addAttribute("pageType", "new");
         return "department/editDepartment";
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/editDepartment", params = "departmentID")
+    @RequestMapping(method = RequestMethod.GET,value = "/edit.html", params = "departmentID")
     public String editDepartment (@RequestParam("departmentID") Integer departmentID, Model model) {
         model.addAttribute("department", service.read(departmentID));
         model.addAttribute("pageType", "edit");
         return "department/editDepartment";
     }
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/saveDepartment" ,  params = "pageType=new")
+    @RequestMapping(method = RequestMethod.POST, value = "/save.html" ,  params = "pageType=new")
     public String saveDepartment (Department department, BindingResult bindingResult)  {
         service.create(department);
         return "redirect:editDepartment";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/saveDepartment" , params = "pageType=edit")
+    @RequestMapping(method = RequestMethod.POST, value = "/save.html" , params = "pageType=edit")
     public String updateDepartment (@ModelAttribute("department") Department department, BindingResult bindingResult) {
         service.update(department);
         return "redirect:editDepartment";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/deleteDepartment")
+    @RequestMapping(method = RequestMethod.POST, value = "/delete.html")
     public String deleteDepartment () {
         return "department/departments";
     }

@@ -59,6 +59,6 @@ public class EmployersList implements Handler {
             request.setAttribute("departmentID", departmentID);
         }
 
-        PageUtil.forwardToPage(request, response, "employers.jsp");
+        PageUtil.forwardToPage(request, response, "employeers.jsp");
     }
 }

@@ -39,20 +39,19 @@
                 <td>${Department.name} </td>
                 <td> ${Department.city}</td>
                 <td>
-                    <form method="get" action="/department/editDepartment" >
-                     <input type="hidden" name="departmentID" value=${Department.departmentID}  />
+                    <form method="get" action="/department/edit.html" >
+                     <input type="hidden" name="departmentID" value=${Department.departmentID}>
                      <p><input type="submit" name="submit" value="edit"></p>
                     </form>
                 </td>
                 <td>
-                    <form method="get" action="employers.html">
-                        <input type="hidden" name="pageType" value="byDepartment">
+                    <form method="get" action="/employee/list.html">
                         <input type="hidden" name="departmentID" value=${Department.departmentID}>
                         <p><input type="submit" name="submit" value="List"></p>
                     </form>
                 </td>
                 <td>
-                    <form method="get" action="DeleteDepartment.html">
+                    <form method="get" action="/department/delete.html">
                         <input  type="hidden" name="departmentID" value=${Department.departmentID}>
                         <p><input type="submit" name="submit" value="Delete"></p>
                     </form>

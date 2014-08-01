@@ -48,7 +48,7 @@ public class Department implements Serializable {
         return departmentID;
     }
 
-    public void setDepartmentID(int departmentID) {
+    public void setDepartmentID(Integer departmentID) {
         this.departmentID = departmentID;
     }
 

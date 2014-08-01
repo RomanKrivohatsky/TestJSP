@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=windows-1251" language="java" %>
 <%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <html>
@@ -26,25 +27,28 @@
     </div>
 
     <H2>${saveStatus}</H2>
+    ${errors.email}
+    ${errors.birthday}
 
-    <form method="post" action="SaveEmployee.html">
-        <p>¬ведите им€</p><input type="text" name="firstName" value= <c:out value = "${firstName}"></c:out>  >
-        <font color="#ff0000" size="+1">  <c:if test="${not empty firstNameError}"> Validation error: ${firstNameError} </c:if></font>
-        <p>¬ведите фамилию</p> <input type="text" name="lastName" value= <c:out value = "${lastName}"></c:out> >
-        <font color="#ff0000" size="+1">  <c:if test="${not empty lastNameError}"> Validation error: ${lastNameError} </c:if></font>
-        <p>¬ведите e-mail</p> <input type="email" name="email" value= <c:out value = "${email}"></c:out> >
-        <font color="#ff0000" size="+1">  <c:if test="${not empty emailError}"> Validation error: ${emailError} </c:if></font>
-        <p>¬ведите оклад</p><input type="number" name="salary" value=<c:out value = "${salary}"></c:out>  >
-        <font color="#ff0000" size="+1"> <c:if test="${not empty salaryError}"> Validation error: ${salaryError} </c:if></font>
-        <fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${birthday}"/>
+    <sf:form method="post" action="/employee/save.html?pageType=${pageType}" modelAttribute="employee">
+        <p>¬ведите им€</p><input type="text" name="firstName" value= <c:out value = "${employee.firstName}"></c:out>  >
+        <font color="#ff0000" size="+1">  <c:if test="${not empty errors.firstName}"> Validation error: ${errors.firstName} </c:if></font>
+
+        <p>¬ведите фамилию</p> <input type="text" name="lastName" value= <c:out value = "${employee.lastName}"></c:out> >
+        <font color="#ff0000" size="+1">  <c:if test="${not empty errors.lastName}"> Validation error: ${errors.lastName} </c:if></font>
+
+        <p>¬ведите e-mail</p> <input type="email" name="email" value= <c:out value = "${employee.email}"></c:out> >
+        <font color="#ff0000" size="+1">  <c:if test="${not empty errors.email}"> Validation error: ${errors.email} </c:if></font>
+
+        <p>¬ведите оклад</p><input type="number" name="salary" value=<c:out value = "${employee.salary}"></c:out>  >
+        <font color="#ff0000" size="+1"> <c:if test="${not empty errors.salary}"> Validation error: ${errors.salary} </c:if></font>
+
+        <fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${employee.birthday}"/>
         <p>¬ведите дату рождени€</p><input type="date" name="birthday" value="${date}"/>
-        <font color="#ff0000" size="+1">  <c:if test="${not empty birthdayError}"> Validation error: ${birthdayError} </c:if></font>
+        <font color="#ff0000" size="+1">  <c:if test="${not empty errors.birthday}"> Validation error: ${errors.birthday} </c:if></font>
 
-            </p><input type="hidden" name="employeID" value=${employeID}>
-            <input type="hidden" name="pageType" value=${pageType}>
-            <p><select name="departmentID">
-
-                <c:forEach var="Department" items="${Departments}">
+            <p><select name="employee.departmentID">
+                <c:forEach var="Department" items="${departments}">
                     <c:choose>
                         <c:when test="${not empty departmentID and Department.departmentID == departmentID}">
                             <option selected value="${Department.departmentID}">${Department.name}</option>
@@ -56,8 +60,9 @@
                 </c:forEach>
             </select></p>
 
+            <input type="hidden" name="employeID" value=${employeID}>
             <input type="submit" name="submit" value="Save">
-    </form>
+    </sf:form>
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a href="Employers.html">Emloyeers</a> | <a

@@ -44,7 +44,7 @@
             <td>Редактировать</td>
             <td>Удалить</td>
         </tr>
-        <c:forEach var="Employe" items="${requestScope.Employers}">
+        <c:forEach var="Employe" items="${requestScope.employeers}">
             <tr>
                 <td><c:out value="${Employe.firstName}" /></td>
                 <td> ${Employe.lastName} </td>
@@ -54,11 +54,9 @@
                 <fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${Employe.birthday}"/>
                 <td> ${date} </td>
                 <td>
-                    <form metdod="get" action="EditEmployee.html">
+                    <form metdod="get" action="/employee/edit.html">
                         <input type="hidden" name="employeID" value=${Employe.employeID}>
-                       <!-- <input type="hidden" name="departmentID" value="Employe.department.departmentID> -->
-
-                        <p><input CLASS="button" type="submit" name="submit" value="Edit"></p>
+                        <p><input type="submit" name="submit" value="Edit"></p>
                     </form>
                 </td>
                 <td>
@@ -66,7 +64,7 @@
                         <input type="hidden" name="EmployeID" value=${Employe.employeID}>
                         <input type="hidden" name="pageType" value="byDepartment">
                         <input type="hidden" name="departmentID" value=${departmentID}>
-                        <p><input class="button" type="submit" name="submit" value="Delete"></p>
+                        <p><input type="submit" name="submit" value="Delete"></p>
                     </form>
                 </td>
             </tr>

@@ -18,10 +18,10 @@
                 <h2>Main Menu</h2>
                 <div id="navcontainer">
                     <ul id="navlist">
-                        <li id="active"><a href="/department/list">Departments</a></li>
-                        <li><a href="Employers.html">Employers</a></li>
-                        <li><a href="/department/editDepartment">AddDepartment</a></li>
-                        <li><a href="AddEmployee.html">AddEmployee</a></li>
+                        <li id="active"><a href="/department/list.html">Departments</a></li>
+                        <li><a href="/employee/list.html">Employers</a></li>
+                        <li><a href="/department/edit.html">AddDepartment</a></li>
+                        <li><a href="/employee/edit.html">AddEmployee</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
