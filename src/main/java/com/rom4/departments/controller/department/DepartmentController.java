@@ -30,6 +30,7 @@ public class DepartmentController {
         model.addAttribute(service.getList());
         return "department/departments";
     }
+
     @RequestMapping(value = "/list.html{departmentName}")
     public String departments (@PathVariable("departmentName") String departmentName, Model model) {
         model.addAttribute("deleteStatus", "Department " + departmentName + " has been deleted!" );
@@ -39,7 +40,21 @@ public class DepartmentController {
 
     @RequestMapping(method = RequestMethod.GET,value = "/edit.html")
     public String addDepartment (Model model) {
+        model.addAttribute("department", new Department());
         model.addAttribute("pageType", "new");
+        return "department/editDepartment";
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/edit.html", params = {"saveStatus", "departmentID"})
+    public String editDepartment (@RequestParam("saveStatus") String saveStatus,
+                                       @RequestParam("departmentID") Integer departmentID,
+                                  Model model) {
+        if ((saveStatus.equals("1")||saveStatus.equals("2"))&&departmentID>0 ) {
+            saveStatus = saveStatus.equals("1") ? "created!" : "updated!";
+            model.addAttribute("saveStatus", "Department " + service.read(departmentID).getName() + " has been " + saveStatus);
+        }
+        model.addAttribute("department", new Department());
+        model.addAttribute("pageType", "edit");
         return "department/editDepartment";
     }
 
@@ -64,7 +79,7 @@ public class DepartmentController {
             return "department/editDepartment";
         }
 
-        return "redirect:edit.html";
+        return "redirect:edit.html?saveStatus=1&departmentID="+department.getDepartmentID();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" , params = "pageType=edit")
@@ -81,7 +96,7 @@ public class DepartmentController {
             return "department/editDepartment";
         }
 
-        return "redirect:edit.html";
+        return "redirect:edit.html?saveStatus=2&departmentID="+department.getDepartmentID();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/delete.html")

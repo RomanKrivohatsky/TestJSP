@@ -25,9 +25,10 @@
         <h2 id="slogan">table with employers...</h2>
     </div>
 
-    <H1> Exception:  ${ex.message} <H2>
+            <H1> Exception:  ${ex.message} </H1>
+
     <c:forEach items="${ex.errors}" var="error">
-    <H2>  ${error.defaultMessage} </H2>
+                <font color="#ff0000" size="+1">  ${error.defaultMessage} </font>
     </c:forEach>
 
 <div id="footer">

@@ -23,10 +23,6 @@ public class EmployeeDAOhibImpl implements EmployeeDAOhib {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
     private Session currentSession() {
         return sessionFactory.getCurrentSession();
     }
@@ -75,10 +71,7 @@ public class EmployeeDAOhibImpl implements EmployeeDAOhib {
     @Override
     @Transactional
     public List<Employee> getEmployees(int departmentID) {
-            /*Caused by: org.hibernate.QueryException: could not resolve property: department_id of: com.rom4.de
-            partments.domain.Employee*/
-            /*Criteria cr = currentSession().createCriteria(Employee.class);
-            cr.add(Restrictions.eq("department_id", departmentID));*/
+
             SQLQuery query = currentSession().createSQLQuery("select * from employees where department_id = :department_id order by employee_id");
             query.addEntity(Employee.class);
             query.setParameter("department_id", departmentID);

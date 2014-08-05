@@ -21,7 +21,7 @@
 
 <div id="pagewidth">
     <div id="header">
-        <a href="home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
+        <a href="/home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
         <h2 id="slogan">table with employers...</h2>
     </div>
 
@@ -66,7 +66,7 @@
     </table>
 
     <div id="footer">
-        <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a
+        <p><a href="/home.html">Homepage</a> | <a href="/contact.html">contact</a> | <a
                 href="http://validator.w3.org/check?uri=referer">html</a> | <a
                 href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a
                 href="http://www.mitchinson.net"> www.mitchinson.net</a> | tdis work is licensed under a <a
