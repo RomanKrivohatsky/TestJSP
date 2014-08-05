@@ -69,7 +69,7 @@ public class EmployeeDAOhibImpl implements EmployeeDAOhib {
     @Override
     @Transactional
     public List<Employee> getEmployees() {
-        return currentSession().createQuery("from Employee order by employeID").list();
+        return currentSession().createQuery("from Employee order by employeeID").list();
     }
 
     @Override
@@ -79,7 +79,7 @@ public class EmployeeDAOhibImpl implements EmployeeDAOhib {
             partments.domain.Employee*/
             /*Criteria cr = currentSession().createCriteria(Employee.class);
             cr.add(Restrictions.eq("department_id", departmentID));*/
-            SQLQuery query = currentSession().createSQLQuery("select * from employes where department_id = :department_id order by employe_id");
+            SQLQuery query = currentSession().createSQLQuery("select * from employees where department_id = :department_id order by employee_id");
             query.addEntity(Employee.class);
             query.setParameter("department_id", departmentID);
             return query.list();

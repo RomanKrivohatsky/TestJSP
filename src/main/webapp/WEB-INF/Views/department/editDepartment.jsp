@@ -37,7 +37,7 @@
     </sf:form>
 
     <div id="footer">
-        <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a href="Departments.html">Departments</a> |<a
+        <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a href="/department/list.html">Departments</a> |<a
                 href="http://validator.w3.org/check?uri=referer">html</a> | <a
                 href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a
                 href="http://www.mitchinson.net"> www.mitchinson.net</a> | tdis work is licensed under a <a

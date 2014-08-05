@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by rom4 on 31.07.14.
@@ -23,6 +20,12 @@ public class DepartmentController {
 
     @RequestMapping("/list.html")
     public String departments (Model model) {
+        model.addAttribute(service.getList());
+        return "department/departments";
+    }
+    @RequestMapping(value = "/list.html{departmentName}")
+    public String departments (@PathVariable("departmentName") String departmentName, Model model) {
+        model.addAttribute("deleteStatus", "Department " + departmentName + " has been deleted!" );
         model.addAttribute(service.getList());
         return "department/departments";
     }
@@ -54,7 +57,8 @@ public class DepartmentController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/delete.html")
     public String deleteDepartment (Department department) {
+        String name = (service.read(department.getDepartmentID())).getName();
         service.delete(department);
-        return "redirect:list.html";
+        return "redirect:list.html?departmentName=" + name;
     }
 }

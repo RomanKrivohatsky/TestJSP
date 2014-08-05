@@ -25,12 +25,6 @@
         <h2 id="slogan">table with employers...</h2>
     </div>
 
-    <form method="get" action="AddEmployee.html">
-        <input type="hidden" name="pageType" value="AddEmployeWithDep">
-        <input type="hidden" name="departmentID" value=${departmentID}>
-        <p><input type="submit" name="submit" value="Add employee"></p>
-    </form>
-
     <H2>${saveStatus}</H2>
 
     <table class="CSSTableGenerator" >
@@ -44,24 +38,24 @@
             <td>Редактировать</td>
             <td>Удалить</td>
         </tr>
-        <c:forEach var="Employe" items="${requestScope.employeers}">
+        <c:forEach var="Employee" items="${requestScope.employeers}">
             <tr>
-                <td><c:out value="${Employe.firstName}" /></td>
-                <td> ${Employe.lastName} </td>
-                <td> ${Employe.department.name} </td>
-                <td> ${Employe.email} </td>
-                <td> ${Employe.salary} </td>
-                <fmt:formatDate var="date" pattern="dd-mm-yyyy" value="${Employe.birthday}"/>
+                <td><c:out value="${Employee.firstName}" /></td>
+                <td> ${Employee.lastName} </td>
+                <td> ${Employee.department.name} </td>
+                <td> ${Employee.email} </td>
+                <td> ${Employee.salary} </td>
+                <fmt:formatDate var="date" pattern="dd-mm-yyyy" value="${Employee.birthday}"/>
                 <td> ${date} </td>
                 <td>
                     <form metdod="get" action="/employee/edit.html">
-                        <input type="hidden" name="employeID" value=${Employe.employeID}>
+                        <input type="hidden" name="employeeID" value=${Employee.employeeID}>
                         <p><input type="submit" name="submit" value="Edit"></p>
                     </form>
                 </td>
                 <td>
                     <form metdod="get" action="DeleteEmployee.html">
-                        <input type="hidden" name="EmployeID" value=${Employe.employeID}>
+                        <input type="hidden" name="EmployeID" value=${Employee.employeeID}>
                         <input type="hidden" name="pageType" value="byDepartment">
                         <input type="hidden" name="departmentID" value=${departmentID}>
                         <p><input type="submit" name="submit" value="Delete"></p>

@@ -7,7 +7,6 @@ import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.service.dao.EmployeeService;
-import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
@@ -87,7 +86,7 @@ public class SaveEmploye implements Handler {
             emp.setDepartment(dep);
 
             if (pageType.equals("edit")) {
-                emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
+                emp.setEmployeeID(Integer.parseInt(request.getParameter("employeID")));
             }
 
         } catch (ParseException e) {
@@ -135,7 +134,7 @@ public class SaveEmploye implements Handler {
                     employeeService.create(emp);
                 }
                 else if (pageType.equals("edit")) {
-                    emp.setEmployeID(Integer.parseInt(request.getParameter("employeID")));
+                    emp.setEmployeeID(Integer.parseInt(request.getParameter("employeID")));
                     saveStatus =  "Employee " + emp.getLastName() +" has been updated";
                     employeeService.update(emp);
                 }

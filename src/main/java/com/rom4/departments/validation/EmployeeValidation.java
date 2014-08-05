@@ -1,6 +1,5 @@
 package com.rom4.departments.validation;
 
-import com.rom4.departments.domain.Department;
 import com.rom4.departments.domain.Employee;
 import com.rom4.departments.service.dao.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class EmployeeValidation implements Validator {
         Employee employe = service.byEmail(((Employee) target).getEmail());
 
         if (employe != null) {
-            if (!employe.getEmployeID().equals(((Employee) target).getEmployeID())) {
+            if (!employe.getEmployeeID().equals(((Employee) target).getEmployeeID())) {
                 errors.rejectValue("email", "email.duplicate", "duplicate email");
             }
         }

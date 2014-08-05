@@ -12,14 +12,14 @@ import java.util.*;
 
 
 @Entity
-@Table(name="employes")
+@Table(name="employees")
 public class Employee {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employe_id")
-    private Integer employeID;
+    @Column(name = "employee_id")
+    private Integer employeeID;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name="department_id")
@@ -45,12 +45,12 @@ public class Employee {
         this.department = department;
     }
 
-    public Integer getEmployeID() {
-        return employeID;
+    public Integer getEmployeeID() {
+        return employeeID;
     }
 
-    public void setEmployeID( Integer employeID) {
-        this.employeID = employeID;
+    public void setEmployeeID(Integer employeeID) {
+        this.employeeID = employeeID;
     }
 
     public String getFirstName() {
@@ -97,7 +97,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employeID=" + employeID +
+                "employeID=" + employeeID +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
@@ -113,21 +113,14 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        return  employeID == employee.getEmployeID();
+        return  employeeID == employee.getEmployeeID();
 
     }
 
     @Override
     public int hashCode() {
-        return employeID;
+        return employeeID;
     }
 
-    private class checkFirstName implements CheckWithCheck.SimpleCheck {
-        @Override
-        public boolean isSatisfied(Object o, Object o2) {
-
-            return true;
-        }
-    }
 }
 

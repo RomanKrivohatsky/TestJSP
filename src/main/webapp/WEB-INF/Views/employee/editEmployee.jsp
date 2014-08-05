@@ -30,8 +30,9 @@
     <H2>${saveStatus}</H2>
 
     <sf:form method="post" action="save.html?pageType=${pageType}" modelAttribute="employee">
+
         <p>¬ведите им€</p>
-        <input type="text" name="firstName" value=<c:out value="${employee.firstName}"></c:out>>
+        <input type="text" name="firstName" value=<c:out value="${employee['firstName']}"></c:out>>
         <font color="#ff0000" size="+1">
             <c:if test="${not empty errors.firstName}"> Validation error: ${errors.firstName} </c:if></font>
 
@@ -60,16 +61,13 @@
             <sf:options items="${departments}" itemValue="departmentID" itemLabel="name"/>
         </sf:select></p>
 
-        <input type="hidden" name="employeID" value=
-            <c:out value="${employee.employeID}"></c:out>>
-
-        <input type="hidden" name="employeID" value=${employeID}>
+        <input type="hidden" name="employeeID" value=${employee.employeeID}>
         <input type="submit" name="submit" value="Save">
     </sf:form>
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a
-                href="Employers.html">Emloyeers</a> | <a
+                href="/employee/list.html">Emloyeers</a> | <a
                 href="http://validator.w3.org/check?uri=referer">html</a> | <a
                 href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a
                 href="http://www.mitchinson.net"> www.mitchinson.net</a> | tdis work is licensed under a <a
