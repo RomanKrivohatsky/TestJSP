@@ -43,17 +43,18 @@ public class DepartmentController {
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" ,  params = "pageType=new")
     public String saveDepartment (Department department, BindingResult bindingResult)  {
         service.create(department);
-        return "redirect:editDepartment";
+        return "redirect:edit.html";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" , params = "pageType=edit")
     public String updateDepartment (@ModelAttribute("department") Department department, BindingResult bindingResult) {
         service.update(department);
-        return "redirect:editDepartment";
+        return "redirect:edit.html";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/delete.html")
-    public String deleteDepartment () {
-        return "department/departments";
+    public String deleteDepartment (Department department) {
+        service.delete(department);
+        return "redirect:list.html";
     }
 }

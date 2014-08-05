@@ -11,11 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +32,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new DateEditor());
+        binder.registerCustomEditor(Department.class, new EmployeeEditor(departmentService));
+    }
+
     @RequestMapping("/list.html")
     public String employers (Model model) {
         model.addAttribute("employeers", employeeService.getList());
@@ -46,8 +52,8 @@ public class EmployeeController {
 
     @RequestMapping(method = RequestMethod.GET,value = "/edit.html")
     public String addDEmploye (Model model) {
-        model.addAttribute("pageType", "new");
         model.addAttribute("departments", departmentService.getList());
+        model.addAttribute("pageType", "new");
         return "employee/editEmployee";
     }
 
@@ -59,22 +65,23 @@ public class EmployeeController {
         return "employee/editEmployee";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/save.html" ,  params = "pageType=new")
-    public String saveDepartment (@ModelAttribute("employee") Employee employee, Model model)  {
+    @RequestMapping(method = RequestMethod.POST, value = "/save.html",  params = "pageType=new")
+    public String saveEmployee (@ModelAttribute("employee") Employee employee, Model model)  {
         try {
             employeeService.create(employee);
         } catch (ValidateException e) {
 
-            Map<String, String> errors = parseErrors(e.getErrors());
+           /* Map<String, String> errors = parseErrors(e.getErrors());
             model.addAttribute("departments", departmentService.getList());
+            model.addAttribute("pageType", "new");
             model.addAttribute("errors", errors);
-            return "employee/editEmployee";
+            return "employee/editEmployee";*/
         }
-        return "redirect:editEmployee";
+        return "redirect:edit.html";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" , params = "pageType=edit")
-    public String updateDepartment (@ModelAttribute("employee") Employee employee,  Model model) {
+    public String updateEmployee (@ModelAttribute("employee") Employee employee,  Model model) {
         try {
             employeeService.update(employee);
         } catch (ValidateException e) {
@@ -85,7 +92,7 @@ public class EmployeeController {
             model.addAttribute("errors", errors);
             return "employee/editEmployee";
         }
-        return "redirect:editEmployee";
+        return "redirect:edit.html";
     }
 
     private Map<String, String> parseErrors( List<ObjectError> errorList) {

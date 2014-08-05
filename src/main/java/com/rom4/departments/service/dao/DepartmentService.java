@@ -15,7 +15,7 @@ import java.util.List;
 public interface DepartmentService {
 
     @Transactional
-    Department read(int departmentID);
+    Department read(Integer departmentID);
 
     @Transactional
     Department byName(String name);

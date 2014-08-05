@@ -24,8 +24,6 @@
 
     <H2>${deleteStatus}</H2>
 
-    <a href="/department/editDepartment?pageType=edit"> <h1 >editDepartment  </h1> </a>
-
 <table class="CSSTableGenerator"  >
         <tr>
             <td>Название</td>
@@ -51,10 +49,10 @@
                     </form>
                 </td>
                 <td>
-                    <form method="get" action="/department/delete.html">
+                    <sf:form method="post" action="/department/delete.html" modelAttribute="department">
                         <input  type="hidden" name="departmentID" value=${Department.departmentID}>
                         <p><input type="submit" name="submit" value="Delete"></p>
-                    </form>
+                    </sf:form>
                 </td>
             </tr>
         </c:forEach>

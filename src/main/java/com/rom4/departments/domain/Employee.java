@@ -32,7 +32,7 @@ public class Employee {
     @Column(name = "email")
     private String email = null;
     @Column(name = "salary")
-    private float salary = 0.0F;
+    private Float salary = 0.0F;
     @Column(name = "birthday")
     private Date birthday = null;
 
@@ -77,11 +77,11 @@ public class Employee {
         this.email = email;
     }
 
-    public float getSalary() {
+    public Float getSalary() {
         return salary;
     }
 
-    public void setSalary(float salary) {
+    public void setSalary(Float salary) {
         this.salary = salary;
     }
 

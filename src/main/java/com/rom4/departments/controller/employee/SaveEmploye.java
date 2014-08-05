@@ -70,7 +70,7 @@ public class SaveEmploye implements Handler {
             emp.setLastName(request.getParameter("lastName"));
             emp.setEmail(request.getParameter("email"));
             if (request.getParameter("salary").equals("")) {
-                emp.setSalary(0);
+                emp.setSalary(0F);
             }
             else {
                 emp.setSalary(Float.parseFloat(request.getParameter("salary")));

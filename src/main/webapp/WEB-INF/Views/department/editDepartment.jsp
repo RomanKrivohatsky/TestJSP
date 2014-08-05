@@ -26,13 +26,13 @@
 
     <H2>${saveStatus}</H2>
 
-    <sf:form method="post" action="department/save.html?pageType=${pageType}"   modelAttribute="department">
+    <sf:form method="post" action="save.html?pageType=${pageType}"   modelAttribute="department">
         <p>Department name</p><input type="text" name="name" value= <c:out value = "${department.name}"></c:out> >
         <font color="#ff0000" size="+1"> <c:if test="${not empty nameError}"> Validation error: <b> ${nameError} </b> </c:if> </font>
         <font color="#ff0000" size="+1"> <c:if test="${not empty nameEmptyError}"> Validation error: <b> ${nameEmptyError} </b> </c:if> </font>
         <p>¬ведите город</p><input type="text" name="city" value= <c:out value = "${department.city}"></c:out> >
         <font color="#ff0000" size="+1"> <c:if test="${not empty cityError}"> Validation error: <b> ${cityError} </b> </c:if> </font>
-        <p>ID</p><input type="number" name="departmentID" value= <c:out value = "${department.departmentID}"></c:out> >
+        <input type="hidden" name="departmentID" value= <c:out value = "${department.departmentID}"></c:out> >
         <input type="submit" name="submit" value="Save">
     </sf:form>
 

@@ -47,7 +47,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public Department read(int departmentID) {
+    public Department read(Integer departmentID) {
         return dao.readDepartment(departmentID);
     }
 
