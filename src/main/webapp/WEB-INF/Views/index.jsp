@@ -8,7 +8,7 @@
 <body>
 <div id="pagewidth">
     <div id="header">
-        <a href="home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
+        <a href="/home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
         <h2 id="slogan">training web project..4345345345    .</h2>
 
     </div>
@@ -52,7 +52,7 @@
         </div>
     </div>
     <div id="footer">
-        <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a href="http://validator.w3.org/check?uri=referer">html</a> | <a href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a href="http://www.mitchinson.net"> www.mitchinson.net</a> | This work is licensed under a <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a></p>
+        <p><a href="/home.html">Homepage</a> | <a href="/contact.html">contact</a> | <a href="http://validator.w3.org/check?uri=referer">html</a> | <a href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a href="http://www.mitchinson.net"> www.mitchinson.net</a> | This work is licensed under a <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a></p>
     </div>
 </div>
 </body>
