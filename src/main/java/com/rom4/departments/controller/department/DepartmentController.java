@@ -27,12 +27,12 @@ public class DepartmentController {
 
     @RequestMapping("/list.html")
     public String departments (Model model) {
-        model.addAttribute(service.getList());
+         model.addAttribute(service.getList());
         return "department/departments";
     }
 
-    @RequestMapping(value = "/list.html{departmentName}")
-    public String departments (@PathVariable("departmentName") String departmentName, Model model) {
+    @RequestMapping(value = "/list.html", params = "departmentName")
+    public String departmentsAfterDelete (@RequestParam("departmentName") String departmentName, Model model) {
         model.addAttribute("deleteStatus", "Department " + departmentName + " has been deleted!" );
         model.addAttribute(service.getList());
         return "department/departments";
@@ -91,7 +91,7 @@ public class DepartmentController {
 
             Map<String, String> errors = parseErrors(e.getErrors());
             model.addAttribute("department", department);
-            model.addAttribute("pageType", "new");
+            model.addAttribute("pageType", "edit");
             model.addAttribute("errors", errors);
             return "department/editDepartment";
         }

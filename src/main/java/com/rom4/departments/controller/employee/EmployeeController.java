@@ -110,7 +110,7 @@ public class EmployeeController {
             Map<String, String> errors = parseErrors(e.getErrors());
             model.addAttribute("employee", employee);
             model.addAttribute("departments", departmentService.getList());
-            model.addAttribute("pageType", "new");
+            model.addAttribute("pageType", "edit");
             model.addAttribute("errors", errors);
             return "employee/editEmployee";
         }

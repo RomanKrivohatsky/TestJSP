@@ -32,7 +32,7 @@
     <sf:form method="post" action="save.html?pageType=${pageType}" modelAttribute="employee">
 
         <p>¬ведите им€</p>
-        <input type="text" name="firstName" value=<c:out value="${employee['firstName']}"></c:out>>
+        <input type="text" name="firstName" value=<c:out value="${employee.firstName}"></c:out>>
         <font color="#ff0000" size="+1">
             <c:if test="${not empty errors.firstName}"> Validation error: ${errors.firstName} </c:if></font>
 
