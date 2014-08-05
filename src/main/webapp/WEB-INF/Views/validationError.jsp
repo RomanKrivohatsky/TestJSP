@@ -1,5 +1,3 @@
-
-
 <%--
   Created by IntelliJ IDEA.
   User: rom4
@@ -23,22 +21,23 @@
 <div id="pagewidth">
     <div id="header">
         <a href="home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
+
         <h2 id="slogan">table with employers...</h2>
     </div>
 
+    <H1> Exception:  ${ex.message} <H2>
+    <c:forEach items="${ex.errors}" var="error">
+    <H2>  ${error.defaultMessage} </H2>
+    </c:forEach>
 
-    <h2> Contacts1 </h2>
-<p> Kharkov </p>
-<p>  Tarasovskaya str.</p>
-
-    <div id="footer">
-        <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a
-                href="http://validator.w3.org/check?uri=referer">html</a> | <a
-                href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a
-                href="http://www.mitchinson.net"> www.mitchinson.net</a> | tdis work is licensed under a <a
-                rel="license" target="_blank" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
-            Attribution 3.0 License</a></p>
-    </div>
+<div id="footer">
+    <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a
+            href="http://validator.w3.org/check?uri=referer">html</a> | <a
+            href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a
+            href="http://www.mitchinson.net"> www.mitchinson.net</a> | tdis work is licensed under a <a
+            rel="license" target="_blank" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
+        Attribution 3.0 License</a></p>
+</div>
 </div>
 
 </body>

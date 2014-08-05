@@ -1,5 +1,7 @@
 package com.rom4.departments.controller.employee;
 
+import com.rom4.departments.controller.employee.editors.DateEditor;
+import com.rom4.departments.controller.employee.editors.EmployeeEditor;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.domain.Employee;
 import com.rom4.departments.exception.ValidateException;
@@ -108,7 +110,7 @@ public class EmployeeController {
             Map<String, String> errors = parseErrors(e.getErrors());
             model.addAttribute("employee", employee);
             model.addAttribute("departments", departmentService.getList());
-            model.addAttribute("pageType", "edit");
+            model.addAttribute("pageType", "new");
             model.addAttribute("errors", errors);
             return "employee/editEmployee";
         }

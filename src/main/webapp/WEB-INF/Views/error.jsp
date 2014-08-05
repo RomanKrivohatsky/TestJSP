@@ -13,7 +13,7 @@
 <head>
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-    <link rel="stylesheet" href="../../css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="/resource/style.css" type="text/css"/>
 </head>
 
 <body>
@@ -27,7 +27,11 @@
 
 <h1>Ошибка обработки данных!</h1>
 
-<p>Текст ошибки: ${errorStatus}</p>
+
+
+    Exception:  ${ex.message}
+    <c:forEach items="${ex.stackTrace}" var="ste">    ${ste}
+    </c:forEach>
 
 
 

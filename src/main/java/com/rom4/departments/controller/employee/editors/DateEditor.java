@@ -1,4 +1,4 @@
-package com.rom4.departments.controller.employee;
+package com.rom4.departments.controller.employee.editors;
 
 import org.springframework.stereotype.Component;
 

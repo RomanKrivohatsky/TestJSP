@@ -21,13 +21,13 @@ public interface DepartmentService {
     Department byName(String name);
 
     @Transactional
-    void create(Department dep) ;
+    void create(Department dep) throws ValidateException;
 
     @Transactional
-    void update(Department dep) ;
+    void update(Department dep) throws ValidateException;
 
     @Transactional
-    void delete(Department department);
+    void delete(Department department) throws ValidateException;
 
     @Transactional
     List getList();

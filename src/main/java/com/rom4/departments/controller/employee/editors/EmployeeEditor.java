@@ -1,4 +1,4 @@
-package com.rom4.departments.controller.employee;
+package com.rom4.departments.controller.employee.editors;
 
 import com.rom4.departments.service.dao.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
