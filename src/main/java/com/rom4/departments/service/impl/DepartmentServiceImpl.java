@@ -64,7 +64,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public void create(Department dep) throws ValidateException  {
+    public void create(Department dep)   {
     /*    List<ObjectError> errors = validate(dep, "create");
         if ( errors != null) {
             throw new ValidateException("Department validation error!", errors);
@@ -74,7 +74,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public void update(Department dep) throws ValidateException {
+    public void update(Department dep)  {
 /*        List<ObjectError> errors = validate(dep, "create");
         if ( errors != null) {
             throw new ValidateException("Department validation error!", errors);
@@ -84,7 +84,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public void delete(Department department) throws ValidateException {
+    public void delete(Department department)  {
     /*    List<ObjectError> errors = validate(department, "delete");
         if ( errors != null) {
             throw new ValidateException("Department validation error!", errors);
