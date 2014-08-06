@@ -60,7 +60,7 @@ public class DepartmentController {
 
     @RequestMapping(method = RequestMethod.GET,value = "/edit.html", params = {"saveStatus", "departmentID"})
     public String editDepartment (@RequestParam("saveStatus") String saveStatus,
-                                       @RequestParam("departmentID") Integer departmentID,
+                                  @RequestParam("departmentID") Integer departmentID,
                                   Model model) {
         if ((saveStatus.equals("1")||saveStatus.equals("2"))&&departmentID>0 ) {
             saveStatus = saveStatus.equals("1") ? "created!" : "updated!";
@@ -72,62 +72,53 @@ public class DepartmentController {
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/edit.html", params = "departmentID")
-    public String editDepartment (@RequestParam("departmentID") Integer departmentID, Model model) {
+    public String editDepartment (@RequestParam("departmentID") Integer departmentID,
+                                  Model model) {
         model.addAttribute("department", service.read(departmentID));
         model.addAttribute("pageType", "edit");
         return "department/editDepartment";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" ,  params = "pageType=new")
-    public String saveDepartment (@Valid Department department, Model model)  {
+    public String saveDepartment (@Valid Department department,
+                                  Model model,
+                                  BindingResult result)  {
 
-        try {
-            service.create(department);
-        } catch (ValidateException e) {
-
-            Map<String, String> errors = parseErrors(e.getErrors());
+        if (result.hasErrors()) {
             model.addAttribute("department", department);
             model.addAttribute("pageType", "new");
-            model.addAttribute("errors", errors);
             return "department/editDepartment";
         }
+
+        service.create(department);
 
         return "redirect:edit.html?saveStatus=1&departmentID="+department.getDepartmentID();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" , params = "pageType=edit")
-    public String updateDepartment (@ModelAttribute("department") Department department, Model model) {
+    public String updateDepartment (@Valid Department department,
+                                    Model model,
+                                    BindingResult result) {
 
-        try {
-            service.update(department);
-        } catch (ValidateException e) {
 
-            Map<String, String> errors = parseErrors(e.getErrors());
+        if (result.hasErrors()) {
             model.addAttribute("department", department);
             model.addAttribute("pageType", "edit");
-            model.addAttribute("errors", errors);
             return "department/editDepartment";
         }
 
+        service.update(department);
         return "redirect:edit.html?saveStatus=2&departmentID="+department.getDepartmentID();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/delete.html")
-    public String deleteDepartment (Department department) throws ValidateException {
-        String name = (service.read(department.getDepartmentID())).getName();
+    public String deleteDepartment (@Valid Department department, BindingResult result) {
+          String name = (service.read(department.getDepartmentID())).getName();
 
-            service.delete(department);
+         service.delete(department);
 
         return "redirect:list.html?departmentName=" + name;
     }
 
-    private Map<String, String> parseErrors( List<ObjectError> errorList) {
-        Map<String, String> errors = new HashMap<>();
-        for (ObjectError objectError : errorList) {
-            if (objectError instanceof FieldError) {
-                errors.put( ((FieldError) objectError).getField(), objectError.getDefaultMessage());
-            }
-        }
-        return errors;
-    }
+
 }
