@@ -16,6 +16,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +79,7 @@ public class DepartmentController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" ,  params = "pageType=new")
-    public String saveDepartment (Department department, Model model)  {
+    public String saveDepartment (@Valid Department department, Model model)  {
 
         try {
             service.create(department);

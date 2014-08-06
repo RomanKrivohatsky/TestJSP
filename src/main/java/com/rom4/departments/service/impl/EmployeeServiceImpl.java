@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     @Qualifier("employeeValidation")
     org.springframework.validation.Validator springValidator ;
-
+/*
     public List<ObjectError> validate(Employee employee) {
         BeanPropertyBindingResult result = new BeanPropertyBindingResult(employee, "employee");
         ValidationUtils.invokeValidator(springValidator, employee, result);
@@ -40,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return errors;
         }
         return null;
-    }
+    }*/
 
     @Override
     @Transactional
@@ -57,21 +57,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public void create(Employee employee)  throws ValidateException {
-        List<ObjectError> errors = validate(employee);
+/*        List<ObjectError> errors = validate(employee);
 
         if ( errors != null) {
             throw new ValidateException("Employee validation error!", errors);
-        }
+        }*/
         dao.createEmployee(employee);
     }
 
     @Override
     @Transactional
     public void update(Employee employee) throws ValidateException {
-        List<ObjectError> errors = validate(employee);
+/*        List<ObjectError> errors = validate(employee);
         if (errors != null) {
             throw new ValidateException("Employee validation error!", errors);
-        }
+        }*/
         dao.udpateEmployee(employee);
     }
 

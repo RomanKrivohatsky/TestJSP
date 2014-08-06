@@ -38,7 +38,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Qualifier("departmentDeleteValidation")
     org.springframework.validation.Validator springDeleteValidator ;
 
-    public List<ObjectError> validate(Department department, String method) {
+   /* public List<ObjectError> validate(Department department, String method) {
         BeanPropertyBindingResult result = new BeanPropertyBindingResult(department, "department");
         Validator val = method.equals("delete") ? springDeleteValidator : springValidator;
         ValidationUtils.invokeValidator(val, department, result);
@@ -48,7 +48,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             return errors;
         }
         return null;
-    }
+    }*/
 
     @Override
     @Transactional
@@ -65,30 +65,30 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     @Transactional
     public void create(Department dep) throws ValidateException  {
-        List<ObjectError> errors = validate(dep, "create");
+    /*    List<ObjectError> errors = validate(dep, "create");
         if ( errors != null) {
             throw new ValidateException("Department validation error!", errors);
-        }
+        }*/
          dao.createDepartment(dep);
     }
 
     @Override
     @Transactional
     public void update(Department dep) throws ValidateException {
-        List<ObjectError> errors = validate(dep, "create");
+/*        List<ObjectError> errors = validate(dep, "create");
         if ( errors != null) {
             throw new ValidateException("Department validation error!", errors);
-        }
+        }*/
         dao.udpateDepartment(dep);
     }
 
     @Override
     @Transactional
     public void delete(Department department) throws ValidateException {
-        List<ObjectError> errors = validate(department, "delete");
+    /*    List<ObjectError> errors = validate(department, "delete");
         if ( errors != null) {
             throw new ValidateException("Department validation error!", errors);
-        }
+        }*/
         dao.deleteDepartment(department);
     }
 
