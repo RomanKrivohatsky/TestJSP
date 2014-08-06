@@ -38,7 +38,7 @@
         <c:if test="${not empty errors.city}"> Validation error: ${errors.city} </c:if></font>
 
         <input type="hidden" name="departmentID" value= <c:out value = "${department.departmentID}"></c:out> >
-        <input type="submit" name="submit" value="Save">
+    <p><input type="submit" name="submit" value="Save"> </p>
     </sf:form>
 
     <div id="footer">

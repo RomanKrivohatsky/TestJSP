@@ -25,7 +25,7 @@
         <h2 id="slogan">table with employers...</h2>
     </div>
 
-    <H2>${saveStatus}</H2>
+    <H2><c:if test="${not empty lastName}"> Employee ${lastName} has been deleted! </c:if></H2>
 
     <table class="CSSTableGenerator" >
         <tr>
@@ -50,15 +50,14 @@
                 <td>
                     <form metdod="get" action="/employee/edit.html">
                         <input type="hidden" name="employeeID" value=${Employee.employeeID}>
-                        <p><input type="submit" name="submit" value="Edit"></p>
+                        <input type="submit" name="submit" value="Edit">
                     </form>
                 </td>
                 <td>
-                    <form metdod="get" action="DeleteEmployee.html">
-                        <input type="hidden" name="EmployeID" value=${Employee.employeeID}>
-                        <input type="hidden" name="pageType" value="byDepartment">
+                    <form method="post" action="/employee/delete.html">
+                        <input type="hidden" name="employeeID" value=${Employee.employeeID}>
                         <input type="hidden" name="departmentID" value=${departmentID}>
-                        <p><input type="submit" name="submit" value="Delete"></p>
+                        <input type="submit" name="submit" value="Delete">
                     </form>
                 </td>
             </tr>

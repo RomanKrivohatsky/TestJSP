@@ -41,15 +41,36 @@ public class EmployeeController {
     @RequestMapping("/list.html")
     public String employers (Model model) {
         model.addAttribute("employeers", employeeService.getList());
+        model.addAttribute("departmentID", 0);
+        return "employee/employeers";
+    }
+    @RequestMapping(value = "/list.html", params = "employeeLastName")
+    public String employersAfterDelete (@RequestParam String employeeLastName,
+                                        Model model) {
+        model.addAttribute("lastName", employeeLastName);
+        model.addAttribute("employeers", employeeService.getList());
+        model.addAttribute("departmentID", 0);
         return "employee/employeers";
     }
 
     @RequestMapping(value="/list.html", params = "departmentID")
     public String employersByDepartment (@RequestParam Integer departmentID,
                                          Model model) {
+        model.addAttribute("departmentID", departmentID);
         model.addAttribute("employeers", employeeService.getList(departmentID));
         return "employee/employeers";
     }
+
+    @RequestMapping(value="/list.html", params = {"departmentID" ,"employeeLastName"})
+    public String employersByDepartment (@RequestParam String employeeLastName,
+                                         @RequestParam Integer departmentID,
+                                         Model model) {
+        model.addAttribute("lastName", employeeLastName);
+        model.addAttribute("departmentID", departmentID);
+        model.addAttribute("employeers", employeeService.getList(departmentID));
+        return "employee/employeers";
+    }
+
 
     @RequestMapping(method = RequestMethod.GET,value = "/edit.html")
     public String addEmploye (Model model) {
@@ -116,6 +137,18 @@ public class EmployeeController {
         }
         return "redirect:edit.html?saveStatus=2&employeeID="+employee.getEmployeeID();
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/delete.html")
+    public String deleteEmployee (@RequestParam Integer employeeID,
+                                  @RequestParam Integer departmentID) throws ValidateException {
+        String redirectURL = "redirect:list.html";
+        Employee employee = employeeService.read(employeeID);
+        String name = employee.getLastName();
+        employeeService.delete(employee);
+        redirectURL += departmentID == 0 ? "?employeeLastName=" + name : "?employeeLastName=" + name + "&departmentID=" + departmentID;
+        return redirectURL;
+    }
+
 
     private Map<String, String> parseErrors( List<ObjectError> errorList) {
         Map<String, String> errors = new HashMap<>();
