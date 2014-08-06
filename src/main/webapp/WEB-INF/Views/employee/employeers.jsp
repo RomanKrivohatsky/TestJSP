@@ -45,7 +45,7 @@
                 <td> ${Employee.department.name} </td>
                 <td> ${Employee.email} </td>
                 <td> ${Employee.salary} </td>
-                <fmt:formatDate var="date" pattern="dd-mm-yyyy" value="${Employee.birthday}"/>
+                <fmt:formatDate var="date" pattern="dd-MM-yyyy" value="${Employee.birthday}"/>
                 <td> ${date} </td>
                 <td>
                     <form metdod="get" action="/employee/edit.html">

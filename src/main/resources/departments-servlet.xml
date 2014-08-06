@@ -28,6 +28,7 @@
         <!-- статических ресурсов -->
     <mvc:resources mapping="/resource/**" location="/resource/" />
 
+
     <!-- обеспечивает транзакционность -->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate3.HibernateTransactionManager"

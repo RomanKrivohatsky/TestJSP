@@ -1,16 +1,22 @@
 package com.rom4.departments.controller.department;
 
+import com.rom4.departments.controller.employee.editors.DateEditor;
+import com.rom4.departments.controller.employee.editors.EmployeeEditor;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentService;
+import com.rom4.departments.validation.DepartmentValidation;
+import com.rom4.departments.validation.EmployeeValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +30,12 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentService service;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(new DepartmentValidation());
+    }
+
 
     @RequestMapping("/list.html")
     public String departments (Model model) {
@@ -66,7 +78,7 @@ public class DepartmentController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" ,  params = "pageType=new")
-    public String saveDepartment (@ModelAttribute("department") Department department, Model model)  {
+    public String saveDepartment (Department department, Model model)  {
 
         try {
             service.create(department);

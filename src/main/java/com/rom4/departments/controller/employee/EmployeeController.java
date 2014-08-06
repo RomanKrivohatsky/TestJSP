@@ -7,6 +7,7 @@ import com.rom4.departments.domain.Employee;
 import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
+import com.rom4.departments.validation.EmployeeValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +37,7 @@ public class EmployeeController {
     protected void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new DateEditor());
         binder.registerCustomEditor(Department.class, new EmployeeEditor(departmentService));
+        binder.setValidator(new EmployeeValidation());
     }
 
     @RequestMapping("/list.html")
@@ -105,7 +107,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html",  params = "pageType=new")
-    public String createEmployee (@ModelAttribute("employee") Employee employee,
+    public String createEmployee (Employee employee,
                                   Model model)  {
         try {
             employeeService.create(employee);
