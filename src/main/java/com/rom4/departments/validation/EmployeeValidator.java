@@ -13,8 +13,8 @@ import org.springframework.validation.Validator;
  */
 
 @Component
-@Qualifier("employeeValidation")
-public class EmployeeValidation implements Validator {
+@Qualifier("EmployeeValidator")
+public class EmployeeValidator implements Validator {
 
     @Autowired
     private EmployeeService service;

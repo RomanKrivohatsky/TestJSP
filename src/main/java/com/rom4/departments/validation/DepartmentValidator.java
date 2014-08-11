@@ -14,7 +14,7 @@ import org.springframework.validation.Validator;
  */
 @Component
 @Qualifier("departmentValidation")
-public class DepartmentValidation implements Validator {
+public class DepartmentValidator implements Validator {
 
     @Autowired
     DepartmentService service;

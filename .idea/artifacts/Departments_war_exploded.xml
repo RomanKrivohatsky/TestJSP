@@ -13,6 +13,8 @@
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.0.0.GA" />
+          <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:4.3.1.Final" />
+          <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.1.0.CR2" />
           <element id="library" level="project" name="Maven: net.sf.oval:oval:1.31" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:3.6.10.Final" />
           <element id="library" level="project" name="Maven: antlr:antlr:2.7.6" />

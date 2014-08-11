@@ -1,20 +1,12 @@
 package com.rom4.departments.service.impl;
 
 import com.rom4.departments.domain.Department;
-import com.rom4.departments.domain.Employee;
-import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentDAOhib;
 import com.rom4.departments.service.dao.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
 
 import java.util.List;
 
@@ -31,7 +23,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDAOhib dao;
 
     @Autowired
-    @Qualifier("departmentValidation")
+    @Qualifier("departmentValidator")
     org.springframework.validation.Validator springValidator ;
 
     @Autowired

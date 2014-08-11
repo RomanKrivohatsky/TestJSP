@@ -23,10 +23,10 @@ public interface EmployeeService {
     Employee byEmail(String email);
 
     @Transactional
-    void create(Employee dep) throws ValidateException;
+    void create(Employee dep);
 
     @Transactional
-    void update(Employee dep) throws ValidateException;
+    void update(Employee dep);
 
     @Transactional
     void delete(Employee Employee);

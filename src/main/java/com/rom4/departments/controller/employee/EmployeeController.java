@@ -1,21 +1,24 @@
 package com.rom4.departments.controller.employee;
 
 import com.rom4.departments.controller.employee.editors.DateEditor;
-import com.rom4.departments.controller.employee.editors.EmployeeEditor;
+import com.rom4.departments.controller.employee.editors.DepartmentEditor;
 import com.rom4.departments.domain.Department;
 import com.rom4.departments.domain.Employee;
 import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentService;
 import com.rom4.departments.service.dao.EmployeeService;
-import com.rom4.departments.validation.EmployeeValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,12 +35,15 @@ public class EmployeeController {
     private DepartmentService departmentService;
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    @Qualifier("EmployeeValidator")
+    private Validator validator;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new DateEditor());
-        binder.registerCustomEditor(Department.class, new EmployeeEditor(departmentService));
-        binder.setValidator(new EmployeeValidation());
+        binder.registerCustomEditor(Department.class, new DepartmentEditor(departmentService));
+        binder.setValidator(validator);
     }
 
     @RequestMapping("/list.html")
@@ -106,59 +112,43 @@ public class EmployeeController {
         return "employee/editEmployee";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/save.html",  params = "pageType=new")
-    public String createEmployee (Employee employee,
-                                  Model model)  {
-        try {
-            employeeService.create(employee);
-        } catch (ValidateException e) {
+    @RequestMapping(method = RequestMethod.POST, value = "/save.html", params = "pageType=new")
+    public String createEmployee(@Valid Employee employee,
+                                 BindingResult result,
+                                 Model model) {
 
-            Map<String, String> errors = parseErrors(e.getErrors());
+        if (result.hasErrors()) {
             model.addAttribute("employee", employee);
             model.addAttribute("departments", departmentService.getList());
             model.addAttribute("pageType", "new");
-            model.addAttribute("errors", errors);
             return "employee/editEmployee";
         }
-        return "redirect:edit.html?saveStatus=1&employeeID="+employee.getEmployeeID();
+        employeeService.create(employee);
+        return "redirect:edit.html?saveStatus=1&employeeID=" + employee.getEmployeeID();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" , params = "pageType=edit")
-    public String updateEmployee (@ModelAttribute("employee") Employee employee,
+    public String updateEmployee (@Valid Employee employee,
+                                  BindingResult result,
                                   Model model) {
-        try {
-            employeeService.update(employee);
-        } catch (ValidateException e) {
-
-            Map<String, String> errors = parseErrors(e.getErrors());
+        if (result.hasErrors()) {
             model.addAttribute("employee", employee);
             model.addAttribute("departments", departmentService.getList());
             model.addAttribute("pageType", "edit");
-            model.addAttribute("errors", errors);
             return "employee/editEmployee";
         }
+        employeeService.update(employee);
         return "redirect:edit.html?saveStatus=2&employeeID="+employee.getEmployeeID();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/delete.html")
     public String deleteEmployee (@RequestParam Integer employeeID,
-                                  @RequestParam Integer departmentID) throws ValidateException {
+                                  @RequestParam Integer departmentID) {
         String redirectURL = "redirect:list.html";
         Employee employee = employeeService.read(employeeID);
         String name = employee.getLastName();
         employeeService.delete(employee);
         redirectURL += departmentID == 0 ? "?employeeLastName=" + name : "?employeeLastName=" + name + "&departmentID=" + departmentID;
         return redirectURL;
-    }
-
-
-    private Map<String, String> parseErrors( List<ObjectError> errorList) {
-        Map<String, String> errors = new HashMap<>();
-        for (ObjectError objectError : errorList) {
-            if (objectError instanceof FieldError) {
-                errors.put( ((FieldError) objectError).getField(), objectError.getDefaultMessage());
-            }
-        }
-        return errors;
     }
 }

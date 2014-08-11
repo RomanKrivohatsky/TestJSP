@@ -1,26 +1,18 @@
 package com.rom4.departments.controller.department;
 
-import com.rom4.departments.controller.employee.editors.DateEditor;
-import com.rom4.departments.controller.employee.editors.EmployeeEditor;
 import com.rom4.departments.domain.Department;
-import com.rom4.departments.exception.ValidateException;
 import com.rom4.departments.service.dao.DepartmentService;
-import com.rom4.departments.validation.DepartmentValidation;
-import com.rom4.departments.validation.EmployeeValidation;
+import com.rom4.departments.validation.DepartmentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by rom4 on 31.07.14.
@@ -32,9 +24,13 @@ public class DepartmentController {
     @Autowired
     private DepartmentService service;
 
+    @Autowired
+    @Qualifier("departmentValidator")
+    private Validator validator;
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(new DepartmentValidation());
+        binder.setValidator(validator);
     }
 
 
@@ -81,8 +77,8 @@ public class DepartmentController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" ,  params = "pageType=new")
     public String saveDepartment (@Valid Department department,
-                                  Model model,
-                                  BindingResult result)  {
+                                  BindingResult result,
+                                  Model model)  {
 
         if (result.hasErrors()) {
             model.addAttribute("department", department);
@@ -97,10 +93,9 @@ public class DepartmentController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/save.html" , params = "pageType=edit")
     public String updateDepartment (@Valid Department department,
-                                    Model model,
-                                    BindingResult result) {
-
-
+                                    BindingResult result,
+                                    Model model
+                                    ) {
         if (result.hasErrors()) {
             model.addAttribute("department", department);
             model.addAttribute("pageType", "edit");
@@ -112,13 +107,11 @@ public class DepartmentController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/delete.html")
-    public String deleteDepartment (@Valid Department department, BindingResult result) {
-          String name = (service.read(department.getDepartmentID())).getName();
+    public String deleteDepartment (@Valid Department department) {
+         String name = (service.read(department.getDepartmentID())).getName();
 
          service.delete(department);
 
         return "redirect:list.html?departmentName=" + name;
     }
-
-
 }

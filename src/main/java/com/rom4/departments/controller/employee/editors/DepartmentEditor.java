@@ -10,11 +10,11 @@ import java.beans.PropertyEditorSupport;
  * Created by rom4 on 04.08.14.
  */
 
-public class EmployeeEditor extends PropertyEditorSupport{
+public class DepartmentEditor extends PropertyEditorSupport{
 
     private DepartmentService service;
 
-    public EmployeeEditor(DepartmentService service) {
+    public DepartmentEditor(DepartmentService service) {
         this.service = service;
     }
 

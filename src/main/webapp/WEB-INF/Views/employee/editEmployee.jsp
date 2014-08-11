@@ -27,43 +27,56 @@
         <h2 id="slogan">edit a department...</h2>
     </div>
 
-    <H2>${saveStatus}</H2>
+    <div id="wrapper" class="clearfix">
 
-    <sf:form method="post" action="save.html?pageType=${pageType}" modelAttribute="employee">
-
-        <p>¬ведите им€</p>
-        <input type="text" name="firstName" value=<c:out value="${employee.firstName}"></c:out>>
-        <font color="#ff0000" size="+1">
-            <c:if test="${not empty errors.firstName}"> Validation error: ${errors.firstName} </c:if></font>
-
-        <p>¬ведите фамилию</p>
-        <input type="text" name="lastName" value=<c:out value="${employee.lastName}"></c:out>>
-        <font color="#ff0000" size="+1">
-            <c:if test="${not empty errors.lastName}"> Validation error: ${errors.lastName} </c:if></font>
-
-        <p>¬ведите e-mail</p>
-        <input type="email" name="email" value=<c:out value="${employee.email}"></c:out>>
-        <font color="#ff0000" size="+1">
-            <c:if test="${not empty errors.email}"> Validation error: ${errors.email} </c:if></font>
-
-        <p>¬ведите оклад</p>
-        <input type="number" name="salary" value=<c:out value="${employee.salary}"></c:out>>
-        <font color="#ff0000" size="+1">
-            <c:if test="${not empty errors.salary}"> Validation error: ${errors.salary} </c:if></font>
+        <H2>${saveStatus}</H2>
 
         <fmt:formatDate var="date" type="both" pattern="yyyy-MM-dd" value="${employee.birthday}"/>
-        <p>¬ведите дату рождени€</p>
-        <input type="date" name="birthday" value="${date}">
-        <font color="#ff0000" size="+1">
-            <c:if test="${not empty errors.birthday}"> Validation error: ${errors.birthday} </c:if></font>
 
-        <p><sf:select path="department">
-            <sf:options items="${departments}" itemValue="departmentID" itemLabel="name"/>
-        </sf:select></p>
+        <sf:form method="post" action="save.html?pageType=${pageType}" modelAttribute="employee"
+                 cssClass="form-container">
+
+        <table>
+            <tr>
+                <td>¬ведите им€:</td>
+                <td><sf:input path="firstName" cssClass="form-field"/></td>
+                <td><sf:errors path="firstName" cssClass="error"/></td>
+            </tr>
+            <tr>
+                <td>¬ведите фамилию:</td>
+                <td><sf:input path="lastName" cssClass="form-field"/></td>
+                <td><sf:errors path="lastName" cssClass="error"/></td>
+            </tr>
+            <tr>
+                <td>¬ведите e-mail:</td>
+                <td><sf:input path="email" cssClass="form-field"/></td>
+                <td><sf:errors path="email" cssClass="error"/></td>
+            </tr>
+            <tr>
+                <td>¬ведите оклад:</td>
+                <td><sf:input path="salary" cssClass="form-field"/></td>
+                <td><sf:errors path="salary" cssClass="error"/></td>
+            </tr>
+            <tr>
+                <td>¬ведите дату рождени€:</td>
+                <td><sf:input path="birthday" type="date" value="${date}" cssClass="form-field"/></td>
+                <td><sf:errors path="birthday" cssClass="error"/></td>
+            </tr>
+            <tr>
+                <td>¬џберите отдел:</td>
+                <td>
+                    <sf:select path="department">
+                        <sf:options items="${departments}" itemValue="departmentID" itemLabel="name"/>
+                    </sf:select>
+                </td>
+            </tr>
+            </sf:form>
+        </table>
 
         <input type="hidden" name="employeeID" value=${employee.employeeID}>
-        <input type="submit" name="submit" value="Save">
-    </sf:form>
+        <input type="submit" name="submit" value="Save" class="submit-button">
+
+    </div>
 
     <div id="footer">
         <p><a href="/home.html">Homepage</a> | <a href="/contact.html">contact</a> | <a

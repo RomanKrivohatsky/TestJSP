@@ -20,14 +20,13 @@
     <!-- location for componnents -->
     <context:component-scan base-package="com.rom4.departments"/>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven />
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
 
     <!-- Обрабатывает запросы на получение -->
         <!-- статических ресурсов -->
     <mvc:resources mapping="/resource/**" location="/resource/" />
-
 
     <!-- обеспечивает транзакционность -->
     <bean id="transactionManager"
@@ -86,8 +85,6 @@
         <property name="exceptionMappings">
             <map>
                 <entry key="DatabaseException" value="databaseError"/>
-                <entry key="ValidateException" value="validationError"/>
-
             </map>
         </property>
         <!-- See note below on how this interacts with Spring Boot -->

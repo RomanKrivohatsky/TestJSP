@@ -8,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
 
 import java.util.List;
 
@@ -28,19 +24,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDAOhib dao;
 
     @Autowired
-    @Qualifier("employeeValidation")
+    @Qualifier("employeeValidator")
     org.springframework.validation.Validator springValidator ;
-/*
-    public List<ObjectError> validate(Employee employee) {
-        BeanPropertyBindingResult result = new BeanPropertyBindingResult(employee, "employee");
-        ValidationUtils.invokeValidator(springValidator, employee, result);
-        List<ObjectError> errors = result.getAllErrors();
-
-        if(errors.size()>0) {
-            return errors;
-        }
-        return null;
-    }*/
 
     @Override
     @Transactional
@@ -56,22 +41,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void create(Employee employee)  throws ValidateException {
-/*        List<ObjectError> errors = validate(employee);
-
-        if ( errors != null) {
-            throw new ValidateException("Employee validation error!", errors);
-        }*/
+    public void create(Employee employee) {
         dao.createEmployee(employee);
     }
 
     @Override
     @Transactional
-    public void update(Employee employee) throws ValidateException {
-/*        List<ObjectError> errors = validate(employee);
-        if (errors != null) {
-            throw new ValidateException("Employee validation error!", errors);
-        }*/
+    public void update(Employee employee) {
         dao.udpateEmployee(employee);
     }
 
