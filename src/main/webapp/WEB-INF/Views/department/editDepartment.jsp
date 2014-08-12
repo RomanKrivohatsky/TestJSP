@@ -33,18 +33,20 @@
                  cssClass="form-container">
 
             <table>
+                <div class="form-field">
                 <tr>
-                    <td>Department name:</td>
-                    <td><sf:input path="name" cssClass="form-field"/></td>
-                    <td><sf:errors path="name" cssClass="form-field-error"/></td>
-
+                        <td>Department name:</td>
+                        <td><sf:input path="name" /></td>
+                        <td><sf:errors path="name" /></td>
                 </tr>
+                </div>
+                <div class="form-field">
                 <tr>
-                    <td>City:</td>
-                    <td><sf:input path="city" cssClass="form-field"/></td>
-                    <td><sf:errors path="city" cssClass="form-field-error"/></td>
-
+                        <td>City:</td>
+                        <td><sf:input path="city" /></td>
+                        <td><sf:errors path="city" cssClass="form-field-error"/></td>
                 </tr>
+                </div>
             </table>
 
             <input type="hidden" name="departmentID" value=

@@ -1,5 +1,3 @@
-
-
 <%--
   Created by IntelliJ IDEA.
   User: rom4
@@ -16,20 +14,44 @@
     <title>DEPARTMENTS</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <link rel="stylesheet" href="/resource/style.css" type="text/css"/>
+
+    <script src="/resource/users.js"></script>
+
 </head>
 
 <body>
 
 <div id="pagewidth">
     <div id="header">
-        <a href="home.html"> <h1 id="logo">DEPARTMENTS  </h1> </a>
+        <a href="home.html"><h1 id="logo">DEPARTMENTS </h1></a>
+
         <h2 id="slogan">table with employers...</h2>
     </div>
 
 
     <h2> Contacts1 </h2>
-<p> Kharkov </p>
-<p>  Tarasovskaya str.</p>
+
+    <p> Kharkov </p>
+
+    <p> Tarasovskaya str.</p>
+
+
+    <form>
+        <input type="text" name="firstName">
+        <input type="text" name="lastName">
+        <input type="text" name="age">
+        <input type="text" name="userID">
+    </form>
+
+    <button name="save"
+            onclick="addUser(document.forms[0].elements.firstName.value,
+                            document.forms[0].elements.lastName.value,
+                            document.forms[0].elements.age.value)">Save
+    </button>
+
+
+    <button name="Show user" onclick="showUser( document.forms[0].elements.userID.value)">Show</button>
+    <button name="All User" onclick="showUsers()">All Users </button>
 
     <div id="footer">
         <p><a href="home.html">Homepage</a> | <a href="contact.html">contact</a> | <a
